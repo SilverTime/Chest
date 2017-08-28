@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<!--页头引入-->
+<head ms-controller="head">
+    <title>Chest进销存-商品查询</title>
+    <meta content="Chest进销存" name="Description">
+    <meta content="名称" name="Keywords">
+    <meta charset="UTF-8">
+    <!--坑爹的IE兼容-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--坑爹的将360默认为极速模式打开-->
+    <meta name="renderer" content="webkit">
+    <!--移动优先-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+
+    <!--avalon-->
+    <script src="./src/js/avalon.modern.min.js"></script>
+    <!--图标引入-->
+    <!--bootstrap引入-->
+    <!--已合并到layout中-->
+    <!--<link href="./src/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+    <link href="./src/css/layout.css" rel="stylesheet">
+    <!--引入btn-->
+    <!--<link href="./src/css/button.css" rel="stylesheet" type="text/css"/>-->
+    <!--fontAwesone 引入-->
+    <link href="./src/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!--[if lte IE 7]>
+    <link href="./src/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css"/>
+
+    <![endif]-->
+    <!--本地CSS-->
+    <link href="./src/css/mooshroom.css" rel="stylesheet">
+    <link href="./src/css/local.css" rel="stylesheet">
+    <!--todo 所有插件的样式在js内部加载-->
+</head>
+
+<body style="padding-top: 0px">
+
+<!--作用域开始-->
+<div class="container" ms-controller="query">
+
+    <div  class="box-col ver-center" >
+
+        <h2 style="margin-top: 50px">
+            商品查询：
+        </h2>
+
+
+        <div style="max-width: 1170px;width: 100%;padding:0 50px">
+            <div class="box-row">
+
+                    <input type="text" maxlength="50" onkeyup="cutLength(this)" class="form-control input-lg" ms-duplex="goodsKey"
+                           ms-on-keyup="searchGoods" onchange="query.searchGoods()"
+                           placeholder="输入商品名称查询"/>
+
+                    <div style="margin:9px 10px" class="text-center" ms-if='state!="waiting"'>
+                        <i class="icon-spinner icon-spin icon-2x" ms-visible='state=="searching"'></i>
+                        <i class="icon-check icon-2x text-success"  ms-visible='state=="done"'></i>
+                        <i class="icon-ban-circle icon-2x text-danger"  ms-visible='state=="none"'></i>
+                    </div>
+
+            </div>
+
+            <br/>
+            <div ms-visible='state=="done"||state=="searching"'>
+
+
+                <div style="background-color: white" >
+                    <table class="all-table table table-bordered" >
+                        <thead>
+                        <tr>
+                            <td>名称</td>
+                            <td>型号</td>
+                            <td>单位</td>
+                            <td>库存</td>
+                            <td>标价</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ms-repeat="goods">
+                            <td>{{el.Name}}</td>
+                            <td>{{el.Standard}}</td>
+                            <td>{{el.Unit}}</td>
+                            <td>
+                                <span ms-visible="el.StoreTotal>0">有货</span>
+                                <span  ms-visible="el.StoreTotal<=0">卖完了</span>
+                            </td>
+                            <td>{{el.Price1}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+
+                    &nbsp;第&nbsp;{{GP}} &nbsp;/&nbsp; {{Math.ceil(GT/GN)}}页&nbsp;&nbsp;&nbsp;&nbsp;总共&nbsp;{{GT}}&nbsp;个商品
+                    <span class="pull-right">
+                        <button class="btn btn-sm  btn-primary" ms-click="pagerGoods(1)" ms-if="GP>1">
+                            <i class="icon-arrow-left  search-pager"></i>&nbsp;&nbsp;上一页
+                        </button>
+
+                        <button class="btn btn-sm  btn-primary" ms-click="pagerGoods(-1)" ms-if="GP<(Math.ceil(GT/GN))">
+                            下一页&nbsp;&nbsp;<i class="icon-arrow-right  search-pager"></i>
+                        </button>
+
+                    </span>
+
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+
+            <h2 style="color: #cacacb;text-shadow: 0px 2px 1px #ffffff" class="text-center" ms-visible='state=="none"'>
+                (＞﹏＜) 没有找到符合的商品……
+            </h2>
+            <div id="tipBoardDiv" ms-if="state == 'waiting'">
+                <div id="tipBoard" >亲，当前是查自己的商品哟~<br/>如果要查别的商家，<b>请下楼梯</b></div>
+                <br/><br/><br/>
+                <img style="position:relative;left: 40px;" src="./src/images/query.png" />
+                <a href="http://chest.tansuyun.cn" class="link-home text-center" >
+                    <i class="icon-hand-left icon-2x"></i><br/>
+                    查询其他商家
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--提示-->
+<div ms-controller="uiBox" >
+    {{ui|html}}
+</div>
+<script>
+    avalon.ready(function () {
+        //引入tip组件
+        //配置父元素的VM
+        var vm = avalon.define({
+            $id: "uiBox",
+            ready: function () {
+                require(["../../ui/tip/tip.js", '../../ui/modal/modal.js', '../../ui/ws/ws.js'], function () {
+                    vm.ui='<div ms-widget="tip,tip,$opta"></div><div ms-widget="ws,ws,$optc"></div>'
+                    avalon.scan()
+                    tip.on('欢迎回来！', 1, 3000)
+
+                })
+            },
+            ui:"",
+            //提示框配置
+            $opta: {},
+//                模态框配置
+            $optb: {},
+            //websocket配置
+            $optc: {
+                server: "ws://my.s.tansuyun.cn:46032",//线上版本
+//                    server: "ws://my.s.tansuyun.cn:46080",//测试版本
+            },
+        })
+        vm.ready()
+        avalon.scan()
+        return uiBox=vm
+    });
+</script>
+<script src="./plugins/cache/cache.js"></script>
+<script src="./config.js"></script>
+
+<script>
+    avalon.ready(function(){
+        var vm=avalon.define({
+            $id:"query",
+            ready: function () {
+
+            },
+
+            state:"waiting",//当前状态: waiting,searching,done,none
+
+            // 商品搜索
+            goods:[],
+            goodsKey:"",
+            goLastKey:"",
+            focusGoods:-1,
+            onGoods:false,
+            goHover: function (i) {
+                vm.onGoods=i
+
+            },
+            goOut: function (i) {
+                vm.onGoods=0
+            },
+//        lastInput:0,
+            GP:1,
+            GT:0,
+            GN:16,
+            searchGoods: function () {
+
+                if(vm.goodsKey!=""&&vm.goodsKey!=vm.goLastKey){
+                    //触发请求
+                    vm.goLastKey=vm.goodsKey
+                    vm.GP=1
+                    vm.callGoods()
+                }
+                else if(vm.goodsKey==""&&vm.goodsKey!=vm.goLastKey){
+                    vm.state='waiting'
+                    vm.goods=[]
+                    vm.GP=1
+                    vm.goLastKey=''
+
+
+                }
+            },
+            pagerGoods: function (n) {
+                var newGP=vm.GP+-n;
+                if(newGP>=1){
+                    vm.GP=newGP
+                }
+                else{
+                    vm.GP=1
+                }
+
+                vm.callGoods()
+            },
+            //正是召唤商品列表
+            callGoods: function () {
+
+                vm.state='searching'
+                if(vm.GP<0){
+                    vm.GP=0
+                }
+                ws.call({
+                    i:"Goods/search",
+                    data:{
+                        keyword:vm.goodsKey,
+                        P:vm.GP,
+                        N:vm.GN
+                    },
+                    success: function (res) {
+                        if(res.L.length>0&&vm.goodsKey!=''){
+                            vm.GP=res.P
+
+                            var resL=res.L
+                            var len=resL.length
+
+                            vm.goods=[]
+                            for(var i=0;i<len;i++){
+                                vm.goods.push(resL[i])
+                            }
+//                            vm.goods=list
+                            vm.state='done'
+                        }
+                        else{
+                            vm.goods=[]
+                            vm.GP--
+
+                            vm.state='none'
+
+                        }
+                        vm.GT=res.T
+
+
+                    }
+                })
+            },
+
+
+        })
+        avalon.scan()
+        return query=vm
+    })
+</script>
+
+
+
+</body>
+</html>

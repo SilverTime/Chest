@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>易点进销存——您便捷高效的企业云管家</title>
+    <meta content="易点进销存是一款针对中小型零售、批发企业开发的企业管理软件，系统特有的云服务、智能记忆、操作简单、升级平滑等特点让商家的店铺管理变得简单、高效。微信公众账号：易点进销存。" name="Description">
+    <meta content="易点进销存 进销存软件 进销存 易点 进销存管理系统 进销存管理软件 进销存软件哪个好 云进销存 saas企业管理软件 中小型企业管理软件 在线进销存 简易进销存" name="Keywords">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./src/css/office.css">
+    <!--fontAwesone 引入-->
+    <link href="./src/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+   <!-- <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
+    <script src="./plugins/cache/cache.js"></script>
+    <script src="./plugins/call/call.mobile.v2.js"></script>
+    <script src="./src/js/avalon.min.js"></script>
+    <script src="./src/js/avalon.modern.min.js"></script>
+    <!-- <script src="./src/js/jquery-2.1.1.js"></script>-->
+    <avalon ms-skip="1" class="avalonHide">X
+        <style id="avalonStyle">.avalonHide {
+            display: none !important
+        }</style>
+    </avalon>
+
+    <style>
+        .vi-shower, .vi-tv, .vi-box > .iconfont {
+            transition: 0.3s all;
+        }
+
+        .vi-shower {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: -999;
+            background-color: rgba(255, 255, 255, 0.58);
+            top: 0px;
+            left: 0px;
+            opacity: 0;
+        }
+
+        .vi-shower-showing {
+            opacity: 1 !important;
+            z-index: 999 !important;
+        }
+
+        .vi-tv {
+            position: relative;
+            background-color: #555555;
+            width: 960px;
+            min-height: 400px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 100%;
+            border: 1px solid #000;
+            box-shadow: 0px 0px 14px #585858;
+        }
+
+        .vi-tv-showing {
+            margin-top: 3% !important;
+        }
+
+        .vi-box {
+            position: relative;
+            height: 150px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .vi-box > .iconfont {
+            font-size: 50px;
+        }
+
+        .vi-box:hover > .iconfont {
+            font-size: 67px;
+        }
+
+
+    </style>
+    <!--  <![endif]&ndash;&gt;-->
+</head>
+<body ms-controller="home" ms-class="hiddenBody:wantRegister||showVideo">
+
+<div ms-widget="tip,tipW"></div>
+
+<!--导航-->
+<div class="nav">
+    <ul>
+        <li class="li1">
+            <img src="./src/images/logo.png" alt="" width="60px">
+        </li>
+        <li class="li2">
+            <a class="nav-a" href="#getStart">用户使用说明书&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </li>
+        <li class="li2">
+            <a class="nav-a" href="">易点介绍</a>
+        </li>
+    </ul>
+</div>
+<!--正文-->
+<div class="page" style="background-color: rgb(249,249,249);margin-top:1px">
+    <div class=" container">
+        <br>
+        <br>
+
+        <h1 class="text-center">
+            易点进销存----您便捷高效的企业云管家
+        </h1>
+
+        <div class="text-center">
+            <a class="btn-chest" href="./my.html">
+                立即体验
+            </a>
+        </div>
+        <div class="text-center">
+
+            <img src="./src/images/3.jpg" alt="" style="width: 600px">
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <h2 id="getStart">上手视频</h2>
+
+        <div class="vi-shower" ms-class="vi-shower-showing:showVideo" ms-click="toggleVideo">
+            <div class="vi-tv" ms-class="vi-tv-showing:showVideo">
+                <video id="teachVideo" width="958" controls ms-attr-src="videoSrc" type="video/mp4">
+
+                </video>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="vi-box" style="background-color: #9b27af" ms-click="toggleVideo('界面介绍 (2).mp4')">
+                    <i class="iconfont">&#xe61f;</i><br/>
+                    界面介绍
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="vi-box" style="background-color: #4cae50" ms-click="toggleVideo('商品添加总.mp4')">
+                    <i class="iconfont">&#xe649;</i><br/>
+                    商品添加
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="vi-box" style="background-color: #2195f2" ms-click="toggleVideo('客户供应商总1.mp4')">
+                    <i class="iconfont">&#xf00d8;</i><br/>
+                    客户供应商
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="vi-box" style="background-color: #f6a333;" ms-click="toggleVideo('订单筛选.mp4')">
+                    <i class="iconfont">&#xe682;</i><br/>
+                    账单筛选
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="vi-box" style="background-color: #f65e43;" ms-click="toggleVideo('门店管理.mp4')">
+                    <i class="iconfont">&#xe667;</i><br/>
+                    门店管理
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="vi-box" style="background-color: #f67f9c;" ms-click="toggleVideo('员工管理4.mp4')">
+                    <i class="iconfont">&#xe66f;</i><br/>
+                    员工管理
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="vi-box" style="background-color: #9e8ef6;" ms-click="toggleVideo('单个结算1.mp4')">
+                    <i class="iconfont">&#xe61b;</i><br/>
+                    单个结算
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="vi-box" style="background-color: #82daf6" ms-click="toggleVideo('批量结算总.mp4')">
+                    <i class="iconfont">&#xeb67;</i><br/>
+                    批量结算
+                </div>
+            </div>
+
+
+            <!--<div class="col-sm-3">-->
+            <!--<div class="vi-box" style="height: 150px;background-color: #56f688;margin-bottom: 20px">-->
+            <!--盘存调拨-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="col-sm-3">
+                <div class="vi-box" style="border:3px dashed #dddddd;color: #dddddd;padding-top: 20px">
+                    <i class=" icon-food icon-3x"></i><br/>
+                    制作中……
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+
+<div style="
+        background-image: url(./src/images/tumblr_mnh1jdFvHR1st5lhmo2_1280.jpg);
+        height: 400px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center center;">
+</div>
+
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-xs-6" style="position: relative;">
+            <img src="./src/images/9.jpg" alt=" " style="width: 100%;position: absolute;" ms-if="chooseFour == 1">
+            <img src="./src/images/10.jpg" alt="" style="width: 100%;position: absolute;" ms-if="chooseFour == 2">
+            <img src="./src/images/11.jpg" alt="" style="width: 100%;position: absolute;" ms-if="chooseFour == 3">
+            <img src="./src/images/12.jpg" alt="" style="width: 100%;position: absolute;" ms-if="chooseFour == 4">
+        </div>
+        <div class="col-xs-6">
+            <div class="bbox" ms-class="onHover:chooseFour == 1" ms-mouseenter="chooseOneInFour(1)">
+                <div class="pull-left btn-round">
+                    <i class="icon-bar-chart icon-large"></i>
+                </div>
+                <div>
+                    报表中心 <br>
+                    <small> 实际数据，实时反馈，统计分析</small>
+                </div>
+            </div>
+
+            <div class="bbox" ms-class="onHover:chooseFour == 2" ms-mouseenter="chooseOneInFour(2)">
+                <div class="pull-left btn-round">
+                    <i class="icon-large  icon-home"></i>
+                </div>
+                <div>
+                    总账记录 <br>
+                    <small>全部订单交易随查，随看，实时统计</small>
+                </div>
+            </div>
+
+            <div class="bbox" ms-class="onHover:chooseFour == 3" ms-mouseenter="chooseOneInFour(3)">
+                <div class="pull-left btn-round">
+                    <i class="icon-large  icon-inbox"></i>
+                </div>
+                <div>
+                    商品管理 <br>
+                    <small>商品编辑，分类管理，清晰明了</small>
+                </div>
+            </div>
+
+            <div class="bbox" ms-class="onHover:chooseFour == 4" ms-mouseenter="chooseOneInFour(4)">
+                <div class="pull-left btn-round">
+                    <i class="icon-large  icon-user"></i>
+                </div>
+                <div>
+                    客户供应商 <br>
+                    <small>指定供应商查看，提高处理效率</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+<div class="page" style="background-color: #F9F9F9;margin-top:1px" class="text-center">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="container">
+        <div class="col-xs-4 feature">
+            <i class="icon-large icon-cloud"></i>
+
+            <div class="center-block fd1"></div>
+            <p class="center-block">云存特质，<br/>随时随地办公不误！</p>
+        </div>
+        <div class="col-xs-4 feature">
+            <i class="icon-large icon-print"></i>
+
+            <div class="center-block fd2"></div>
+            <p class="center-block">异地打印，<br/>个性设置打印出单！</p>
+        </div>
+        <div class="col-xs-4 feature">
+            <i class="icon-large icon-exchange "></i>
+
+            <div class="center-block fd3"></div>
+            <p class="center-block">邀请查货，<br/>推送品种迎来下单！</p>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+
+<div class="page6">
+    <span class="p6title">他们这样评价易点的</span>
+    <br/><br/><br/><br/>
+
+    <div class="page6Center">
+
+        <div class="p6left"><span class="p6title">—— “&nbsp;</span></div>
+
+        <div class="p6center">
+            <div ms-if="chooseFive == 1">软件界面直观清晰，不需要我到处找想要的功能。适合我这样的懒人！哈哈！</div>
+            <div ms-if="chooseFive == 2">我觉得多账号多地同时登陆功能确实不错，我有几个门店，现在可以数据同步处理。</div>
+            <div ms-if="chooseFive == 3">商品查询功能确实不错，我现在每次去批发商那里调货的时候，只需要查询他家有没有我想要的货，就能找到合适的上家进行调货。</div>
+            <div ms-if="chooseFive == 4">这界面不错，我一看就懂，毫无学习成本啊！哈哈！</div>
+            <div ms-if="chooseFive == 5">哇！真的能十秒内完成开单，搜索功能太方便啦，还会自动保存客户供应商，不错不错！</div>
+        </div>
+
+        <div class="p6right"><span class="p6title">&nbsp;&nbsp;” ——</span></div>
+
+        <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+
+        <div class="p6foot">
+            <div class="inLeft" ms-mouseenter="chooseOneInFive(1)" ms-mouseleave="autoChoose">
+                <img src="./src/images/tou1.jpg" style="width: 100px;height: 100px;"/>
+
+                <div class="mod" ms-if="chooseFive != 1"></div>
+            </div>
+            <div class="inCenter" ms-mouseenter="chooseOneInFive(2)" ms-mouseleave="autoChoose">
+                <img src="./src/images/tou2.jpg" style="width: 100px;height: 100px;"/>
+
+                <div class="mod" ms-if="chooseFive != 2"></div>
+            </div>
+            <div class="inCenter" ms-mouseenter="chooseOneInFive(3)" ms-mouseleave="autoChoose">
+                <img src="./src/images/tou3.jpg" style="width: 100px;height: 100px;"/>
+
+                <div class="mod" ms-if="chooseFive != 3"></div>
+            </div>
+            <div class="inCenter" ms-mouseenter="chooseOneInFive(4)" ms-mouseleave="autoChoose">
+                <img src="./src/images/tou4.jpg" style="width: 100px;height: 100px;"/>
+
+                <div class="mod" ms-if="chooseFive != 4"></div>
+            </div>
+            <div class="inRight" ms-mouseenter="chooseOneInFive(5)" ms-mouseleave="autoChoose">
+                <img src="./src/images/tou5.jpg" style="width: 100px;height: 100px;"/>
+
+                <div class="mod" ms-if="chooseFive != 5"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page" style="background-color: #F9F9F9;margin-top:1px">
+    <div class="container">
+        <br>
+        <br>
+        <br/>
+
+        <h1 class="text-center">
+            这些人在用易点
+        </h1>
+        <br/>
+
+        <div class="text-center">
+            <a class="btn-chest" ms-click="toRegister">
+                立即体验
+            </a>
+        </div>
+        <br>
+
+        <div class="col-xs-1 aStore" ms-repeat="stores">
+            <div class="storeShow">
+                <div class="storeIcon" ms-class="blueIconB:$index%2==0">{{el.Name[0]|uppercase}}</div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <div>
+
+                    <p>{{el.Name}}</p>
+                    <!--<a class="btn btn-success btn-xs">查货</a>-->
+                    <!-- <span style="color: #707070">已关闭查货</span>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+
+<!--页脚-->
+<!--页脚-->
+<div class="footer">
+    <div class="container">
+        <hr>
+        <span class="pull-left">
+            © 2014-2016 碳素云
+        </span>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div class="modalBox" style="display: none" ms-visible="wantRegister">
+    <br/>
+
+    <div class="cont">
+        <div class="elseInfo">
+            <div class="form">
+                <span class="title">易点进销存</span>
+                <span class="info">您便捷高效的企业云管家</span>
+                <hr/>
+                <form>
+                    <input type="text" class="form-control" placeholder="用户名" ms-duplex="userName"
+                           ms-keyup="checkUser"/>
+                    <input type="password" class="form-control " placeholder="密码" ms-duplex="userPwd"
+                           ms-keyup="checkPwd" ms-blur="checkRePwd"/>
+                    <input type="password" class="form-control" placeholder="再次输入密码" ms-duplex="reUserPwd"
+                           ms-blur="checkRePwd"/>
+                    <input type="text" class="form-control" placeholder="店铺名称" ms-duplex="storeName"
+                           ms-keyup="checkStore"/>
+                    <input type="text" class="form-control" placeholder="地址" ms-duplex="address"
+                           ms-keyup="checkAddress"/>
+                    <input type="text" class="form-control" placeholder="联系人" ms-duplex="contact"
+                           ms-keyup="checkContact"/>
+                    <input type="text" class="form-control" placeholder="电话" ms-duplex="phone" ms-keyup="checkPhone"/>
+                    <input type="text" class="form-control" placeholder="个性域名" ms-duplex="userDomain"
+                           ms-keyup="checkDomain"/>
+                    <a class="btn btn-info" ms-click="toEnroll">注册</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-default"
+                                                                                           ms-click="close">取消</a>
+                </form>
+            </div>
+            <div class="infoTip">
+                <div class="tipLine">
+                    <div ms-if="u1"><span class="icon-large icon-ok-circle" style="font-size: 28px;"
+                                          ms-if="userOk"> </span><span class="errInfo"
+                                                                       ms-if="!userOk">用户名只支持中文、字母、数字！</span></div>
+                </div>
+                <div class="tipLine">
+                    <div ms-if="p1"><span class="icon-large icon-ok-circle" style="font-size: 28px;"
+                                          ms-if="pwdOk"> </span><span class="errInfo" ms-if="!pwdOk">密码长度为6-16位！</span>
+                    </div>
+                </div>
+                <div class="tipLine">
+                    <div ms-if="r1"><span class="icon-large icon-ok-circle" style="font-size: 28px;"
+                                          ms-if="rePwdOk"> </span><span class="errInfo"
+                                                                        ms-if="!rePwdOk">两次输入密码不一致！</span></div>
+                </div>
+                <div class="tipLine">
+                    <div ms-if="s1"><span class="icon-large icon-ok-circle" style="font-size: 28px;"
+                                          ms-if="storeOK"> </span><span class="errInfo"
+                                                                        ms-if="!storeOK">店铺名称不能为空！</span></div>
+                </div>
+                <div class="tipLine">
+                    <div ms-if="a1"><span class="icon-large icon-ok-circle" style="font-size: 28px;"
+                                          ms-if="addressOK"> </span><span class="errInfo"
+                                                                          ms-if="!addressOK">店铺地址不能为空！</span></div>
+                </div>
+                <div class="tipLine">
+                    <div ms-if="c1"><span class="icon-large icon-ok-circle" style="font-size: 28px;"
+                                          ms-if="contactOK"> </span><span class="errInfo"
+                                                                          ms-if="!contactOK">联系人不能为空！</span></div>
+                </div>
+                <div class="tipLine">
+                    <div ms-if="ph1"><span class="icon-large icon-ok-circle" style="font-size: 28px;"
+                                           ms-if="phoneOk"> </span><span class="errInfo" ms-if="!phoneOk">请输入正确的座机或手机号！座机用‘-’分隔。</span>
+                    </div>
+                </div>
+                <div class="tipLine">
+                    <div ms-if="d1"><span class="icon-large icon-ok-circle" style="font-size: 28px;"
+                                          ms-if="domainOk"> </span><span class="errInfo" ms-if="!domainOk">个性域名只支持中文、字母、数字！</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+</div>
+
+<script>
+    var apiURL = 'http://chest.tansuyun.cn/ajax/?i=';
+    avalon.ready(function () {
+        require(['../../plugins/isIt/isIt.js', '../../ui/tip/tip.js'], function () {
+            var vm = avalon.define({
+                $id: "home",
+                ready: function () {
+                    vm.autoChoose();
+                    vm.getStores();
+                    avalon.scan();
+                },
+
+                /*视频播放相关*/
+                showVideo: false,
+                videoSrc: "",
+                toggleVideo: function (i) {
+                    vm.showVideo = !vm.showVideo
+                    if (typeof(i) == "string") {
+                        vm.videoSrc = 'http://7xqlfr.com1.z0.glb.clouddn.com/' + i
+                    }
+
+                    var video = document.getElementById('teachVideo')
+                    if (vm.showVideo) {
+                        setTimeout(function () {
+                            video.play()
+                        }, 500)
+
+                    } else {
+                        video.pause()
+                    }
+
+                },
+
+
+                wantRegister: false,
+                toRegister: function () {
+                    vm.wantRegister = true;
+                },
+                UC: "",
+                /* *
+                 Name:'乐山新宇',
+                 Address:'四川乐山',
+                 Contact:'鄢传云',
+                 Phone:'15283316016',
+                 Domain:'lsxy',
+                 Config:[],//此处可选配置自己的数据库服务器，属于高级配置部分，包括redis缓存服务器的配置也可以，不配置的时候使用公用服务器，自动生成
+                 UN:'mooshroom',
+                 PWD:"123456"
+                 返回
+                 {
+                 CompanyID:1,
+                 UID:1
+                 }
+                 * */
+                //地址：http://chest.tansuyun.cn/ajax?i=Company/regist
+                DomainUrl: "",
+                userRegister: function () {
+                    $.call({
+                        i: 'Company/regist',
+                        data: {
+                            Name: vm.storeName,
+                            Address: vm.address,
+                            Contact: vm.contact,
+                            UN: vm.userName,
+                            PWD: vm.userPwd,
+                            Phone: vm.phone,
+                            Domain: vm.userDomain
+                        },
+                        success: function (res) {
+                            vm.wantRegister = false;
+                            vm.UC = res;
+                            tipW.on("注册成功，欢迎使用~", 1, 3000);
+                            //缓存个性域名
+                            cache.go({Domain: vm.userDomain});
+                            vm.DomainUrl = "http://" + vm.userDomain + ".chest.tansuyun.cn/#!/";
+                            setTimeout(function () {
+                                window.location.href = vm.DomainUrl;
+                            }, 2000);
+                        },
+                        error: function (mes) {
+                            tipW.on("注册失败，请重试！" + mes, 0, 3000);
+                        }
+                    });
+                },
+                stores: [],
+                //http://chest.tansuyun.cn/ajax/?i=Company/get
+                getStores: function () {
+                    $.call({
+                        i: "Company/get",
+                        data: {},
+                        success: function (res) {
+//                                console.log("--------以下是商家列表---------")
+                            console.log(res);
+                            vm.stores = res.d;
+                        },
+                        error: function (msg) {
+                            tipW.on("获取商家出错！" + msg, 0, 3000);
+                        }
+                    });
+                },
+                /*主页动画*/
+                chooseFour: 1,
+                chooseOneInFour: function (i) {
+                    vm.chooseFour = i;
+                },
+                chooseFive: 1,
+                chooseOneInFive: function (i) {
+                    clearInterval(vm.chooseTimeOut);
+                    vm.chooseFive = i;
+                },
+                chooseTimeOut: "",
+                autoChoose: function () {
+                    vm.chooseTimeOut = setInterval(function () {
+                        if (vm.chooseFive == 5) {
+                            vm.chooseFive = 1;
+                        } else {
+                            vm.chooseFive++;
+                        }
+                    }, 3000);
+                },
+                /*主页注册*/
+                /*第一次填写*/
+                u1: false,
+                p1: false,
+                r1: false,
+                s1: false,
+                a1: false,
+                c1: false,
+                ph1: false,
+                d1: false,
+                /*初始值*/
+                userName: '',
+                userPwd: '',
+                reUserPwd: '',
+                storeName: '',
+                address: '',
+                contact: '',
+                phone: '',
+                userDomain: '',
+                /*检验结果*/
+                userOk: false,
+                pwdOk: false,
+                rePwdOk: false,
+                storeOK: false,
+                addressOK: false,
+                contactOK: false,
+                phoneOk: false,
+                domainOk: false,
+                /*执行检查*/
+                checkUser: function () {
+                    //\u4E00-\u9FA5只包含汉字，没有标点符号
+                    vm.u1 = true;
+                    var reg = /^[\u4e00-\u9fa50-9a-zA-Z]{0,}$/;
+                    if (reg.test(vm.userName)) {
+                        vm.userOk = true;
+                    } else {
+                        vm.userOk = false;
+                    }
+                    /*此处需要跟后台交互，查是否存在此用户名*/
+                },
+                checkPwd: function () {
+                    vm.p1 = true;
+                    if (isIt.pwd(vm.userPwd, "")) {
+                        vm.pwdOk = true;
+                    } else {
+                        vm.pwdOk = false;
+                    }
+                },
+                checkRePwd: function () {
+                    if (vm.userPwd != '') {
+                        vm.r1 = true;
+                        if (vm.userPwd == vm.reUserPwd) {
+                            vm.rePwdOk = true;
+                        } else {
+                            vm.rePwdOk = false;
+                        }
+                    }
+                },
+                checkStore: function () {
+                    vm.s1 = true;
+                    if (vm.storeName != '') {
+                        vm.storeOK = true;
+                    } else {
+                        vm.storeOK = false;
+                    }
+                },
+                checkAddress: function () {
+                    vm.a1 = true;
+                    if (vm.address != '') {
+                        vm.addressOK = true;
+                    } else {
+                        vm.addressOK = false;
+                    }
+                },
+                checkContact: function () {
+                    vm.c1 = true;
+                    if (vm.contact == '') {
+                        vm.contactOK = false;
+                    } else {
+                        vm.contactOK = true;
+                    }
+                },
+                checkPhone: function () {
+                    vm.ph1 = true;
+                    if (isIt.phone(vm.phone, "") || isIt.mobile(vm.phone, "")) {
+                        vm.phoneOk = true;
+                    } else {
+                        vm.phoneOk = false;
+                    }
+                },
+                checkDomain: function () {
+                    vm.d1 = true;
+                    var reg = /^[\u4e00-\u9fa50-9a-zA-Z]{0,}$/;
+                    if (reg.test(vm.userDomain)) {
+                        vm.domainOk = true;
+                    } else {
+                        vm.domainOk = false;
+                    }
+                    /*此处需跟后台要检查是否已有此个性域名*/
+                },
+                toEnroll: function () {
+                    if (vm.userOk && vm.pwdOk && vm.rePwdOk && vm.phoneOk && vm.domainOk) {
+                        vm.userRegister();
+                    } else {
+                        tipW.on("请检查您的信息！", 0, 3000);
+                    }
+                },
+                close: function () {
+                    vm.wantRegister = false;
+                    /*第一次填写*/
+                    vm.u1 = false;
+                    vm.p1 = false;
+                    vm.r1 = false;
+                    vm.s1 = false;
+                    vm.a1 = false;
+                    vm.c1 = false;
+                    vm.ph1 = false;
+                    vm.d1 = false;
+                    /*初始值*/
+                    vm.userName = '';
+                    vm.userPwd = '';
+                    vm.reUserPwd = '';
+                    vm.storeName = '';
+                    vm.address = '';
+                    vm.contact = '';
+                    vm.phone = '';
+                    vm.userDomain = '';
+                    /*检验结果*/
+                    vm.userOk = false;
+                    vm.pwdOk = false;
+                    vm.rePwdOk = false;
+                    vm.storeOK = false;
+                    vm.addressOK = false;
+                    vm.contactOk = false;
+                    vm.phoneOk = false;
+                    vm.domainOk = false;
+                }
+            });
+            vm.ready();
+            return home = vm;
+        });
+    });
+
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?4d49eb9c7241902e2a647868ffc6e5c0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<!--页头引入-->
+<head ms-controller="head">
+    <title>Chest进销存-订单打印</title>
+    <meta content="Chest进销存" name="Description">
+    <meta content="名称" name="Keywords">
+    <meta charset="UTF-8">
+    <!--坑爹的IE兼容-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--坑爹的将360默认为极速模式打开-->
+    <meta name="renderer" content="webkit">
+    <!--avalon-->
+    <script src="./src/js/avalon.modern.min.js"></script>
+</head>
+
+<body style="padding-top: 0px">
+
+<!--作用域开始-->
+<div class="" ms-controller="printOrder">
+    {{Order|html}}
+</div>
+
+<!--提示-->
+<div ms-controller="uiBox" >
+    {{ui|html}}
+</div>
+<script>
+    avalon.ready(function () {
+        //引入tip组件
+        //配置父元素的VM
+        var vm = avalon.define({
+            $id: "uiBox",
+            ready: function () {
+                require(["../../ui/tip/tip.js", '../../ui/modal/modal.js', '../../ui/ws/ws.js'], function () {
+                    vm.ui='<div ms-widget="tip,tip,$opta"></div><div ms-widget="ws,ws,$optc"></div>'
+                    avalon.scan()
+//                    tip.on('欢迎回来！', 1, 3000)
+
+                })
+            },
+            ui:"",
+            //提示框配置
+            $opta: {},
+//                模态框配置
+            $optb: {},
+            //websocket配置
+            $optc: {
+                server: "ws://my.s.tansuyun.cn:46032",//线上版本
+//                    server: "ws://my.s.tansuyun.cn:46080",//测试版本
+            },
+        })
+        vm.ready()
+        avalon.scan()
+        return uiBox=vm
+    });
+</script>
+<script src="./plugins/cache/cache.js"></script>
+<script src="./config.js"></script>
+
+<script>
+    avalon.ready(function(){
+        var vm=avalon.define({
+            $id:"printOrder",
+
+
+            //打印的订单
+            Order:"",
+
+            //解析订单编号 通过#后面的额东西
+            getID:function(){
+                return ((!window.location.hash)?"1":window.location.hash).replace("#","");
+            },
+
+            //获取打印模板
+            getOrder:function(){
+                tip.on('正在准备打印材料……',1)
+                ws.call({
+                    i:"Order/print",
+                    data:{
+                        OrderID:vm.getID()
+                    },
+                    success:function(res){
+                        if(!res.err){
+                            vm.Order=res.html
+                            setTimeout(vm.printIt,400)
+                        }
+                        else{
+                            tip.on(res.err)
+                        }
+                    }
+                })
+            },
+
+            //执行打印操作
+            printIt:function(){
+                tip.off('正在准备打印材料……',1)
+                window.print()
+            }
+
+
+        })
+        avalon.scan()
+
+        function ready(){
+            require(["../../plugins/door/door"],function(){
+                if(window.ws==undefined){
+                    setTimeout(ready,30)
+                    console.log("ws还没有准备好，正在重试")
+                }else{
+                    door.comeIn({
+                        haveLogin: function () {
+                            vm.getOrder()
+                        },
+                        notLogin: function () {
+
+                            notLoginG()
+                        }
+                    })
+
+                }
+            })
+
+        }
+        ready()
+
+        window.printOrder=vm
+    })
+</script>
+
+
+
+</body>
+</html>

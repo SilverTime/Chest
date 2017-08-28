@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>碳素云报销打印单-打印模板</title>
+    <style>
+        body {
+            width: 211mm;
+            height: 180mm;
+            margin: 0mm;
+            position: relative;
+        }
+
+
+        div {
+            position: absolute;
+        }
+        .inline{
+            position: static;
+            float: left;
+            height: 8mm;
+            line-height: 8mm;
+        }
+
+        .in-1{
+            width: 31mm;
+            text-align: center;
+            clear: left;
+        }
+
+        .in-2{
+            width: 68mm;
+            text-align: center;
+        }
+
+        .in-12{
+            width: 99mm;
+            clear: left;
+        }
+
+
+        .in-3{
+            width: 31mm;
+            margin-left: 1mm;
+            margin-right: 1mm;
+            text-align: right;
+
+            clear: right;
+        }
+        .money{
+            font-size: 4mm;
+            letter-spacing: 1mm;
+        }
+
+        .y-1 {
+            top: 19mm;
+        }
+
+        .y-2{
+            top:34mm;
+        }
+        .y-3{
+            top:94mm;
+        }
+        .x-1 {
+            left: 20mm;
+        }
+    </style>
+</head>
+<body>
+
+<!--第一行-->
+<div style="left: 45mm;" class="y-1">
+    {{报销部门}}
+</div>
+<div class="y-1" style="left: 78mm">
+    {{年}}
+</div>
+<div class="y-1" style="left: 95mm">
+    {{月}}
+</div>
+<div class="y-1" style="left: 112mm">
+    {{日}}
+</div>
+
+<div class="y-2 x-1">
+    <div class="inline in-1">
+        {{报销项目}}
+    </div>
+    <div class="inline in-2">
+        {{摘要}}
+    </div>
+    <div class="inline in-3 money">
+        25220100
+    </div>
+
+    <div class="inline in-1">
+        {{报销项目}}
+    </div>
+    <div class="inline in-2">
+        {{摘要}}
+    </div>
+    <div class="inline in-3 money">
+        25220100
+    </div>
+
+    <div class="inline in-1">
+        {{报销项目}}
+    </div>
+    <div class="inline in-2">
+        {{摘要}}
+    </div>
+    <div class="inline in-3 money">
+        25220100
+    </div>
+
+    <div class="inline in-1">
+        {{报销项目}}
+    </div>
+    <div class="inline in-2">
+        {{摘要}}
+    </div>
+    <div class="inline in-3 money">
+        25220100
+    </div>
+
+    <div class="inline in-1">
+        {{报销项目}}
+    </div>
+    <div class="inline in-2">
+        {{摘要}}
+    </div>
+    <div class="inline in-3 money">
+        25220100
+    </div>
+
+    <div class="inline in-1">
+
+    </div>
+    <div class="inline in-2">
+
+    </div>
+    <div class="inline in-3 money">
+        25220100
+    </div>
+
+    <div class="inline in-12" style="text-align: right">
+        <span>壹&nbsp;</span>
+        <span>壹&nbsp;</span>
+        <span>壹&nbsp;</span>
+        <span>壹&nbsp;</span>
+        <span>壹&nbsp;</span>
+        <span>壹&nbsp;</span>
+        <span>壹&nbsp;</span>
+        <span>壹&nbsp;</span>
+    </div>
+    <div class="inline in-3" >
+        500&nbsp;
+    </div>
+    <div class="inline in-3" style="width: 44mm">
+        500&nbsp;
+    </div>
+</div>
+
+<div class="y-3" style="left: 53mm">
+    {{会计}}
+</div>
+<div class="y-3" style="left: 92mm">
+    {{复核}}
+</div>
+<div class="y-3" style="left: 132mm">
+    {{出纳}}
+</div>
+<div class="y-3" style="left: 175mm">
+    {{报销人}}
+</div>
+
+</body>
+</html>

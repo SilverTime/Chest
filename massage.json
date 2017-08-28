@@ -1,0 +1,31 @@
+{
+  "c": "p",
+  "i": "MSG/MSG/push",
+  "d": {
+    "Time":"10位时间戳",
+    "HaveRead":false,
+    "Type":4,
+    "In":[
+      {
+        "GoodsID":"",
+        "Name":"",
+        "UnitName":"",
+        "Model":"",
+        "Standard":"",
+        "Amount":""
+      }
+    ],
+    "Out":[
+      {
+        "GoodsID":"",
+        "Name":"",
+        "UnitName":"",
+        "Model":"",
+        "Standard":"",
+        "Amount":""
+      }
+    ]
+  }
+}
+
+

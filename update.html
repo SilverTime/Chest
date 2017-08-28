@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>版本更新</title>
+    <meta content="易点进销存是一款针对中小型零售、批发企业开发的企业管理软件，系统特有的云服务、智能记忆、操作简单、升级平滑等特点让商家的店铺管理变得简单、高效。微信公众账号：易点进销存。" name="Description">
+    <meta content="易点进销存 进销存软件 进销存 易点 进销存管理系统 进销存管理软件 进销存软件哪个好 云进销存 saas企业管理软件 中小型企业管理软件 在线进销存 简易进销存" name="Keywords">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <script language="JavaScript" src="./src/js/avalon.modern.1.5.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .bg-box {
+            height: 385px;
+            width: 100%;
+            position: relative;
+            z-index: -1;
+        }
+
+
+        .bg-icon-box {
+            position: relative;
+        }
+
+        .bg-text{
+            position: absolute;
+            color: #d8e3e6;
+            font-size: 25px;
+            font-family: 微软雅黑;
+            top: 90px;
+            left: 53%;
+
+
+
+            animation-name:textscroll;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            transform: rotate(6deg);
+        }
+        @-moz-keyframes textscroll {
+            0% {
+                transform: rotate(6deg) translateY(0px);
+            }
+            50% {
+                transform: rotate(-6deg) translateY(0px);
+            }
+            100% {
+                transform: rotate(6deg) translateY(0px);
+            }
+        }
+
+        @-webkit-keyframes textscroll {
+            0% {
+                transform: rotate(6deg) translateY(0px);
+                letter-spacing: inherit;
+            }
+            50% {
+                transform: rotate(-6deg) translateY(0px);
+                letter-spacing: 3px;
+            }
+            100% {
+                transform: rotate(6deg) translateY(0px);
+                letter-spacing: inherit;
+
+            }
+        }
+
+        .bg-icon-box img {
+            position: absolute;
+
+            animation-name: iconscroll;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+
+            z-index: -5;
+        }
+
+        @-moz-keyframes iconscroll {
+            0% {
+                transform: translateY(-10px);
+            }
+            50% {
+                transform: translateY(30px);
+            }
+
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @-webkit-keyframes iconscroll {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(40px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+
+        .bg-icon-box img:nth-of-type(1) {
+            top: 50px;
+            left: 5%;
+            width: 50px;
+        }
+
+        .bg-icon-box img:nth-of-type(2) {
+            top: 135px;
+            left: 2%;
+            width: 62px;
+        }
+
+        .bg-icon-box img:nth-of-type(3) {
+            top: 172px;
+            left: 10%;
+            width: 39px;
+        }
+
+        .bg-icon-box img:nth-of-type(4) {
+            top: 149px;
+            left: 237px;
+            width: 23px;
+        }
+
+        .bg-icon-box img:nth-of-type(5) {
+            top: 60px;
+            left: 38%;
+            width: 120px;
+        }
+
+        .bg-icon-box img:nth-of-type(6) {
+            top: 141px;
+            left: 83%;
+            width: 45px;
+        }
+
+        .bg-icon-box img:nth-of-type(7) {
+            top: 117px;
+            left: 90%;
+            width: 58px;
+        }
+
+        .bg-icon-box img:nth-of-type(8) {
+            top: 67px;
+            left: 95%;
+            width: 40px;
+        }
+
+        .bg-light-box {
+            margin-top: 50px;
+            background: url("./src/images/bg-wave-light.png") repeat-x 0 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -2;
+
+            -moz-animation-name: bg1scroll;
+            -moz-animation-duration: 100s;
+            -moz-animation-timing-function: linear;
+            -moz-animation-iteration-count: infinite;
+
+            -webkit-animation-name: bg1scroll;
+            -webkit-animation-duration: 100s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+
+            animation-name: bg1scroll;
+            animation-duration: 100s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+
+        }
+
+        @-moz-keyframes bg1scroll {
+            0% {
+                background-position: 0 0px;
+            }
+            100% {
+                background-position: -1920px 0px;
+            }
+        }
+
+        @-webkit-keyframes bg1scroll {
+            0% {
+                background-position: 0 0px;
+            }
+            100% {
+                background-position: -1920px 0px;
+            }
+        }
+
+        .bg-deep-box {
+            margin-top: 50px;
+            background: url("./src/images/bg-wave-deep.png") repeat-x 0 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 15px;
+            z-index: -12;
+
+            -moz-animation-name: bg2scroll;
+            -moz-animation-duration: 100s;
+            -moz-animation-timing-function: linear;
+            -moz-animation-iteration-count: infinite;
+
+            -webkit-animation-name: bg2scroll;
+            -webkit-animation-duration: 100s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+
+            animation-name: bg2scroll;
+            animation-duration: 100s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+
+        }
+
+        @-moz-keyframes bg2scroll {
+            0% {
+                background-position: 0 0px;
+            }
+            100% {
+                background-position: 1920px 0px;
+            }
+        }
+
+        @-webkit-keyframes bg2scroll {
+            0% {
+                background-position: 0 0px;
+            }
+            100% {
+                background-position: 1920px 0px;
+            }
+        }
+
+        .update-main {
+            width: 60%;
+            margin: 0 auto;
+            height: 1000px;
+            background: #fdfdfe;
+            position: relative;
+            margin-top: -150px;
+            padding: 20px;
+        }
+
+        .extra-title {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #fdfdfe;
+            font-family: 微软雅黑;
+            font-size: 17px;
+            padding: 11px 20px
+        }
+
+        .update-main-left {
+            float: left;
+            width: 13%;
+            height: 100%;
+            padding: 20px 20px 20px 0px;
+            box-sizing: border-box;
+        }
+
+        .update-main-left li:first-of-type{
+            font-size: 18px;
+            color: #6d9abc;
+        }
+
+        .update-main-right {
+            float: left;
+            width: 86%;
+            height: 100%;
+            padding: 10px 0 0px 20px;
+            background: #fdfdfe;
+            box-sizing: border-box;
+        }
+
+        .main-right-list {
+            border-bottom: 2px solid #b2b2b2;
+            min-height: 140px;
+            position: relative;
+        }
+
+        .list-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .list-content {
+            font-size: 18px;
+            font-family: 微软雅黑;
+            margin-bottom: 40px;
+        }
+
+        .list-foot-time {
+            right: 10px;
+            font-size: 16px;
+            position: absolute;
+            bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div ms-controller="update">
+    <div class="bg-box">
+        <div class="bg-light-box"></div>
+        <div class="bg-deep-box"></div>
+        <div class="bg-icon-box">
+            <span class="bg-text">让互联网成为生产力</span>
+            <img src="./src/images/update-1.png" alt=""/>
+            <img src="./src/images/update-2.png" alt=""/>
+            <img src="./src/images/update-3.png" alt=""/>
+            <img src="./src/images/update-4.png" alt=""/>
+            <img src="./src/images/update-5.png" alt=""/>
+            <img src="./src/images/update-6.png" alt=""/>
+            <img src="./src/images/update-7.png" alt=""/>
+            <img src="./src/images/update-8.png" alt=""/>
+        </div>
+    </div>
+    <div style="background: linear-gradient(180deg, #e9f3f5 0%, #ffffff 80%);z-index: -10">
+        <div class="update-main">
+            <hr/>
+            <span class="extra-title">[+]新增&nbsp;[-]删除&nbsp;[^]升级&nbsp;[#]修复</span>
+
+            <div class="update-main-left">
+                <div style="position: fixed">
+                    <h3 style="margin:10px 0;">版本</h3>
+                    <ul style="list-style: none;padding-left: 20px;font-size: 16px">
+                        <li ms-repeat="version" style="margin: 10px;">
+                            <a style="text-decoration: none" ms-attr-href="#version{{$key}}"  ms-click="toVersion($key)">
+                                {{$key}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div>
+                <div class="update-main-right" ms-repeat="version">
+                    <h2 style="color: #f3bb74;margin-bottom: 20px;" ms-attr-id="version{{$key}}">{{$key}}</h2>
+                    <div class="main-right-list" ms-repeat="$val">
+                        <div class="list-title">[<span>{{el.mark}}</span>]<span>{{el.title}}</span></div>
+                        <p class="list-content">{{el.content}}</p>
+
+                        <div class="list-foot-time">{{el.time}}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--<div style="height: 1200px">-->
+
+<!--</div>-->
+</body>
+<script>
+    (function(){
+        require(['avalon','mmRequest.js','text!../../update.json'],function(avalon, mmRequest,json){
+          var vm=avalon.define({
+              $id:"update",
+              ready:function(){
+                  var updateJson=JSON.parse(json);
+                  vm.version=updateJson;
+                  ForEach(updateJson,function(num){
+                      ForEach(num,function(el){
+                         console.log(el)
+                          vm.content.push(el)
+                     })
+                  }),
+                  avalon.scan();
+              },
+              reset:function(){},
+              toVersion: function (versionName) {
+                  vm.nowVersion=versionName
+              },
+              version:{},
+              content:[],
+          })
+            window.vm=vm;
+            vm.ready();
+        })
+    })();
+
+    //遍历数组和对象
+    /*
+     * for each 语句，
+     * 实现for 和for(var i in y)的功能
+     * 调用时
+     ForEach(obj,function(i){
+     })
+     * */
+    function ForEach(obj, func) {
+        if(typeof obj=="object"){
+            if(obj.length==undefined){
+                for (var i in obj) {
+                    func(obj[i],i);
+                }
+            }else{
+                for (var i = 0; i < obj.length; i++) {
+                    func(obj[i],i);
+                }
+            }
+        }else{
+            console.log('类型错误:'+JSON.stringify(obj))
+        }
+    }
+</script>
+</html>

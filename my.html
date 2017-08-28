@@ -1,0 +1,1001 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="zh-CN">
+<!--页头引入-->
+<head ms-controller="head">
+    <title>易点租赁——您便捷高效的企业云管家</title>
+    <meta content="易点租赁是一款针对中小型零售、批发企业开发的企业管理软件，系统特有的云服务、智能记忆、操作简单、升级平滑等特点让商家的店铺管理变得简单、高效。微信公众账号：易点租赁。" name="Description">
+    <meta content="易点租赁 租赁软件 租赁 易点 租赁管理系统 租赁管理软件 租赁软件哪个好 云租赁 saas企业管理软件 中小型企业管理软件 在线租赁 简易租赁" name="Keywords">
+    <meta charset="UTF-8">
+    <!--坑爹的IE兼容-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--坑爹的将360默认为极速模式打开-->
+    <meta name="renderer" content="webkit">
+    <!--移动优先-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+
+    <!--avalon-->
+    <script src="./src/js/avalon.modern.1.5.min.js"></script>
+    <!--图标引入-->
+    <!--bootstrap引入-->
+    <link href="./src/css/layout.css" rel="stylesheet">
+    <!--已合并到layout中-->
+    <!--<link href="./src/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+    <!--引入btn-->
+    <!--<link href="./src/css/button.css" rel="stylesheet" type="text/css"/>-->
+    <!--fontAwesone 引入-->
+    <link href="./src/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!--本地CSS-->
+    <!--<link href="./src/css/mooshroom.css" rel="stylesheet">-->
+    <link href="./src/css/local.css" rel="stylesheet">
+    <style>
+        [ms-controller] {
+            visibility: hidden
+        }
+    </style>
+
+</head>
+
+<body class="">
+<noscript>
+    <div class="container">
+        <H1>Javascript Disabled</H1>
+        您当前的浏览器禁用了javascript，导致无法使用易点租赁…… <br/>
+        请在浏览器的设置（setting）中，启用javascript
+    </div>
+
+</noscript>
+<!--打印容器-->
+<div class="visible-print" id="print">
+
+</div>
+<!--内容-->
+<div id="desk" style="display: none">
+    <div class="box-row hidden-print">
+        <!--顶部快捷功能-->
+
+        <div ms-controller="quickStart" class="top-bar" id="topBar">
+
+            <div class="top-1 box-row hor-ends">
+                <!--4个按钮-->
+                <div class="quick-l ">
+                <span style="position: relative;">
+                    <a class="btn-quick btn-quick-imp" href="#!/bill/2"
+                       ms-on-mouseenter='preLoad("sell")' ms-on-mouseleave="unLoad">
+                        <i class="icon-gift">&nbsp;</i>
+                        消耗品出库
+                    </a>
+                    <a class="btn-quick btn-quick-imp" href="#!/bill/12"
+                       ms-on-mouseenter='preLoad("sell")' ms-on-mouseleave="unLoad">
+                        <!--<i class="icon-gift">&nbsp;</i>-->
+                        租赁出库
+                    </a>
+                    <button class="btn-quick" ms-click="toggleBill">
+                        开单&nbsp;
+                        <i class="icon-caret-down" ms-visible="!showMoreBill"></i>
+                        <i class="icon-caret-up" ms-visible="showMoreBill"></i>
+                    </button>
+                    <div class="kdbox" ms-class-showBill="showMoreBill">
+                        <span class="shBill" ms-on-mouseleave="toggleBill">
+                            <div style="color: #66A0B5;">
+                                <div style="width:3px; height:18px;background: #66A0B5;float: left"></div>
+                                &nbsp;&nbsp;销售
+                            </div>
+                            <div style="height:70px;padding:10px 0 0 0;">
+                                <a class="btn btn-default btn-xs menuBtn" href="#!/bill/2"
+                                   ms-on-mouseenter='preLoad("sell")' ms-on-mouseleave="unLoad">
+                                    消耗品出库 F1
+                                </a>
+
+                                <a class="btn btn-default btn-xs menuBtn" href="#!/bill/12"
+                                   ms-on-mouseenter='preLoad("sell")' ms-on-mouseleave="unLoad">
+                                    租赁单
+                                </a>
+
+                                <a class="btn btn-default btn-xs menuBtn" href="#!/bill/3" style="margin-top: 10px"
+                                   ms-on-mouseenter='preLoad("sellReturn")' ms-on-mouseleave="unLoad">
+                                    销售退货 F2
+                                </a>
+                                <!--<a class="btn btn-default btn-xs menuBtn" href="#!/bill/11"-->
+                                   <!--ms-on-mouseenter='preLoad("sell")' ms-on-mouseleave="unLoad">-->
+                                    <!--报价单-->
+                                <!--</a>-->
+
+                            </div>
+                            <div style="color: #66A0B5;">
+                                <div style="width:3px; height:18px;background: #66A0B5;float: left"></div>
+                                &nbsp;&nbsp;采购
+                            </div>
+                            <div style="height:40px;padding:10px 0 0 0;">
+                                <a class="btn btn-default btn-xs menuBtn" href="#!/bill/0"
+                                   ms-on-mouseenter='preLoad("pur")'
+                                   ms-on-mouseleave="unLoad">
+                                    采购入库 F3
+                                </a>
+                                <a class="btn btn-default btn-xs menuBtn" href="#!/bill/1"
+                                   ms-on-mouseenter='preLoad("purReturn")' ms-on-mouseleave="unLoad">
+                                    采购退货 F4
+                                </a>
+                            </div>
+                            <div style="color: #66A0B5;">
+                                <div style="width:3px; height:18px;background: #66A0B5;float: left"></div>
+                                &nbsp;&nbsp;库房
+                            </div>
+                            <div style="height:40px;padding:10px 0 0 0;">
+
+                                <a class="btn btn-default btn-xs menuBtn" href="#!/bill/6"
+                                   ms-if="Stores.length>1"
+                                   ms-on-mouseenter='preLoad("A")' ms-on-mouseleave="unLoad">
+                                    调拨
+                                </a>
+                                <a class="btn btn-default btn-xs menuBtn" href="#!/bill/4"
+                                   ms-on-mouseenter='preLoad("-4")' ms-on-mouseleave="unLoad">
+                                    报损
+                                </a>
+                                <a class="btn btn-default btn-xs menuBtn" href="#!/bill/5"
+                                   style="color:#fff;border-radius:3px;background: #64A0B9!important;"
+                                   ms-on-mouseenter='preLoad("B")' ms-on-mouseleave="unLoad">
+                                    盘存
+                                </a>
+                            </div>
+                        </span>
+                    </div>
+                    <a href="#!/billDraft/0" style="    color: #66a8bc;" class="btn-quick">
+                        <i class="icon-share">&nbsp;</i>
+                        草稿箱
+                    </a>
+                </span>
+
+                    <!--<a onclick="window.location.href='query.html'" class="btn-quick">邀请查货</a>-->
+
+
+                    <!-- <div class="top-2 box-row hor-ends">  -->
+
+                    <div class="search-box box-row warp" style="display: inline-block">
+                        <!--<span>快速搜索：</span><br/>-->
+
+                        <div style="display: inline-block;margin: 4px 0;">
+                            <input type="text" id="searchGoods"
+                                   maxlength="50"
+                                   class="form-control focus-longer"
+                                   onkeyup="goInput.posePanel(this)"
+                                   onfocus="goInput.show(true);
+                                   goInput.posePanel(this)"
+                                   onblur="goInput.show(false)"
+                                   onkeyup="cutLength(this)"
+                                   ms-duplex="goodsKey"
+                                   placeholder="商品搜索"/>
+                        </div>
+
+
+                        <div style="display: inline-block">
+
+                            <input type="text" maxlength="50" id="searchCus"
+                                   class="form-control focus-longer"
+                                   onkeyup="cusInput.posePanel(this)"
+                                   onfocus="cusInput.show(true);cusInput.posePanel(this)"
+                                   onblur="cusInput.show(false)"
+                                   onkeyup="cutLength(this)"
+                                   ms-duplex="customerKey"
+                                   placeholder="交易方搜索"/>
+
+                            <!--客户查询的搜索结果框-->
+
+                        </div>
+
+                        <!-- <a href="#!/search/0" class="btn btn-default" style="height: 34px;">订单查询</a>-->
+                    </div>
+
+
+                </div>
+
+
+                <!--     </div>-->
+
+
+                <!--用户状态-->
+                <div class="user-state pull-right">
+                    HI-
+                    <a href="#!/more/0" style="display: inline-block">{{user.UserName}}</a>
+                    您现在正在
+               <span>
+                   <a style="font-weight:bold;display: inline-block"
+                      ms-click="moreStore">
+                       {{nowStore.SName}}
+                   </a>
+               </span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <a ms-click="logout" style="font-size:12px;display:inline-block">退出登录</a>
+
+
+                    <!--店铺列表-->
+                    <div class="more-store" ms-visible="showMoreStore" ms-on-mouseleave="closeMoreS">
+                        <div style='padding:5px'>
+                            切换到：
+                        </div>
+
+                        <div ms-repeat="Stores" class="storeI" ms-click="changeStore($index)">
+                            {{el.SName}}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--全局统计-->
+            <div class="box-row globalData" ms-click="lookGlobal">
+                <div class="pull-left globalDataArrow">
+                    <i class="icon-large icon-angle-left" ms-if="showGlobal == false"></i>
+                    <i class="icon-large icon-angle-right" ms-if="showGlobal == true"></i>
+                </div>
+                <div ms-if="!showGlobal" style="width:15px;background:#fff;height:100%;"></div>
+                <div class="alldatabox" ms-class-htowdata="!showGlobal">
+                    <div class="box-row twoData">
+                        <div class="total box-row" ms-visible="wShowGlobal">
+                            <big>
+                                超期
+                            </big>
+
+                            <div>
+                                <div>
+                                    应收<span style="color: #5cb85c;"> {{Report.Day.EarlyReceivables}} </span>
+                                </div>
+                                <div>
+                                    应付<span style="color: #f0ad4e;"> {{Report.Day.FinalReceivalbes}} </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="total box-row" ms-visible="wShowGlobal">
+                            <big>
+                                销售额
+                            </big>
+
+                            <div>
+                                <div>
+                                    今日<span style="color: #d9534f;"> {{Report.Day.SalesAmount}}&nbsp;&nbsp;</span>
+                                </div>
+                                <div>
+                                    本月<span style="color: #777;"> {{Report.Month.SalesAmount}}&nbsp;&nbsp;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--左侧导航-->
+        <div class="panel-low">
+            <div style="width: 59px"></div>
+            <div ms-controller="nav" class="nav">
+
+                <div class="nav-list">
+                    <!--ms-repeat-->
+                    <div ms-repeat="navList" class="nav-item" ms-class="now:now==$index">
+                        <a ms-attr-href='"#!/"+el.en+"/0"' ms-on-mouseenter="preLoad($index)"
+                           ms-if="!el.sub" class="box-col row-center">
+                        <span style="font-size: 24px">
+                            {{el.icon|html}}
+                        </span>
+                            <!--<br/>-->
+                        <span style="font-size: 13px">
+                            {{el.zh}}
+                        </span>
+                        </a>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <!--中内容-->
+        <div class="box-row hor-center" style="width: 100%">
+            <div class="main-bg" ms-controller="layout">
+
+                <!--下方各模块私有-->
+                <div class="layout panel" ms-class="scaled:rightShowing">
+                    <!--主体-->
+                    {{url|html}}
+
+                    <!--备选商品-->
+
+                    <!--页脚-->
+                    <div class="footer">
+                <span class="pull-right">
+                    &copy; 碳素云 2015
+                </span>
+                    </div>
+                </div>
+
+                <!--右侧小窗口-->
+                <div class="right-layout"
+                     ms-class="right-showing:rightShowing"
+                     ms-class-2="right-layout-clickable:!rightShowing"
+                     ms-visible="subUrl!=''">
+                    <div class="right-layout-toggle" ms-click="subToggle">
+                        <!--<i style="color:#fff" class="icon-angle-left icon-2x smooth-show" ms-class="turn-right:rightShowing"></i>-->
+                        <div class="right-title" ms-visible="rightTitle!=''">
+                            <i class="icon-angle-left icon-2x" ms-visible="!rightShowing"></i>
+                            <i class="icon-angle-right icon-2x" ms-visible="rightShowing"></i>
+                            {{rightTitle}}
+                        </div>
+                    </div>
+                    <div class="right-content" onclick="if(!layout.rightShowing){layout.subOpen()}"
+                         ms-on-mouseleave="setTimeClose"
+                         ms-on-mouseenter="clearClose">
+                        {{subUrl|html}}
+                    </div>
+
+                </div>
+                <div>
+                    <button class="btn btn-sm goodsCar" style="color:#FFFFFF" ms-click="showGoodsCar">已选<br/>商品
+                    </button>
+                    <span class="goodsCarNum" ms-if="GCList.length!=0"> {{GCList.length}} </span>
+                </div>
+
+
+                <!-- 浏览器版本提醒-->
+                <!--<div class="browser-err" ms-if="browser.name!='firefox'&&browser.name!='chrome'">-->
+                <!--您的浏览器过于老旧，无法获得最佳体验,请使用 <span style="color:#fff">chrome</span> 或 <span style="color:#fff">firefox</span> 浏览器访问。 <br/>-->
+                <!--点击下载chrome浏览器：<a href="http://down.tansuyun.cn/chrome.exe">http://down.tansuyun.cn/chrome.exe</a>-->
+                <!--</div>-->
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--登陆界面-->
+<div class="login-pannel" ms-controller="login" id="loginPanel" ms-visible="showLoginPanel">
+
+    <div ms-if="showLoginPanel">
+        <div class="container">
+            <div class="lo-title">
+                <img src="./src/images/logo.png" class="pull-left" alt="" width="64"/>
+
+                <div class="text-center pull-left">
+                    <span>
+                        易点租赁
+                    </span>
+                    <br/>
+                    <span>
+                        chest.tansuyun.cn
+                    </span>
+                </div>
+            </div>
+
+            <div class="lo-form">
+                <strong ms-visible="joinTip==''">易点租赁</strong>
+
+                <p ms-visible="joinTip==''">您便捷高效的租赁管家</p>
+                <p ms-visible="joinTip!=''" style="
+                position: absolute;
+                width: 100%;
+                left: 0px;
+                text-align: center;">
+                    {{joinTip}}
+                </p>
+                <div ms-visible="joinTip!=''" style="height: 50px"></div>
+
+                <div ms-visible='state!="waiting"&&state!="success"'>
+                    <div class="getin-nav box-row hor-ends">
+                        <div ms-class="now-nav:page==0" ms-click="toPage(0)">
+                            加入易点
+                        </div>
+                        <div ms-class="now-nav:page==1" ms-click="toPage(1)">
+                            用户登录
+                        </div>
+                        <div ms-class="now-nav:page==2" ms-click="toPage(2)">
+                            找回密码
+                        </div>
+                    </div>
+                    <div ms-visible="page==0||page==1">
+                        <div style="width: 316px;">
+                            <tsy:input ms-data-id="'nameInput'">
+                                <input slot="core" type="text" class="tsy-input tsy-input-md" maxlength="50"
+                                       onkeyup="cutLength(this)" id="account"
+                                       ms-duplex="login_account"
+                                       ms-on-input="verifyLoginName()" placeholder="用户名">
+                            </tsy:input>
+                        </div>
+                        <div style="width: 316px;">
+                            <tsy:input ms-data-id="'passwordInput'">
+                                <input slot="core" class="tsy-input tsy-input-md"
+                                       type="password" id="pwd" ms-duplex="login_pwd" ms-on-input="verifyLoginPwd()"
+                                       placeholder="密码">
+                            </tsy:input>
+                        </div>
+                        <div ms-visible="page==0">
+                            <div style="width: 316px;">
+                                <tsy:input ms-data-id="'phoneInput'">
+                                    <input slot="core" class="tsy-input tsy-input-md"
+                                           type="text" ms-duplex="phone" ms-on-input="checkPhone()"
+                                           placeholder="手机号">
+                                </tsy:input>
+                            </div>
+                            <div style="width: 316px;">
+                                <tsy:input ms-data-id="'emailInput'">
+                                    <input slot="core" class="tsy-input tsy-input-md"
+                                           type="text" ms-duplex="email" ms-on-input="checkEmail()"
+                                           placeholder="邮箱">
+                                </tsy:input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ms-visible="page==2">
+                        <!-- 找回密码-->
+                        <div style="width: 316px;position: relative;">
+                            <tsy:input ms-data-id="'pswMail'">
+                                <input slot="core" class="tsy-input tsy-input-md" style="padding-right: 110px;"
+                                       type="text" ms-duplex="psw_email" ms-on-input="checkPswEmail()"
+                                       placeholder="邮箱">
+                            </tsy:input>
+                            <span ms-visible="sendPINstate==0"
+                                  style="position: absolute;right:30px;top: 8px;cursor: pointer" ms-click="sendPIN">发送验证码</span>
+                            <span ms-visible="sendPINstate==1" style="position: absolute;right:10px;top: 8px;"
+                                  id="seconds" value="60s" ms-click="secondsCount"></span>
+                        </div>
+                        <div style="width: 316px;">
+                            <tsy:input ms-data-id="'pswNew'">
+                                <input slot="core" class="tsy-input tsy-input-md"
+                                       type="password" id="" ms-duplex="pwd_new" ms-on-input="checkPsw()"
+                                       placeholder="新密码">
+                            </tsy:input>
+                        </div>
+                        <div style="width: 316px;">
+                            <tsy:input ms-data-id="'pswPIN'">
+                                <input slot="core" class="tsy-input tsy-input-md"
+                                       type="text" ms-duplex="psw_pin" placeholder="验证码">
+                            </tsy:input>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <button class="btn  btn-info btn-block" ms-click="login" ms-visible="page==1">登录</button>
+                        <button class="btn  btn-info btn-block" ms-click="register" ms-visible="page==0">注册</button>
+                        <button class="btn  btn-info btn-block" ms-click="pswReset" ms-visible="page==2">设置为新的密码
+                        </button>
+                    </div>
+                </div>
+                <div ms-visible='state=="waiting"'>
+                    <i class="icon-spinner icon-spin icon-5x"></i>
+                </div>
+
+
+                <div ms-visible="state=='success'">
+                    <div ms-visible="!join">
+                        <div ms-visible="!addingCom">
+                            <p  ms-visible="companyList.length>0" style="font-size: 18px;text-align: left">进入：</p>
+                            <div ms-repeat="companyList" class="c-list-item" ms-click="getStart(el.CompanyID)">
+                                {{el.Name}}
+                            </div>
+                            <br>
+                            <p  ms-visible="companyList.length>0" style="font-size: 18px;text-align: left">或者：</p>
+                            <div class="c-add" ms-click="openAddCom">
+                                <i class="icon-plus "></i>
+                                新建一个企业
+                            </div>
+                        </div>
+                        <div ms-visible="addingCom">
+                            <tsy:input ms-data-id="'comNameInput'">
+                                <input slot="core" type="text"
+                                       class="tsy-input tsy-input-md"
+                                       ms-duplex="comName"
+                                       ms-on-input="checkComName"
+                                       placeholder="企业名称">
+                            </tsy:input>
+
+
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <button class="btn btn-info btn-block" ms-click="addCom">创建</button>
+                                </div>
+                                <div class="col-xs-3">
+                                    <button class="btn btn-default btn-block" ms-click="closeAddCom">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ms-visible="join">
+                        <div class="c-add" ms-click="joinCOM">
+                            点击加入 <br>
+                            {{COM.Name}}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <!--<div class="text-center">-->
+
+        <!--<img src="./src/images/home-bg.png" alt=""-->
+        <!--style="width: 90%;margin-left: auto;margin-right: auto;margin-top: 30px"/>-->
+        <!--</div>-->
+    </div>
+
+
+</div>
+
+<!--全局UI组件容器-->
+<div ms-controller="uiBox" class="hidden-print">
+
+    <tsy:ws config="$optc"></tsy:ws>
+    <tsy:progressbar config="$optd"></tsy:progressbar>
+    <tsy:tip config="$opta"></tsy:tip>
+    <tsy:modal config="$optb" id="modal"></tsy:modal>
+    <tsy:totop config="$optTop"></tsy:totop>
+    <tsy:goodsinput config="$optGI_bill"></tsy:goodsinput>
+    <tsy:goodsinput config="$optGI"></tsy:goodsinput>
+    <tsy:goodsinput config="$optGI_compose"></tsy:goodsinput>
+    <tsy:cusinput config="$optCI"></tsy:cusinput>
+    <tsy:cusinput config="$optCI_bill"></tsy:cusinput>
+    <tsy:classinput config="$optCSI_all"></tsy:classinput>
+</div>
+
+<script src="./plugins/cache/cache.js"></script>
+<!--layout.js 已合并到config中-->
+<!--<script src="./layout.js"></script>-->
+
+<script src="./plugins/call/call.mobile.v3.js"></script>
+<script src="./config.js"></script>
+<script src="./src/js/LodopFuncs.js"></script>
+
+
+
+<script>
+    avalon.ready(function () {
+        //配置父元素的VM
+        var uiBox = avalon.define({
+            $id: "uiBox",
+            //提示框配置
+            $opta: {
+                id: "tip"
+            },
+//                模态框配置
+            $optb: {
+                id: "modal"
+            },
+            //websocket配置
+            $optc: {
+                id: "ws",
+//                server: "ws://180.97.81.190:46032",//线上版本
+                server: "ws://my.s.tansuyun.cn:65513",//测试版本
+//                server: "ws://10.10.13.54:65513",//局域网测试版本
+                debug: false
+            },
+            $optd: {
+                id: "pb"
+            },
+            $optTop: {
+                id: "toTop"
+            },
+            $optGI: {
+                id: "goInput",
+                callback: function (goods) {
+                    require(['../../package/goods/goods.js'], function () {
+                        window.goods.toInfo(goods.GoodsID)
+                        document.getElementById("searchGoods").blur()
+                        goInput.mustOut()
+                        goInput.goReset()
+                        quickStart.goodsKey = ""
+                    })
+                },
+                callbackTM: function (goods) {
+                    require(['../../package/goods/goods.js'], function () {
+                        window.goods.toInfo(goods.GoodsID)
+                        document.getElementById("searchGoods").blur()
+                        goInput.mustOut()
+                        goInput.goReset()
+                        quickStart.goodsKey = ""
+                    })
+
+                }
+            },
+            // 开单界面中商品搜索配置
+            $optGI_bill: {
+                id: 'billGoodsSearch',
+                callback: function (goods) {
+
+                    bill.wantSearch = false;
+
+                    var input;
+                    var xc;
+
+                    input = bill.List[bill.focusIndex]
+
+                    /*检查是否超出库存*/
+                    bill.amountErr(bill.focusIndex);
+
+                    fill(bill.focusIndex)
+
+
+                    function fill(fi) {
+                        //填充数据
+
+                        bill.oldList[fi] = {Name: ''}
+                        for (xc in input) {
+                            if (xc.charAt(0) != '$') {
+                                if (goods[xc]) {
+                                    input[xc] = goods[xc]
+                                }
+                                else {
+                                    input[xc] = ""
+                                }
+
+                                //如果是采购，则将标价替换为成本价
+                                if (xc == "Price1") {
+                                    if (bill.state == "0" || bill.state == "1") {
+                                        input.Price1 = goods.Price0
+                                    }
+//                                    var haveLP=false
+//                                    if(goods.LP!=undefined&&goods.LP.Price>0){
+//                                        haveLP=true
+//                                    }
+                                    else if ((bill.state == "2" || bill.state == "3") && goods.LP>0) {
+                                        //如果是销售，则把标价替换为上次价格
+                                        input.Price1 = goods.LP.Price;
+                                    }else if(bill.state=='12'){
+                                        //如果是租赁
+                                        input.Price1=goods.Price3
+
+                                    }
+                                }
+
+
+                                // 记录原有数据，做更改比较所用
+
+                                bill.oldList[fi][xc] = input[xc]
+
+
+                            }
+
+                        }
+                        bill.List[fi].Amount = 1;
+
+
+                        //如果是盘存单，那么默认amount为当前库存
+                        if (bill.state == "5") {
+
+                            bill.List[fi].Amount = goods.ThisTotle
+                        }
+
+                        try {
+                            bill.priceErr(fi)
+                            bill.amountErr(fi)
+                        } catch (err) {
+                        }
+
+
+                    }
+
+                    bill.goOut()
+                    bill.sum()
+                    function goReset() {
+                        bill.goods = []
+                        bill.GP = 1
+                        bill.GT = 0
+                        bill.goodsKey = ""
+                        //bill.goLastKey = ""
+                        bill.focusGoods = -1
+                        bill.onGoods = -1
+                        //bill.focusIndex = ''
+                        bill.goodsToggle = false
+                        bill.goodsWaiting = false
+                    }
+
+                    goReset()
+
+
+                    //跳转至下一行
+                    bill.autoNextLine()
+
+                },
+                callbackTM: function (goods) {
+
+
+                    /*检查表单中是否已存在此商品，存在则数量加一*/
+                    for (var echG = 0; echG < bill.List.length; echG++) {
+                        if (bill.List[echG].GoodsID == goods.GoodsID) {
+
+                            bill.List[echG].Amount++;
+                            /*初始化*/
+                            billGoodsSearch.goReset()
+
+                            /****这里要清空输入框*****/
+                            bill.List[bill.focusIndex].Name = '';
+                            //跳转至下一行
+//                            bill.autoNextLine()
+                            /*重新计合*/
+                            bill.sum();
+                            /*检查是否超出库存*/
+                            bill.amountErr(echG);
+
+
+                            return;
+                        }
+                    }
+                    billGoodsSearch.callback(goods)
+                    billGoodsSearch.mustOut()
+                }
+            },
+
+            //商品拆组公式编辑中的商品搜索
+            $optGI_compose:{
+                id:"composeGoodsSearch",
+                callback: function (goods) {
+                    require(['../../package/goods/compose'], function (compose) {
+                        //拾取当前输入框
+                        var side=compose.focusing[0]
+                        var i=compose.focusing[1]
+
+                        //错误状态
+                        if(side==0){
+                            return
+                        }
+
+                        //转换Name
+//                        goods.Name=goods.Name+" "+goods.Model+" "+goods.Standard
+
+                        //填充
+                        avalon.mix(compose['Compose'+side][i],goods)
+
+                        //关闭搜索框
+                        composeGoodsSearch.mustOut()
+
+                        //更换焦点(设置为后面的数量
+                        window.document.getElementById('Num'+side+i).focus()
+                    })
+
+                },
+                callbackTM: function (goods) {
+                    composeGoodsSearch.callbackTM(goods)
+                }
+            },
+
+            //页面顶部的客户供应商搜索
+            $optCI: {
+                id: "cusInput",
+                callback: function (cus) {
+                    window.location.href = '#!/customerInfo/' + cus.TraderID
+                    document.getElementById("searchCus").blur()
+                    cusInput.mustOut()
+                    cusInput.reset()
+                    quickStart.customerKey = ""
+                }
+            },
+            $optCI_bill: {
+                id: 'billCusSearch',
+                callback: function (cus) {
+                    var cus = cus,
+                            input = bill.customer,
+                            x;
+                    for (x in input) {
+                        if (x.charAt(0) != '$') {
+                            if (cus[x]) {
+                                input[x] = cus[x]
+                            }
+                            else {
+                                input[x] = ""
+                            }
+                            // 记录原有数据，做更改比较所用
+                            bill.oldCus = {}
+                            bill.oldCus[x] = input[x]
+                        }
+                    }
+                    document.getElementsByClassName("billInput")[0].focus()
+                    billCusSearch.mustOut()
+                    billCusSearch.reset()
+                    bill.sum()
+
+                    try{
+                        window.billCus.success()
+                    }catch(err){}
+                }
+            },
+
+            $optCSI_all:{
+                id:"classSearch",
+                callback: function (Class) {
+//                    alert(Class)
+
+                    //填充
+                    goodsEdit.fillClass(Class)
+                    window['goodsClass'+goodsEdit.classFocusing].success()
+
+
+                    //搞定收工
+
+                    classSearch.mustOut()
+                    classSearch.reset()
+
+                    goodsEdit.addClassInput()
+                    setTimeout(function () {
+                        document.getElementsByClassName("addGoodsClass")[goodsEdit.classFocusing+1].focus()
+                    },300)
+                }
+            }
+
+
+
+        })
+
+        avalon.scan()
+        //引入组件
+        require([
+            '../../lib/ws/ws.js',
+            '../../lib/progressbar/progressbar',
+            '../../lib/modal/modal.js',
+            "../../lib/tip/tip.js",
+            '../../lib/toTop/toTop.js',
+            '../../lib/goodsInput/goodsInput',
+            '../../lib/cusInput/cusInput',
+            '../../lib/whatInput/whatInput',
+            '../../lib/classInput/classInput.js',
+            '../../plugins/cache/cloudCache.js',
+        ], function () {
+//       滚动加载
+            avalon.ready(function () {
+
+                //云存储插件配置
+                window.cc = new cc('JTID')
+
+                //自动监听滚动条时间加载更多的列表项目
+                function loadMore() {
+                    //变量
+                    var loading = false
+                    var minTime = 1000
+
+                    function reachBottom() {
+                        var scrollTop = 0;
+                        var clientHeight = 0;
+                        var scrollHeight = 0;
+                        if (document.documentElement && document.documentElement.scrollTop) {
+                            scrollTop = document.documentElement.scrollTop;
+                        } else if (document.body) {
+                            scrollTop = document.body.scrollTop;
+                        }
+                        if (document.body.clientHeight && document.documentElement.clientHeight) {
+                            clientHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
+                        } else {
+                            clientHeight = (document.body.clientHeight > document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
+                        }
+                        scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+
+                        console.log(scrollTop + ',' + clientHeight + ',' + scrollHeight)
+                        if (scrollTop + clientHeight == scrollHeight) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+
+                    //判断
+                    if (!loading && reachBottom()) {
+                        console.log("yes")
+                        //执行条件成立
+                        load()
+                    } else {
+                        console.log("no")
+                    }
+
+
+                    //执行
+                    function load() {
+                        loading = true
+                        //定义对应表
+                        var fnList = {
+                            //首页
+                            /*'#!/all/0': {
+                             vm: 'all',
+                             path: '../../package/all/all',
+                             ifFn: "getList",
+                             sign: 'all.now!=-235',
+                             elseFn: 'byDate'
+                             },*/
+                            '#!/order/0': {
+                                vm: 'order',
+                                path: '../../package/order/order',
+                                ifFn: "getList",
+//                                sign: 'order.now!=-235',
+//                                elseFn: 'byDate'
+                            },
+                            '#!/goods/0': {
+                                vm: "goods",
+                                path: '../../package/goods/goods',
+                                ifFn: "getGoods",
+                                sign: 'goods.className=="选择分类"',
+                                elseFn: 'byClass'
+                            },
+                            '#!/customer/0': {
+                                vm: 'customer',
+                                path: '../../package/customer/customer',
+                                ifFn: "getCus"
+
+                            },
+                            "#!/search/0": {
+                                vm: 'search',
+                                path: '../../package/search/search',
+                                ifFn: 'search'
+                            }
+
+                        }
+
+                        //获取hash
+                        var hash = window.location.hash.toLowerCase()
+                        if (fnList[hash]) {
+                            var vm = fnList[hash].vm,
+                                    path = fnList[hash].path,
+                                    ifFn = fnList[hash].ifFn,
+                                    elseFn = fnList[hash].elseFn;
+
+
+                            //创建依赖
+                            require([path], function () {
+                                //判断sign
+                                if (fnList[hash].sign) {
+                                    //这个VM具有内部判断
+                                    var sign = fnList[hash].sign;
+                                    if (eval(sign)) {
+                                        avalon.vmodels[vm][ifFn]()
+                                    }
+                                    else {
+                                        avalon.vmodels[vm][elseFn]()
+                                    }
+
+                                } else {
+                                    avalon.vmodels[vm][ifFn]()
+                                }
+
+                                //执行函数
+                            })
+                        }
+
+
+                        //重置
+                        setTimeout(function () {
+                            loading = false
+                        }, minTime)
+                    }
+
+                }
+
+                //绑定到滚动事件上
+                EventUtil.addEventHandler(window, 'scroll', function () {
+                    loadMore()
+                })
+
+                //检测滚动条
+                layout.computHeight();
+
+            })
+
+
+        })
+
+
+    });
+
+
+</script>
+<script src="./router.js"></script>
+</body>
+</html>
