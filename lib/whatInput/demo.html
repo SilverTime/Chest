@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>碳素云输入框组件</title>
+    <!--<link rel="stylesheet" href="./whatInput.css"/>-->
+    <!--<link href="../../src/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>-->
+    <script src="../../src/js/avalon.modern.1.5.min.js"></script>
+</head>
+<body>
+<div ms-controller="test">
+    <div style="margin: 100px 300px;">
+        <!--通过ms-data-id来传入参数，无需在vm中写$opt-->
+        <div style="width: 350px;">
+            <tsy:input ms-data-id="'testInput'">
+                <label slot="label" class="tsy-label" name="可选">邮箱</label>
+                <input slot="core" ms-duplex="aaa" type="text" class="tsy-input tsy-input-md" placeholder="邮箱">
+            </tsy:input>
+        </div>
+        {{aaa}}
+    </div>
+    <button ms-click="myinfo">info</button>
+    <button ms-click="mywarning">warning</button>
+    <button ms-click="myerror">error</button>
+    <button ms-click="success">success</button>
+
+</div>
+
+<script>
+    avalon.ready(function () {
+        require(['../../lib/whatInput/whatInput'], function () {
+            var vm = avalon.define({
+                $id: "test",
+                ready: function () {
+
+                },
+
+                aaa: 'aaa',
+                myinfo:function(){
+                    testInput.info('info');
+                },
+                mywarning:function(){
+                    testInput.warning('warning');
+                },
+                myerror:function(){
+                    testInput.error('error');
+                },
+                success: function () {
+                    testInput.success()
+                },
+
+                adsd:function(){
+                    testI.error('asdfasdfasdfsafsad')
+                }
+
+            })
+            avalon.scan()
+        })
+
+    })
+</script>
+
+
+</body>
+</html>

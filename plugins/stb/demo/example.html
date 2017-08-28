@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <title>{{title}}</title>
+    <meta ms-attr-content="{{title}}" name="Description">
+    <meta ms-attr-content="{{title}}" name="Keywords">
+    <meta charset="UTF-8">
+    <!--坑爹的IE兼容-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--坑爹的将360默认为极速模式打开-->
+    <meta name="renderer" content="webkit">
+    <!--移动优先-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--图标引入-->
+    <!--[if lt IE 8]>
+    <link href="../../../src/css/font-awesome-ie7.min.css" rel="stylesheet">
+    <![endif]-->
+    <link href="../../../src/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../src/css/layout.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../src/css/mooshroom.css"/>
+    <link rel="stylesheet" href="../stb.css"/>
+    <link rel="stylesheet" href="../../../src/css/btn.css"/>
+
+</head>
+<body>
+<div ms-controller="include">
+    <div style="width: 200px;background-color: #ffff00;float: left" >12</div>
+    <div ms-include-src="url" style="width: 200px;background-color: #ffff00;float: left"></div>
+</div>
+<script  src="../../../src/js/avalon.js"></script>
+<script src="../../validate/regCheckOut.js"></script>
+<script src="..//stb.js"></script>
+<script src="../../../src/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script  src="../../call/call.js"></script>
+<script>
+
+    define('include', function () {
+        return include = avalon.define({
+            $id: 'include',
+            url: "../stb.html"
+
+        })
+    });
+</script>
+</body>
+</html>

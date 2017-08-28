@@ -1,0 +1,197 @@
+<div ms-controller="search">
+    <b style="color: #66a8bc;cursor: pointer">订单查询</b>
+    <!-- 搜索条-->
+    <div class="box-row hor-ends warp search-tools">
+        <div>
+            商品：
+            <input type="text" maxlength="50" onkeyup="cutLength(this)" class=" " ms-duplex="goodsKey" ms-on-focus="focus(1)"
+                   ms-on-blur="blur"
+                   ms-on-keyup="searchGoods" onchange="quickStart.searchGoods()"
+                   style="width: 170px"/>
+            <!--商品查询的搜索结果框-->
+            <div class="live-search-goods" ms-visible='(searching==1||onGoods==1)&&goodsKey!=""'
+                 ms-on-mouseenter="goHover(1)" ms-on-mouseleave="goOut">
+
+                <div class="">
+
+                    &nbsp;&nbsp;第{{GP}} &nbsp;/&nbsp; {{Math.ceil(GT/GN)}}页
+                                        <span class="pull-right">
+                                            <i class="icon-caret-left icon-2x search-pager" ms-if="GP>1"
+                                               ms-click="pagerGoods(1)"></i>
+
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <i class="icon-caret-right icon-2x search-pager"
+                                               ms-if="GP<(Math.ceil(GT/GN))"
+                                               ms-click="pagerGoods(-1)"></i>&nbsp;&nbsp;
+
+                                        </span>
+
+                </div>
+                <table class="table table-search">
+                    <thead>
+                    <tr>
+                        <td>名称</td>
+                        <td>条形码</td>
+                        <td>本店库存</td>
+                        <td>总库存</td>
+                        <td>标价</td>
+                        <td>成本价</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ms-repeat="goods" ms-on-mouseenter="selectGoods($index)"
+                        ms-click="jump2Goods($index)" ms-class="now:focusGoods==$index">
+                        <td>{{el.Name}}</td>
+                        <td>{{el.BarCode}}</td>
+                        <td>{{el.ThisTotle}}</td>
+                        <td>{{el.AllTotle}}</td>
+                        <Td>{{el.Price1}}</Td>
+                        <td>{{el.Price0}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div>
+            客户供应商：
+            <input type="text" maxlength="50" onkeyup="cutLength(this)" class=" " ms-duplex="customerKey" ms-on-focus="focus(2)"
+                   ms-on-blur="blur"
+                   ms-on-keyup="searchCustomer" onchange="quickStart.searchCustomer()"
+                   style="width: 170px"/>
+
+
+            <!--客户查询的搜索结果框-->
+            <div class="live-search-goods" ms-visible='(searching==2||onGoods==2)&&customerKey!=""'
+                 ms-on-mouseenter="goHover(2)" ms-on-mouseleave="goOut">
+                <div class="">
+                    &nbsp;&nbsp;第{{CP}} &nbsp;/&nbsp; {{Math.ceil(CT/CN)}}页
+                    <i class="icon-caret-right icon-2x search-pager pull-right" ms-if="CP<(Math.ceil(CT/CN))"
+                       ms-click="pagerCus(-1)">&nbsp;&nbsp;</i>
+                    <i class="icon-caret-left icon-2x search-pager pull-right" ms-if="CP>1"
+                       ms-click="pagerCus(1)">&nbsp;&nbsp;</i>
+                </div>
+                <table class="table table-search">
+                    <thead>
+                    <tr>
+                        <td>名称</td>
+                        <td>应收款</td>
+                        <td>应付款</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ms-repeat="customer" ms-on-mouseenter="selectCustomer($index)"
+                        ms-click="jump2Customer($index)" ms-class="now:focusCustomer==$index">
+                        <td>{{el.Name}}</td>
+                        <Td>{{el.Receivables}}</Td>
+                        <td>{{el.Payable}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+        <div >
+            <div class="input-tip" ms-if="tipping">
+                所输入的时间需要用“-”号隔开年月日，例如：2015-08-20
+            </div>
+            日期：
+            <input type="text" maxlength="50" onkeyup="cutLength(this)" class="" placeholder="开始时间" ms-focus="openTip" ms-blur="closeTip" ms-duplex="gt"/>
+            至
+            <input type="text" maxlength="50" onkeyup="cutLength(this)" class="" placeholder="结束时间" ms-focus="openTip" ms-blur="closeTip" ms-duplex="lt"/>
+
+
+        </div>
+        <div>
+            金额：
+            <input type="number"  placeholder="最小金额" ms-duplex="minMoney"/>
+            至
+            <input type="number"  placeholder="最大金额" ms-duplex="maxMoney"/>
+        </div>
+
+        <button class="btn btn-sm btn-success" ms-click="yesToSearch">&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;</button>
+    </div>
+    <hr/>
+    <div>
+        <table class="table table-bordered all-table">
+            <thead>
+            <tr>
+                <td>订单类型</td>
+                <td>单位名称</td>
+                <td>收付款类型</td>
+                <td>总金额</td>
+                <td>未结金额</td>
+                <td>已结金额</td>
+                <td>结款状态</td>
+                <td>开单日期</td>
+                <td>结算日期</td>
+                <td>单号</td>
+                <td>开单人</td>
+                <td>库房</td>
+                <td>操作</td>
+                <td>备注</td>
+            </tr>
+            </thead>
+
+            <!--总单-->
+            <tbody>
+            <!--repeat-start-->
+            <tr ms-repeat="showList" ms-class="type{{el.OrderCode}}:el.Total!=el.Payed">
+                <td>
+                    <span ms-if="el.OrderCode==-1">销售出库</span>
+                    <span ms-if="el.OrderCode==2">销售退货</span>
+                    <span ms-if="el.OrderCode==1">采购入库</span>
+                    <span ms-if="el.OrderCode==-2">采购退货</span>
+                    <span ms-if="el.OrderCode==-3">期初应收</span>
+                    <span ms-if="el.OrderCode==3">期初应付</span>
+                    <span ms-if='el.OrderCode=="A"'>调拨</span>
+                    <span ms-if='el.OrderCode=="B"'>盘点</span>
+                    <span ms-if="el.OrderCode==-4">报损</span>
+                </td>
+                <td>
+                    <a ms-attr-href='"#!/customerInfo/"+el.Customer.TraderID'>
+                        {{el.Customer.Name}}
+                    </a>
+
+                </td>
+
+                <td>
+                    <span ms-if="el.OrderCode<0">收款</span>
+                    <span ms-if="el.OrderCode>0">付款</span>
+                </td>
+                <td>{{Math.abs(el.Total)}}</td>
+                <td>{{Math.abs(el.Need)}}</td>
+                <td>{{Math.abs(el.Payed)}}</td>
+                <td>
+                    <span ms-if="el.Total!=el.Payed">记账</span>
+                    <span ms-if="el.Total==el.Payed">结清</span>
+                </td>
+                <td>{{el.Time*1000|date("yyyy-MM-dd HH:mm")}}</td>
+                <td ms-if="el.SettleTime">{{el.SettleTime*1000|date("yyyy年 MMM dd日 HH:mm")}}</td>
+                <td ms-if="!el.SettleTime">
+                    <span ms-if='el.OrderCode!="A"&&el.OrderCode!="B"&&el.OrderCode!=-4'>
+                        未结算
+                    </span>
+
+                </td>
+                <td>{{el.OrderID}}</td>
+                <td>{{el.Operator.UN}}</td>
+                <td>{{el.StoreName}}</td>
+                <td>
+                    <a ms-if="Math.abs(el.OrderCode)!=3" class="btn btn-xs btn-success" ms-click="toInfo(el.OrderID,$index,el.OrderCode)" ms-on-mouseenter="ready2info">
+                        详情
+                    </a>
+                </td>
+                <td class="limit">{{el.Memo}}</td>
+            </tr>
+            <!--repeat-end-->
+            </tbody>
+        </table>
+        <a class="btn btn-block btn-default" ms-click="search" ms-if='DT-DP*20>0' >
+            加载更多商品 <small>(还有 {{DT - DP*20}} 条数据)</small>
+        </a>
+    </div>
+</div>

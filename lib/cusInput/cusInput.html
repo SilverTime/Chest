@@ -1,0 +1,46 @@
+<!--商品查询的搜索结果框-->
+<div class="live-search-goods" style="position: absolute;z-index:999999999999999"
+     ms-visible="showing||hovering"
+     ms-on-mouseenter="goHover(true)" ms-on-mouseleave="goHover(false)"
+     ms-css-left="left" ms-css-top="top">
+
+    <i class="icon-spinner icon-spin icon-2x goodsSearchWaiting"
+       ms-visible="state=='waiting'"></i>
+    <span class="goods-search-tip" ms-visible="state=='default'">输入客户或供应商的关键词搜索</span>
+    <span class="goods-search-tip" ms-visible="list.length==0&&state=='done'">没有结果……</span>
+    <div ms-visible="list.length>0">
+        <div>
+
+            &nbsp;&nbsp;第{{P}} &nbsp;/&nbsp; {{Math.ceil(T/N)}}页
+        <span class="pull-right">
+            <i class="icon-caret-left icon-2x search-pager" ms-if="P>1"
+               ms-click="pager(1)"></i>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="icon-caret-right icon-2x search-pager"
+               ms-if="P<(Math.ceil(T/N))"
+               ms-click="pager(-1)"></i>&nbsp;&nbsp;
+
+        </span>
+
+        </div>
+        <table class="table table-search">
+            <thead>
+            <tr>
+                <td>名称</td>
+                <td>应收款</td>
+                <td>应付款</td>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr ms-repeat="list" ms-on-mouseenter="selectCustomer($index)"
+                ms-click="jump2Customer($index)" ms-class="now:focusCustomer==$index">
+                <td>{{el.Name}}</td>
+                <Td>{{el.Receivables}}</Td>
+                <td>{{el.Payable}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

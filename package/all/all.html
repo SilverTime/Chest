@@ -1,0 +1,141 @@
+<div ms-controller="all">
+    <div class="all-tool  box-row hor-ends ">
+        <div class="all-filter " >
+            <a ms-repeat="data" ms-class="now:now==($index)" ms-click="filt($index)">{{el.name}}</a>
+        </div>
+    </div>
+    <!--表格-->
+    <table class="table table-bordered all-table" ms-visible="now!=7">
+        <thead>
+        <tr>
+            <td>订单类型</td>
+            <td>单位名称</td>
+            <td>收付款类型</td>
+            <td>总金额</td>
+            <td>未结金额</td>
+            <td>已结金额</td>
+            <!--<td>结款状态</td>-->
+            <td>开单日期</td>
+            <td>结算日期</td>
+            <td>单号</td>
+            <td>开单人</td>
+            <td>库房</td>
+            <td>操作</td>
+            <td>备注</td>
+        </tr>
+        </thead>
+        <!--总单-->
+        <tbody>
+        <!--repeat-start-->
+        <tr ms-repeat="showList" ms-class="type{{el.OrderCode}}:el.Total!=el.Payed">
+            <td>
+                <span ms-if="el.OrderCode==-1">销售出库</span>
+                <span ms-if="el.OrderCode==2">销售退货</span>
+                <span ms-if="el.OrderCode==1">采购入库</span>
+                <span ms-if="el.OrderCode==-2">采购退货</span>
+                <span ms-if="el.OrderCode==3">期初应付</span>
+                <span ms-if="el.OrderCode==-3">期初应收</span>
+                <span ms-if="el.OrderCode==-4">报损</span>
+                <!--<span ms-if="el.OrderCode==A">调拨</span>-->
+                <!--<span ms-if="el.OrderCode==B">盘存</span>-->
+            </td>
+            <td>
+                <a ms-attr-href='"#!/customerInfo/"+el.Customer.TraderID'>
+                    {{el.Customer.Name}}
+                </a>
+            </td>
+            <td>
+                <span ms-if="el.OrderCode<0">收款</span>
+                <span ms-if="el.OrderCode>0">付款</span>
+            </td>
+            <td>{{Math.abs(el.Total)}}</td>
+            <td>{{Math.abs(el.Need)}}</td>
+            <td>{{Math.abs(el.Payed)}}</td>
+            <!--<td>-->
+                <!--<span ms-if="el.Total!=el.Payed">记账</span>-->
+                <!--<span ms-if="el.Total==el.Payed">结清</span>-->
+            <!--</td>-->
+            <td>{{el.Time*1000|date("yyyy-MM-dd HH:mm")}}</td>
+            <td ms-if="el.SettleTime">{{el.SettleTime*1000|date("yyyy-MM-dd HH:mm")}}</td>
+            <td ms-if="!el.SettleTime">未结算</td>
+            <td>{{el.OrderID}}</td>
+            <td>{{el.Operator.UN}}</td>
+            <td>{{el.StoreName}}</td>
+            <td>
+                <a ms-if="Math.abs(el.OrderCode)!=3" class="btn btn-xs btn-success" ms-click="toInfo(el.OrderID,$index,el.OrderCode)" ms-on-mouseenter="ready2info">详情</a>
+            </td>
+            <td class="limit">{{el.Memo}}</td>
+        </tr>
+        <!--repeat-end-->
+        </tbody>
+        <tfoot>
+        <tr class="table-divider">
+            <td></td>
+        </tr>
+        <tr class="table-title">
+            <td>总计</td>
+            <td>单位数量</td>
+            <td>跨越天数</td>
+            <td>总金额</td>
+            <td>未结金额</td>
+            <td>已结金额</td>
+            <td>结清比</td>
+            <td colspan="2">跨越日期</td>
+            <!--<td></td>-->
+            <td>订单量</td>
+            <td>操作人数</td>
+            <td colspan="3"></td>
+
+        </tr>
+        <tr ms-repeat="data" ms-visible="now!=7&&now==$index">
+            <td>总计</td>
+            <td>{{el.CusNum}}</td>
+            <td>{{el.howLong}} 天</td>
+            <td>{{el.allTotle}}</td>
+            <td>{{el.allTotle-el.allPayed}}</td>
+            <td>{{el.allPayed}}</td>
+            <td>{{el.overNum}}</td>
+            <td colspan="2">{{el.minDate*1000|date("yyyy-MM-dd")}} 至 {{el.maxDate*1000|date("yyyy-MM-dd")}}</td>
+            <!--<td></td>-->
+            <td>{{el.allOrder}}</td>
+            <td>{{el.workerNum}}</td>
+            <td colspan="3"></td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <!--调拨盘点报损表格-->
+    <table class="table table-bordered all-table" ms-visible="now==7">
+        <thead>
+        <tr>
+            <td>类型</td>
+            <td>日期</td>
+           <td>单号</td>
+            <td>开单人</td>
+            <td>操作</td>
+            <td>备注</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ms-repeat="data[7].list">
+            <td>
+                <span ms-if='el.OrderCode=="A"'>调拨</span>
+                <span ms-if='el.OrderCode=="B"'>盘点</span>
+                <span ms-if="el.OrderCode==-4">报损</span>
+            </td>
+            <td>{{el.Time*1000|date("yyyy-MM-dd HH:mm")}}</td>
+            <td>{{el.OrderID}}</td>
+            <td>{{el.Operator.UN}}</td>
+            <td>
+                <a class="btn btn-xs btn-success" ms-click="toInfo(el.OrderID,$index)" ms-on-mouseenter="ready2info">详情</a>
+            </td>
+            <td>{{el.Memo}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a ms-repeat="data" class="btn btn-block btn-default" ms-visible="now==$index&&el.L>0"  ms-click="getList">加载更多<small>（还有{{el.L}}条数据）</small></a>
+
+    <br/>
+
+</div>

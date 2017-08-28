@@ -1,0 +1,209 @@
+<!--商品管理列表-->
+<div ms-controller="goods" class="goods">
+    <div class="go-title">
+        <div>
+            <span style="color: #66a8bc;cursor: pointer">商品管理</span>
+
+            <a class="btn btn-success btn-xs" ms-click="toGoodsEdit(0)">
+                <i class="icon-plus-sign"></i>
+                添加商品
+            </a>
+
+            <!--查看当前是启用还是禁用-->
+            <div class="btn-toggle pull-right" ms-class="toggle-right:listType==1"
+                 ms-class-2="toggle-left:listType==0">
+                <span class="btn-t-left">启用的</span>
+                <div class="btn-t-out" ms-click='toListType("auto")'>
+                    <div class="btn-t-in"></div>
+                </div>
+                <span class="btn-t-right">禁用的</span>
+            </div>
+        </div>
+        <br/>
+
+        <div class="box-row flexBox hor-ends">
+
+            <div>
+
+                按关键词筛选：
+                <div style="display: inline-block">
+                    <input type="text" class="form-control" placeholder="输入商品名称或条码" ms-duplex="Keyword">
+                </div>
+
+            </div>
+            <div>
+                按类别筛选：
+                <button class="btn btn-default btn-sm" ms-click="letShowClass"><!--ms-class="showIng:showClass"-->
+                    {{className}}
+                    <!--&nbsp;-->
+
+                    <b class=" icon-chevron-down " ms-if="!showClass"></b>
+                    <b class=" icon-chevron-up " ms-if="showClass"></b>
+                </button>
+                &nbsp;&nbsp;
+                <button class="btn btn-sm btn-link" style="color: #65A1B9;font-size:12px;" ms-click="resetClass">重置
+                </button>
+                &nbsp;&nbsp;&nbsp;
+
+            </div>
+            <div>
+                <input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-title"
+                       ms-duplex="newClassName" placeholder="新分类名称"/>
+                &nbsp;
+                <a class="btn btn-success btn-xs" ms-click="addClass">创建分类</a>
+            </div>
+
+
+        </div>
+        <div class="panel" style="margin-top: 10px;" ms-visible="showClass">
+            <div class="flexBox hor-ends">
+                <div>
+                    分类列表：
+                    <small ms-visible="!classEditing" style="font-weight: normal;">（点击分类，查看该分类下的商品）</small>
+                </div>
+
+                <div>
+                    <button class="btn btn-sm btn-default pull-right" style="height:30px;"
+                            ms-class="btn-primary:classEditing"
+                            ms-click="toggleEdit">
+                        <i class="icon-cog"></i>
+                        &nbsp;
+                        <span ms-if="!classEditing">开启</span>
+                        <span ms-if="classEditing">关闭</span>
+                        类别管理
+                    </button>
+                </div>
+            </div>
+            <br/>
+            <div ms-visible="!classEditing">
+                <!--repeat-->
+                <a class="btn btn-sm btn-default" style="margin-right: 10px;margin-bottom: 7px"
+                   ms-repeat="classList" ms-click="byClass(el.CID,$index)" ms-class="btn-success:el.check">
+                    <i class="icon-ok-sign" style="color:#fff" ms-if="el.check"></i>
+                    {{el.Name}}
+                </a>
+            </div>
+            <div ms-visible="classEditing" class="box-row warp" style="margin-bottom: 10px">
+                <!--repeat-->
+                <div class="panel" style="margin-right: 10px"
+                     ms-repeat="classList">
+                    <span ms-visible="CEindex!=$index">
+                        {{el.Name}}
+                    </span>
+                    <input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-title"
+                           ms-duplex="editingName" ms-visible="CEindex==$index"/>
+                    <span ms-visible="CEindex!=$index">
+                        <button class="btn btn-xs  btn-success" ms-click="toEdit($index)">修改</button>
+                        <button class="btn btn-xs " ms-click="delClass($index)">删除</button>
+                    </span>
+                    <span ms-visible="CEindex==$index">
+                        <button class="btn btn-xs btn-success btn-default" ms-click="saveClass($index)">保存</button>
+                        <button class="btn btn-xs " ms-click="closeCE">取消</button>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!--商品块-->
+
+    <div class="panel panel-default" ms-repeat="list" style="margin-bottom: 10px" ms-visible="listType==el.Disable">
+
+        <div class="panel-body box-row hor-ends">
+
+            <div style="width: 130px;    margin-right: 10px;" ms-if="el.URL!=''">
+                <img src="" alt="" style="width: 100%" ms-attr-src="el.URL">
+            </div>
+
+
+            <div style="width: 100%">
+                <div class="pull-right">
+
+                     <span class="btn btn-default btn-xs " ms-if="el.Disable==1"
+                           ms-click="changeState(0,el.GoodsID,$index)">启用</span>
+
+                    <span class="btn btn-default btn-xs " ms-if="el.Disable==0"
+                          ms-click="changeState(1,el.GoodsID,$index)">禁用</span>
+                </div>
+                <h4 style="border-bottom: 2px dashed #ddd;margin: 0px ;padding-bottom:10px">
+                    <a ms-click="toInfo(el.GoodsID)" style="cursor: pointer">
+
+                        <!--<span ms-if="el.Quality==10">[全新]</span>-->
+                        <!--<span ms-if="el.Quality!=10">[折旧]</span>-->
+                        {{el.Name}}
+                        <small>&nbsp;&nbsp;&nbsp;型号：</small>
+                        {{el.Model}}
+                        <small>&nbsp;&nbsp;&nbsp;规格：</small>
+                        {{el.Standard}}
+                        <small>&nbsp;&nbsp;&nbsp;单位：</small>
+                        {{el.UnitName}}
+                    </a>
+                </h4>
+                <br>
+                <table class="table table-bordered all-table">
+                    <thead>
+                    <tr>
+                        <td>
+                            总库存
+                        </td>
+
+                        <td>
+                            类型
+                        </td>
+                        <td>
+                            加权成本
+                        </td>
+                        <td>
+                            标准售价
+                        </td>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            ×{{el.TotalStock}}
+                        </td>
+                        <td>
+                            <!--<span ms-if='el.Class.length==0'>-->
+                            <!--未分类-->
+                            <!--</span>-->
+                            <span ms-repeat-al="el.Class">
+                    {{al.Name}}&nbsp;
+                </span>
+                        </td>
+                        <td>
+                            <!--价格-->
+                            ￥{{el.Prices.T1.Price}}
+                        </td>
+                        <td>
+                            ￥{{el.Prices.T2.Price}}
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+                <a class="btn btn-success btn-sm" ms-click="toInfo(el.GoodsID)">详情</a>
+                <a class="btn btn-primary btn-sm" ms-click="addToCar($index)">备选</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <a class="btn btn-block btn-default" ms-click="getGoods"
+       ms-if='className=="选择类型"&&(T-P*48>0)'>
+        加载更多商品
+        <small>(还有 {{T - P*48}} 条数据)</small>
+    </a>
+    <a class="btn btn-block btn-default" ms-click="byClass"
+       ms-if='className!="选择类型"&&(CT-CP*48>0)'>
+        加载 {{className}} 下的更多商品
+        <small>(还有 {{CT - CP*48}} 条数据)</small>
+    </a>
+</div>

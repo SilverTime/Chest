@@ -1,0 +1,108 @@
+<div class="row" ms-controller="store">
+    <!--添加门店-->
+    <div class="col-xs-12">
+        <h4>
+            新门店
+        </h4>
+
+
+        <div class="row">
+            <div class="col-xs-3">
+                <tsy:input ms-data-id="'newStoreName'">
+                    <input slot="core"
+                           type="text"
+                           maxlength="50"
+                           onkeyup="cutLength(this)"
+                           ms-on-input="addStore(true)"
+                           ms-duplex="newName"
+                           placeholder="门店名称"
+                           class="form-control">
+                </tsy:input>
+            </div>
+            <div class="col-xs-3">
+                <input type="text" maxlength="50" onkeyup="cutLength(this)" placeholder="门店管理员" ms-duplex="newAdmin"
+                       class="form-control">
+            </div>
+            <div class="col-xs-3">
+                <input type="text" maxlength="50" onkeyup="cutLength(this)" placeholder="联系电话" ms-duplex="newPhone"
+                       class="form-control">
+            </div>
+            <div class="col-xs-3">
+                <a class="btn btn-sm btn-success btn-block" ms-click="addStore(false)">创建店铺</a>
+            </div>
+        </div>
+
+        <br>
+        <h4 class="pull-left">
+            店铺列表
+        </h4>
+        <div class="btn-toggle pull-left" style="margin-left: 30px ;margin-top: 5px" ms-class="toggle-right:StoreStatus==0"
+             ms-class-2="toggle-left:StoreStatus==1">
+            <span class="btn-t-left">启用的</span>
+            <div class="btn-t-out" ms-click='toListType("auto")'>
+                <div class="btn-t-in" ></div>
+            </div>
+            <span class="btn-t-right">禁用的</span>
+        </div>
+
+    </div>
+    <br/>
+
+    <div class="col-xs-4" ms-repeat="list">
+
+
+            <!--正常渲染-->
+            <div ms-visible="editingIndex!=$index" class="storeCard" style="min-height: 102px">
+                <button class="btn btn-link  btn-xs pull-right" ms-if="el.Status==1" ms-click="disable(el.StoreID)">禁用</button>
+                <button class="btn btn-link  btn-xs pull-right"  ms-if="el.Status==0"  ms-click="enable(el.StoreID)">启用</button>
+                <button class="btn btn-xs btn-primary pull-right" ms-click="edit($index)">编辑</button>
+
+                <strong style="font-size: 24px">{{el.SName}}</strong><br>
+                {{el.CName}}({{el.Phone}})
+            </div>
+
+            <!--编辑-->
+
+            <div ms-visible="editingIndex==$index" class="storeCard"
+                 style="
+            background: white;
+            box-shadow: 0px 1px 3px 1px #ddd;
+             border-color:#649fb8">
+                <div class="row">
+                    <div class="col-xs-6" style="height: 50px">
+                        <tsy:input ms-data-id="'editSName'+$index">
+                            <input slot="core"
+                                   type="text"
+                                   maxlength="50"
+                                   onkeyup="cutLength(this)"
+                                   ms-duplex="el.SName"
+                                   placeholder="门店名称"
+                                   class="form-control input-sm">
+                        </tsy:input>
+                        <br>
+                    </div>
+                    <div class="col-xs-6">
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" placeholder="门店管理员" ms-duplex="el.CName"
+                               class="form-control input-sm">
+                        <br>
+                    </div>
+                    <div class="col-xs-6">
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" placeholder="联系电话" ms-duplex="el.Phone"
+                               class="form-control input-sm">
+                    </div>
+                    <div class="col-xs-3">
+                        <button class="btn btn-sm btn-success btn-block" ms-click="saveEdit">保存</button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button class="btn btn-sm btn-default btn-block" ms-click="clearEdit">取消</button>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+    </div>
+</div>

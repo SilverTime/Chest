@@ -1,0 +1,81 @@
+<div ms-controller="customer" class="cus">
+<div class="go-title">
+
+    <span style="color: #66a8bc;cursor: pointer" onclick=' window.location.href="#!/customer/0"'>客户供应商管理</span>
+    <button class="btn btn-success btn-xs" ms-click="traderEdit(0)">添加交易方</button>
+
+
+</div>
+<!--列表-->
+<div>
+    <!--<div class="box-row ">-->
+        <!--<input type="number"  class="form-control" ms-duplex="cusId" style="width:300px" placeholder="输入客户编号快速查看"/>-->
+        <!--<button ms-if='cusId!=""' ms-click="toInfo(cusId)" class="btn btn-default">搜索</button>-->
+    <!--</div>-->
+    <!--<br/>-->
+    <!--列表开始-->
+    <div class="box-row warp hor-aver row-same" style="margin-right:0px;margin-left: 0px">
+        <!--新增块-->
+
+
+
+        <table  class="table table-bordered all-table">
+            <thead>
+            <tr>
+                <td>操作</td>
+                <td>客户编号</td>
+                <td>客户类别</td>
+                <td>名称</td>
+                <td>租赁折扣</td>
+                <td>联系方式</td>
+                <td>通讯地址</td>
+                <td>结款状态</td>
+                <td>应收款</td>
+                <td>应付款</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ms-repeat="list" ms-class="type-1:el.Receivables!=0||el.Payable!=0">
+                <td>
+                    <a class="btn btn-xs btn-default" style="cursor: pointer"  ms-click="traderEdit(el.TraderID)">
+                    <i class="icon-pencil"></i>
+                    &nbsp;编辑
+                </a>
+                    <a class="btn btn-xs btn-success" style="cursor: pointer;color:white" ms-attr-href="#!/customerInfo/{{el.TraderID}}">
+                        详情
+                    </a>
+                </td>
+                <td>#{{el.TraderID}}</td>
+                <td>
+                    <span class="c-type c-type-0" ms-if="el.IsCue==1">客</span>
+                    <span class=" c-type c-type-1" ms-if="el.IsSur==1">供</span>
+                </td>
+                <td>
+                    <a ms-click="toInfo(el.TraderID)" style="cursor: pointer">{{el.Name}}</a>
+
+                </td>
+                <td>{{el.Discount}}%</td>
+                <td>{{el.Phone}}</td>
+                <td>{{el.Address}}</td>
+                <td>
+                    <span ms-visible="el.Receivables!=0||el.Payable!=0">记账</span>
+                    <span ms-visible="el.Receivables==0&&el.Payable==0">已结清</span>
+                </td>
+                <td>{{Math.abs(el.Receivables)}}</td>
+                <td>{{Math.abs(el.Payable)}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+
+    <a class="btn btn-block btn-default" ms-click="getCus" ms-visible="T>list.length">加载更多<small>(还有{{Math.round(T-list.length)}}条数据)</small></a>
+
+    <div style="color:#bfbfbf" class="text-center">没有更多数据了……</div>
+
+</div>
+
+</div>

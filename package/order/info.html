@@ -1,0 +1,425 @@
+<div ms-controller="orderInfo">
+    <h4 class="mo-header">
+
+        <a class="pull-right" ms-click="close">关闭</a>
+        <span>
+            {{typeName[info.Type]}}
+        </span>
+
+
+        <small ms-if="info.Virtual==1">（虚拟订单）</small>
+        <a class="btn btn-xs btn-primary hidden-print" ms-click="print(info.OrderID)" style="color:#ffffff">打印</a>
+    </h4>
+    <div class="lodop-err">
+        {{LodopErr|html}}
+    </div>
+    <div ms-if="PCList.length>0" class="lodop-err">
+        选择打印模版：
+        <div class="row">
+            <div class="col-xs-4" ms-repeat="PCList">
+                <button class="btn btn-block btn-xs btn-default" ms-click="sendToLodop(el.Content)">
+                    {{el.Title}}
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <!--startprint-->
+    <div class="sell-form" style="font-size: 15px;">
+        <!--<h4 class="text-center">-->
+        <!--<span ms-if="info.Type==-1">销售出库单</span>-->
+        <!--<span ms-if="info.Type==2">销售退货单</span>-->
+        <!--<span ms-if="info.Type==1">采购入库单</span>-->
+        <!--<span ms-if="info.Type==-2">采购退货单</span>-->
+        <!--<span ms-if='info.Type=="A"'>库存调拨单</span>-->
+        <!--<span ms-if='info.Type=="-4"'>报损单</span>-->
+        <!--<span ms-if='info.Type=="B"'>盘存单</span>-->
+
+        <!--<small ms-if="info.Virtual==1">（虚拟订单）</small>-->
+        <!--<a class="btn btn-sm btn-primary hidden-print" ms-click="print(info.OrderID)" style="color:#ffffff">打印</a>-->
+        <!--</h4>-->
+        <!--<br/>-->
+
+        <div class="box-row hor-ends">
+
+            <label>
+                开单时间：
+                <span>{{info.Time*1000|date("yyyy年 MMM dd日 HH:mm")}}</span>
+
+            </label>
+
+
+            <label>
+                单号：
+                <small>{{info.OrderID}}</small>
+            </label>
+
+
+        </div>
+        <div ms-if='info.Type!="4"&&info.Type!="5"&&info.Type!="6"'>
+            <div class="row">
+                <div class="col-xs-8">
+                    <label>
+                        客户名称：
+                        {{infoCus.Name}}
+
+                    </label>
+
+                </div>
+
+                <div class="col-xs-4">
+                    <label>
+                        手机号码：
+                        {{infoCus.Phone}}
+                    </label>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <label>
+                        客户地址：
+                        {{infoCus.Address}}
+
+                    </label>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div ms-if='info.Type=="4"||info.Type=="5"||info.Type=="6"' class="box-row hor-ends">
+            <label ms-if='info.Type=="6"'>
+                出库仓库：
+                <span ms-text="info.FromStoreName"></span>
+            </label>
+            <label ms-if='info.Type=="6"'>
+                入库仓库：
+                <span ms-text="info.ToStoreName"></span>
+            </label>
+            <label ms-if='info.Type=="4"||info.Type=="5"'>
+                仓库:
+                <span ms-text="info.StoreName">
+
+            </span>
+            </label>
+            <label>
+                开单人：
+                <span ms-text="info.Operator.Account">
+
+                        </span>
+            </label>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <td style="width:50px">
+                    编号
+                </td>
+                <td style="width:240px">
+                    商品名称
+                </td>
+                <td style="width:100px">
+                    规格
+                </td>
+                <td style="width:50px">
+                    单位
+                </td>
+                <td style="width:80px" ms-if='info.Type!="4"&&info.Type!="5"&&info.Type!="6"'>
+                    单价
+                </td>
+                <td ms-if='info.Type=="5"'>
+                    盘前
+                </td>
+                <td style="width:50px">
+                    <span ms-if='info.Type!="5"'>数量</span>
+                    <span ms-if='info.Type=="5"'>实盘</span>
+                </td>
+                <td ms-if='info.Type=="5"'>
+                    盈亏数量
+                </td>
+                <td style="width:80px" ms-if='info.Type!="4"&&info.Type!="5"&&info.Type!="6"'>
+                    小计
+                </td>
+                <td style="width:150px">
+                    备注
+                </td>
+                <td ms-if="info.Type==12">
+                    操作
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <tr ms-repeat-el="info.Goods">
+                <td>
+                    {{$index+1}}
+                </td>
+                <td>
+                    <a ms-attr-href='"#!/goodsInfo/"+el.GoodsID'>
+                        {{el.Name}}
+                    </a>
+                    <!--{{el.Name}}-->
+                </td>
+                <td>
+                    {{el.Standard}}
+                </td>
+                <td>
+                    {{el.Unit}}
+                </td>
+                <td ms-if='info.Type!="4"&&info.Type!="5"&&info.Type!="6"'>
+                <span ms-if="el.TradePrice">
+                    {{el.TradePrice}}
+                </span>
+
+                </td>
+                <td ms-if='info.Type=="5"'>
+                    {{el.PreAmount}}
+                </td>
+                <td>
+                <span ms-if="el.TradeAmount">
+                    {{el.TradeAmount}}
+                </span>
+                    <span ms-if="el.Amount">
+                    {{el.Amount}}
+                </span>
+
+
+                </td>
+                <td ms-if='info.Type=="5"'>
+                    {{Number(el.Amount-el.PreAmount).toFixed(3)}}
+                </td>
+                <td ms-if='info.Type!="4"&&info.Type!="5"&&info.Type!="6"'>
+                    {{(el.TradePrice*el.Amount).toFixed(2)}}
+                </td>
+                <td class="limit">
+                    <span class="label label-info" ms-if="info.Type==12&&el.RentType==1">
+                        正常归还
+                    </span>
+                    <span class="label label-warning" ms-if="info.Type==12&&el.RentType==2">
+                        损坏赔货
+                    </span>
+                    <span class="label label-danger" ms-if="info.Type==12&&el.RentType==-2">
+                        损坏赔钱
+                    </span>
+
+                    {{el.Memo}}
+                </td>
+                <!--<td ms-if="(info.Type==='1'||info.Type==='2')&&el.Amount>0">-->
+                <!--<button class="btn btn-sm btn-danger"-->
+                <!--ms-click="goodsBack(el.GoodsID,el.Amount,el.Memo,el.TradePrice)">退货-->
+                <!--</button>-->
+                <!--</td>-->
+                <td ms-if="info.Type=='12'" style="position: relative">
+                    <div class="rent-btn" ms-class="rent-btn-1:RentBackBtnOpen==$index" ms-if="el.RentType==-1">
+                        <div class=" input-group input-group-sm">
+                            <input class="form-control " ms-duplex="rentAmount" placeholder="归还数量">
+                            <span class="rent-btn-label">个</span>
+                            <span class="input-group-btn" style="cursor: pointer;">
+                            <button class="btn  btn-primary btn-sm"
+                                    ms-click="RentBack(el.GoodsID,el.Amount,1)">
+                                正常还租
+                            </button>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="rent-btn" ms-class="rent-btn-2:RentBackBtnOpen==$index" ms-if="el.RentType==-1">
+                        <div class=" input-group input-group-sm">
+                            <input class="form-control" ms-duplex="rentAmount" placeholder="损坏数量">
+                            <span class="rent-btn-label">个</span>
+                            <span class="input-group-btn" style="cursor: pointer;">
+                           <button class="btn  btn-default btn-sm"
+                                   ms-click="RentBack(el.GoodsID,el.Amount,2)">
+                               损坏赔货
+                           </button>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="rent-btn" ms-class="rent-btn-3:RentBackBtnOpen==$index" ms-if="el.RentType==-1">
+                        <div class=" input-group input-group-sm">
+                            <input class="form-control" ms-duplex="rentAmount" placeholder="损坏数量">
+                            <span class="rent-btn-label">个</span>
+                            <span class="input-group-btn" style="cursor: pointer;">
+                            <button class="btn  btn-default btn-sm"
+                                    ms-click="RentBack(el.GoodsID,el.Amount,-2)">
+                                损坏赔钱
+                            </button>
+                        </span>
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-xs" ms-if="el.RentType==-1" ms-class-1="btn-primary:RentBackBtnOpen!=$index"
+                            ms-class-2="btn-default:RentBackBtnOpen==$index" ms-click="toggleRentBackBtn($index)">
+                        还租
+                    </button>
+                </td>
+
+            </tr>
+
+
+            </tbody>
+        </table>
+        <div ms-if='info.Type!="4"&&info.Type!="5"&&info.Type!="6"'>
+            <table class="table table-bordered" style="margin-top: -21px">
+                <tbody style="height: 30px">
+                <tr>
+                    <td style="width:50px;">
+                        总计
+                    </td>
+                    <td style="width:390px">
+                        人名币（大写）：
+                        {{bigTotal}}
+                    </td>
+                    <td style="width:80px">
+                        小写:
+                    </td>
+                    <td style="width:280px">
+                        ￥{{info.Total}}
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-xs-6">
+                    <label for="">
+                        支付押金：￥
+                        {{info.Deposit}}
+                    </label>
+                </div>
+                <div class="col-xs-6">
+                    <label for="">
+                        已退押金：￥
+                        {{info.Return}}
+                    </label>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <label>
+                        <strong>
+                            已结算<span ms-if="info.Type==12">租金</span>：￥
+                            {{info.Payed}}
+                            <span ms-if="info.Total==info.Payed">（结清）</span>
+                            <span ms-if="info.Total!=info.Payed">（待结算：￥{{info.Total-info.Payed|number(2)}}）</span>
+                        </strong>
+
+                    </label>
+                    <button ms-if="info.Type!=12" class="btn btn-xs btn-default" ms-click="openDetail">
+                        结算历史&nbsp;&nbsp;<i ms-if="!showDetail"
+                                           class="icon-chevron-down"></i><i
+                            ms-if="showDetail" class="icon-chevron-up"></i></button>
+                </div>
+            </div>
+
+            <div ms-if="showDetail">
+                <table class="table table-bordered all-table">
+                    <thead>
+                    <tr>
+                        <th>结算人</th>
+                        <th>结算日期</th>
+                        <th>结算金额</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ms-repeat="info.SettleLog">
+                        <td>{{el.User.Account}}</td>
+                        <td>{{el.Time*1000|date("yyyy-MM-dd HH:mm")}}</td>
+                        <td>{{Math.abs(el.Money)}}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+            <div class="box-row hor-ends warp">
+                <div>
+                    <label>
+                       仓库：
+                        <span ms-text="info.Store.SName"></span>
+                    </label>
+                </div>
+
+                <div>
+                    <label>
+                        开单人：
+                        <span ms-text="info.Operator.Name">
+                        </span>
+                    </label>
+                </div>
+                <!--<div>-->
+                <!--<label>-->
+                <!--客户签字：-->
+                <!--<span>-->
+
+                <!--</span>-->
+                <!--</label>-->
+                <!--</div>-->
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="pull-left">
+            <span class="memo">
+                订单备注：{{info.Memo}}
+            </span>
+        </div>
+        <div class="pull-right" style="text-align:center;font-size:22px;color:#DDDDDD" ms-if='info.Type!="5"'>
+            <a class="btn btn-default pull-left" ms-click="order.lookLastGood"
+               ms-if="order.curListIndex!=0">上一个</a><span
+                ms-if="order.curListIndex!=0&&order.curListIndex!=(order.showList.length-1)">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a
+                class="btn btn-default pull-right" ms-click="order.lookNextGood"
+                ms-if="order.curListIndex!=(order.showList.length-1)">下一个</a>
+        </div>
+
+        <div class="pull-right" style="text-align:center;font-size:22px;color:#DDDDDD" ms-if='info.Type=="5"'>
+            <a class="btn btn-default pull-left" ms-click="order.lookLastB" ms-if="order.curListIndex!=0">上一个</a><span
+                ms-if="order.curListIndex!=0&&order.curListIndex!=(order.data[7].list.length-1)">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a
+                class="btn btn-default pull-right" ms-click="order.lookNextB"
+                ms-if="order.curListIndex!=(order.data[7].list.length-1)">下一个</a>
+        </div>
+        <div style="clear: both"></div>
+
+    </div>
+    <!--endprint-->
+
+    <div class="mo-footer" ms-if="info.Total!=info.Payed">
+        <div class="pull-right" ms-if="info.Type!='12'">
+            <div class="pull-left">
+                <tsy:input ms-data-id="'InfoSettleMoney'">
+                    <input slot="core" type="number" class="input-inline" ms-duplex="Money" ms-if="settleShow" autofocus
+                           placeholder="请输入金额">
+                </tsy:input>
+            </div>
+
+
+            <button class="btn  btn-success " style="margin-right: 39px" ms-click="settle" ms-visible="settleShow">
+                确认
+                <span ms-if="info.Type==1||info.Type==2">
+                收款
+            </span>
+                <span ms-if="info.Type==0||info.Type==3">
+                付款
+            </span>
+            </button>
+            <button class="btn  btn-success " style="margin-right: 39px" ms-click="showSettle" ms-visible="!settleShow">
+            <span ms-if="info.Type==1||info.Type==2">
+                收款
+            </span>
+                <span ms-if="info.Type==0||info.Type==3">
+                付款
+            </span>
+            </button>
+            <button class="btn  btn-default " ms-click="hideSettle" ms-visible="settleShow">取消</button>
+        </div>
+        <div class="pull-right" ms-if="info.Type=='12'">
+            <button class="btn btn-success" ms-click="rentSettle">结算</button>
+        </div>
+    </div>
+    <div style="display: none" id="print_tmp">
+        {{printTMP|html}}
+    </div>
+</div>

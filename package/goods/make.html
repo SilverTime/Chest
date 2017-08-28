@@ -1,0 +1,82 @@
+<div ms-controller="make" style="position: relative;height: 100%;padding:20px">
+    <div class="make-arr pull-right" ms-click="turn">
+        <i class="icon icon-refresh icon-2x"></i>
+        反转
+    </div>
+
+    {{info.Name}}
+    <br>
+    <br>
+    <div class="box-row hor-ends">
+        <div class="packageBox" style="padding: 10px;min-height: 0px">
+            <label class="packageLabel text-success">材料</label>
+
+            <!--每个商品条目-->
+                <div class="box-row hor-ends ver-center" ms-repeat="info.In">
+                    <div>
+                        {{el.Name}}
+                        &nbsp;&nbsp;
+                        {{el.Model}}
+                        &nbsp;&nbsp;
+                        {{el.Standard}}
+                    </div>
+
+                    <input type="number" class="form-control make-input"
+                           ms-duplex="el.Amount" ms-on-input="GrowTogether('In',$index)">
+                    <div>
+                        {{el.UnitName}}
+                    </div>
+
+                </div>
+        </div>
+        <div>
+        <i class="icon icon-random icon-3x"></i><br>
+            合成为
+
+        </div>
+
+        <div class="packageBox" style="padding: 10px;min-height: 0px">
+            <label class="packageLabel text-danger">结果</label>
+
+            <!--每个商品条目-->
+                <div class="box-row hor-ends ver-center" ms-repeat="info.Out">
+                    <div>
+                        {{el.Name}}
+                        &nbsp;&nbsp;
+                        {{el.Model}}
+                        &nbsp;&nbsp;
+                        {{el.Standard}}
+                    </div>
+
+                    <input type="number" class="form-control make-input"
+                           ms-duplex="el.Amount" ms-on-input="GrowTogether('Out',$index)">
+                    <div>
+                        {{el.UnitName}}
+                    </div>
+
+                </div>
+
+
+        </div>
+    </div>
+
+    <!--库房-->
+    <span class="pull-left" style="margin-top: 6px">
+        操作库房：
+    </span>
+
+    <select name="" id="" class="form-control" style="width: 200px" ms-duplex="Store">
+        <option ms-attr-value="el.StoreID" ms-repeat="Stores">{{el.SName}}</option>
+    </select>
+
+    <div class="make-btn">
+        <button class="btn btn-info" ms-click="make">
+            &nbsp;&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;&nbsp;
+        </button>
+        <button class="btn btn-default" ms-click="goback">
+            &nbsp;取消&nbsp;
+        </button>
+    </div>
+
+
+</div>

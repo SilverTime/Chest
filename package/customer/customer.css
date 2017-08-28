@@ -1,0 +1,147 @@
+/*客户供应商特有样式*/
+
+.cus .go-card{
+    height: 113px!important;
+
+}
+.cus-block{
+    /*width: 350px;*/
+    margin-bottom: 20px;
+}
+.cus .go-card-body{
+    height: 73px!important;
+    padding:6px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.cus .go-card-head{
+    height: 28px!important;
+    border-bottom: 1px solid #cbcbcb;
+
+}
+.cus-card-footer{
+    background-color: #fbf3d2;
+    height: 25px;
+    border: 1px solid #B4B4B4;
+    padding:2px 0px 0px 4px;
+
+}
+.text-g{
+    color: #989898;
+}
+
+.cus-card-footer-done{
+    background-color: #ffffff;
+    height: 25px;
+    border: 1px solid #B4B4B4;
+    padding:2px 0px  0px 15px;
+    color: #969696;
+}
+.c-type{
+    border-radius: 4px;
+    padding: 2px 14px;
+    font-size: 8px;
+    color: #ffffff;
+    background-color: #cbcbcb;
+    cursor: pointer;
+}
+.c-type-0{
+    background-color: #33cb66;
+}
+.c-type-1{
+    background-color: #fdcb33;
+}
+.new{
+    border: 1px dashed #bbbbbb;
+    padding:0 10px;
+    /*height: 61px;*/
+    /*background-color: #f6f6f6;*/
+
+}
+.add-new{
+    width: 100%;
+
+    font-size: 40px;
+    padding-top: 7px;
+    color: #DDDDDD;
+}
+.add-new:hover{
+    color: #777777;
+    border-color: #777777;
+}
+
+.cus .go-input-body,.cus-input-title{
+    /*background-color: #F6F6F6;*/
+}
+
+.cus .main-block,.cus .blue-block,.cus .side-block{
+    height: 83px!important;
+
+}
+.cus .main-block{
+    width: 587px!important;
+}
+
+.cus .side-title{
+
+}
+.cus .side-block{
+    min-height: 83px!important;
+    padding-right: 36px;
+}
+.cus .cus-money{
+    font-size: 18px;
+}
+
+.cus-table thead{
+    background-color: #e3e3e3;
+    color:#333333;
+    font-weight: bold;
+}
+.cus-table td{
+    border:1px solid #bbbbbb!important;
+}
+
+
+.cus-input-title{
+    color: #777777;
+    width: auto;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #bebebe;
+}
+.cus-input-title:focus{
+    border-bottom: 1px solid #66a7bb;
+}
+
+
+/*不同订单的颜色显示*/
+.type1,.type2{
+    background-color: #fce5e5;
+}
+
+.type-1,.type-2{
+    background-color: #fdf4d3;
+}
+
+
+.cus-pay-input-group{
+    /*padding-top: 17px;*/
+    padding-bottom: 5px;
+}
+/*弹性布局*/
+.customerTip{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    align-items:stretch;
+}
+/*订单付款样式*/
+.payInfo{
+    border:1px solid #D6D6D6 !important;
+    min-width:170px;
+    min-height:80px;
+    margin-left:15px;
+}

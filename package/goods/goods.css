@@ -1,0 +1,458 @@
+.flexBox {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.goods {
+    /*padding: 15px;*/
+}
+
+.go-title {
+    /*padding:5px 10px;*/
+    margin-bottom: 10px;
+    font-weight: bold;
+    /*background-color: #d1e7ed;*/
+}
+
+.go-title-info {
+    /*padding:5px 10px;*/
+    /*margin-bottom: 10px;*/
+    font-weight: bold;
+    /*background-color: #d1e7ed;*/
+}
+
+.go-card {
+    /*     padding: 5px; */
+    background-color: #e7eefd;
+    margin-bottom: 15px;
+    margin-right: 7px;
+
+    /*float: left;*/
+    /*width:350px;*/
+    /*     height: 120px; */
+}
+
+.go-card:hover {
+    box-shadow: 0px 2px 14px #D6D6D6;
+}
+
+.new-goods {
+    background-color: #ffffff;
+    border: 1px dashed #CCCCCC;
+    padding: 10px;
+    border-radius: 2px;
+    height: auto;
+    cursor: pointer;
+    width: 100%
+}
+
+.go-card-head {
+    /*cursor: pointer;*/
+    font-weight: bold;
+    font-size: 16px;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+
+    /*border-bottom: 1px solid #dddddd;*/
+}
+
+.store {
+    color: #0098fe;
+    font-weight: normal;
+    margin-right: 29px;
+}
+
+.go-card-head small {
+    color: #c5c5c5;
+    font-weight: normal;
+}
+
+.go-card-btn {
+    /*margin-top: -27px;*/
+
+    /*margin-left: 215px;*/
+
+    position: absolute;
+
+    font-size: 18px;
+}
+
+.go-card a {
+    cursor: pointer;
+}
+
+.goods-in {
+    font-size: 16px;
+    color: #0098fe;
+    margin-right: 10px;
+}
+
+.goods-in:hover {
+    color: #0098fe;
+}
+
+.go-card a:hover {
+    /*font-size: 18px;*/
+}
+
+.go-card-body {
+    /*height: 87px;*/
+    background-color: #fdfdfe;
+    line-height: 18px;
+    color: #6d6d6d;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+.go-add-box > div {
+    margin-bottom: 10px;
+}
+
+.price {
+    border-top: 1px solid #989898;
+    width: 100%;
+}
+
+.price td {
+    padding: 0px;
+    font-weight: bold;
+    line-height: 23px;
+}
+
+.go-input-title {
+    /*width: 100%;*/
+    height: 20px;
+    border: none;
+    outline: none;
+    box-shadow: 0px 1px 0px #aeaeae;
+}
+
+.go-input-title:focus {
+    box-shadow: 0px 1px 0px #66a7bb;
+}
+
+.go-input-body {
+
+    height: 20px;
+    border: none;
+    box-shadow: 0px 1px 0px #b3b3b3;
+    outline: none;
+}
+
+.go-input-body:focus {
+    box-shadow: 0px 1px 0px #0098fe;
+}
+
+/*商品详情*/
+.blue-block {
+    background-color: #d4e9ef;
+    /*height:108px ;*/
+    width: 8px;
+}
+
+.main-block {
+    margin-left: 15px;
+    width: 100%;
+    /*height: 108px;*/
+    border: 1px solid #d6d6d6;
+    padding: 10px 24px;
+    font-size: 16px;
+    line-height: 29px;
+}
+
+.main-block > div {
+    /*width: 200px;*/
+    margin-right: 40px;
+    margin-top: 10px;
+}
+
+.side-title {
+    /*margin-left: 90px;*/
+    color: #90C4D3;
+    margin-top: 21px;
+}
+
+.side-title > span {
+    color: #ff0033;
+    font-size: 35px;
+    /*position: absolute;*/
+    /*top: 8px;*/
+}
+
+.side-block {
+    min-width: 170px;
+    border-left: 8px solid #D4E9EF;
+    border-right: 8px solid #D4E9EF;
+    padding-left: 36px;
+    padding-right: 10px;
+    margin-top: 23px;
+    /*margin-left: 52px;*/
+    /*min-height: 108px;*/
+}
+
+.main-block .go-input-body {
+    height: 25px;
+}
+
+.price-block {
+    height: 77px;
+    width: 152px;
+    margin-left: 8px;
+    margin-bottom: 11px;
+    float: left;
+    position: relative;
+    border: 1px solid #c5c5c5;
+    text-align: center;
+    padding-top: 12px;
+    font-size: 18px;
+}
+
+.price-name {
+
+    font-weight: bold;
+}
+
+.price-val {
+    color: #fa0f20;
+    cursor: pointer;
+}
+
+.price-add {
+    border: 1px dashed #bbbbbb;
+    font-size: 40px;
+    padding-top: 11px;
+    color: #bbbbbb;
+    cursor: pointer;
+}
+
+.goods-in-block {
+    display: block;
+    color: #66A8BC;
+    background-color: rgb(242, 242, 242);
+    width: 100%;
+    height: 73px;
+    text-align: center;
+    padding-top: 24px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    /*margin-left: 85px;*/
+}
+
+/*商品分类所用*/
+.showIng {
+    border-bottom: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+.c-type {
+    border-radius: 4px;
+    padding: 2px 14px;
+    font-size: 8px;
+    color: #ffffff;
+    background-color: #cbcbcb;
+    cursor: pointer;
+}
+
+.c-type-0 {
+    background-color: #33cb66;
+}
+
+.c-type-1 {
+    background-color: #fdcb33;
+}
+
+.btn-toggle {
+
+}
+
+.btn-t-out {
+    margin-bottom: -6px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #ffffff;
+    width: 50px;
+    height: 25px;
+    border: 1px solid #ffffff;
+    border-radius: 25px;
+    box-shadow: inset 0px 2px 2px 1px rgba(0, 0, 0, 0.25);
+}
+
+.btn-t-in {
+    background: #ffffff;
+    width: 23px;
+    height: 23px;
+    border-radius: 25px;
+    box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.47);
+    /* border: 1px solid rgba(0, 0, 0, 0.25); */
+}
+
+/*文字描述*/
+.btn-t-left, .btn-t-right {
+    color: #ADADAD;
+    font-weight: normal;
+
+}
+
+/*左边的时候*/
+.toggle-left > .btn-t-out > .btn-t-in {
+    margin-left: 0px;
+}
+
+.toggle-left > .btn-t-out {
+    background-color: #449d44;
+    border: 1px solid #449d44;
+}
+
+.toggle-left > .btn-t-left {
+    color: #449d44
+}
+
+/*右边的时候*/
+.toggle-right > .btn-t-out > .btn-t-in {
+    margin-left: 24px;
+}
+
+.toggle-right > .btn-t-out {
+    background-color: #fdcb33;
+    border: 1px solid #fdcb33;
+}
+
+.toggle-right > .btn-t-right {
+    color: #fdcb33
+}
+
+/*动画加持*/
+.btn-t-in, .btn-toggle, .btn-t-out, .btn-toggle > span {
+    transition: all 0.3s;
+}
+
+/*添加商品中的按钮*/
+.btn-group-box {
+    float: right;
+    margin-right: 20px;
+}
+
+/*关闭按钮*/
+.pop-close {
+    position: absolute;
+    color: red;
+    border-radius: 50%;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.05s all;
+
+    /*要做动画变更的值*/
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+    line-height: 25px;
+    top: -12px;
+    right: -12px;
+}
+
+.pop-close:hover {
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    line-height: 30px;
+    top: -15px;
+    right: -15px;
+}
+
+.info-sm-solid-box {
+    /*padding: 6px 20px;*/
+    border: 1px solid #ccc;
+    text-align: center;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.info-sm-dashed-box {
+    border: 1px dashed #ccc;
+    text-align: center;
+    margin-left: 15px;
+    font-size: 36px;
+    color: #ccc;
+    margin-bottom: 10px;
+
+}
+
+.info-inventory {
+    border-left: 10px solid #d3e8ee;
+    border-right: 10px solid #d3e8ee;
+    padding-left: 9px;
+    margin: 20px auto;
+
+}
+
+.info-list-margin > div {
+    margin: 8px 0;
+}
+
+.addGoodsCss {
+    height: 32px;
+    border: 1px dashed #ccc;
+    text-align: center;
+    line-height: 32px;
+    color: #ccc;
+    cursor: pointer;
+    /*margin-left: 17px;*/
+}
+
+.composeBox {
+    padding: 20px 0;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.composeExchange {
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-left: 15px;
+}
+.packageBox{
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    position: relative;
+    min-height: 70px;
+    padding:20px 10px 10px 10px;
+}
+.packageLabel{
+    position: absolute;
+    top: -11px;
+    left: 20px;
+    background: #fff;
+}
+
+.addComposeCss{
+    border: 1px dashed #ccc;
+    height: 50px;
+    color: #ccc;
+    font-size: 14px;
+    text-align: center;
+    line-height:50px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+/*商品合成*/
+.make-input{
+    width: 70px!important;
+    margin:0px 10px
+}
+
+.make-arr{
+    cursor: pointer;
+}
+
+.make-btn{
+    margin-top: 30px;
+}

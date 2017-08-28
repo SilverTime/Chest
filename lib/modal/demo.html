@@ -1,0 +1,23 @@
+<div ms-controller="modal_demo">
+    <button class="btn btn-primary pull-right" ms-click="show">点击弹出</button>
+    <div ms-widget="modal,modal1">
+        <div style="width: 600px">
+            akldjfklasj flkasj fklsj dl;fkj asklfj alskj fl;ksjd fkl asj flk ajs ;f
+        </div>
+    </div>
+</div>
+<script>
+    require(['../../ui/modal/modal.js'],function(){
+        var modal_demo=avalon.define({
+            $id:"modal_demo",
+            $opt:{
+
+            },
+            show:function(){
+                modal1.getIn()
+
+            }
+        })
+        avalon.scan()
+    })
+</script>

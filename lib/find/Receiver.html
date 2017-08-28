@@ -1,0 +1,24 @@
+<table class="table" style="margin-bottom: 0px;">
+    <thead style="background-color: #f4f4f4">
+    <tr>
+        <td>
+            电话号码
+        </td>
+        <td>
+            名称
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="l-s-i"
+        ms-repeat-el="list" ms-class="now-active:active==$index"
+        ms-click="select($index)" ms-on-hover="hover($index)" style="">
+        <td>
+            {{el.Phone}}
+        </td>
+        <td>
+            {{el.Names}}
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,200 @@
+/*文档编写区域*/
+.doc-layout{
+    /*height:560px;*/
+}
+.navbar-editor{
+    margin-bottom: 0px;
+}
+
+#doc-main,#doc-show{
+    outline:none;
+    width:100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    overflow-y : scroll;
+    margin-top: 5px;
+    padding: 10px;
+    background: none repeat scroll 0% 0% transparent;
+    color: #2d4e6d;
+    letter-spacing:1px;
+    font: 16px/1.8 Microsoft Yahei,Hiragino Sans GB,WenQuanYi Micro Hei,sans-serif; !important;
+}
+#read-only{
+    margin-top: 5px;
+    padding: 10px;
+    color: #2d4e6d;
+    letter-spacing:1px;
+    font: 16px/1.8 Microsoft Yahei,Hiragino Sans GB,WenQuanYi Micro Hei,sans-serif; !important;
+}
+
+.tool{
+    position: absolute;
+    right:40px;
+    top:30px;
+
+}
+.tool-fixed{
+    position: fixed;
+    right:40px;
+    top:30px;
+}
+
+.tool-item,.spirit,.spirit-box{
+    vertical-align:text-top;
+    border: none;
+    background: none repeat scroll 0% 0% transparent;
+    color:rgba( 6, 0, 1 ,0.5);
+    cursor: pointer;
+    font-size: 16px;
+    transition-property:all;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
+    /* Firefox 4 */
+    -moz-transition-property:all;
+    -moz-transition-duration:0.1s;
+    -moz-transition-timing-function:ease-out;
+    /* Safari 和 Chrome */
+    -webkit-transition-property:all;
+    -webkit-transition-duration:0.1s;
+    -webkit-transition-timing-function:ease-out;
+    /* Opera */
+    -o-transition-property:all;
+    -o-transition-duration:0.1s;
+    -o-transition-timing-function:ease-out;
+}
+.spirit:hover{
+    color:rgba( 6, 0, 1 ,1);
+    margin-top: -10px;
+    text-shadow: 2px 10px 3px rgba(63, 63, 63, 0.21);
+}
+
+.spirit:active{
+    color:rgba( 6, 0, 1 ,1);
+    margin-top: -1px;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.53);
+}
+.spirit-box:hover{
+    color:rgba( 6, 0, 1 ,1);
+    margin-top: -10px;
+    box-shadow: 2px 10px 3px rgba(63, 63, 63, 0.21);
+}
+.spirit-box:active{
+    color:rgba( 6, 0, 1 ,1);
+    margin-top: -1px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.53);
+}
+.now{
+    color:#000000;
+    font-size: 21px;
+}
+
+/*书写模式菜单*/
+
+.nav > li > a, .nav > li > a{
+    color: #cbcbcb
+}
+.nav > li > a:hover, .nav > li > a:focus{
+    color: #585858
+}
+.nav-clean{
+
+}
+blockquote:before, blockquote:after {
+    content: "";
+}
+blockquote {
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-left-style: solid;
+    border-left-width: 10px;
+}
+.table{
+    background-color: rgb(242, 242, 242);
+
+
+
+    padding:8.5px;
+
+
+}
+
+/*代码美化*/
+.com { color: rgba(160, 174, 174, 0.71); }
+.lit { color: #195f91; }
+.pun, .opn, .clo { color: #93a1a1; }
+.fun { color: #dc322f; }
+.str, .atv { color: #D14; }
+.kwd, .linenums, .tag { color: #4f9fcf; }
+.typ, .atn, .dec, .var { color: #099; }
+.pln { color: #48484c; }
+
+.prettyprint {
+    /*padding: 8px;*/
+    /*background-color: #f7f7f9;*/
+    /*border: 1px solid #e1e1e8;*/
+}
+.prettyprint.linenums {
+    -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+    -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+    box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+}
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+    margin: 0 0 0 33px; /* IE indents via margin-left */
+}
+ol.linenums li {
+    padding-left: 12px;
+    color: #bebec5;
+    line-height: 18px;
+    text-shadow: 0 1px 0 #fff;
+}
+code, pre {
+    padding: 0 3px 2px;
+    font-family: Menlo, Monaco, "Courier New", monospace;
+    font-size: 12px;
+    color: #333333;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+code {
+    padding: 3px 4px;
+    color: #d14;
+    /*background-color: #f7f7f9;*/
+    /*border: 1px solid #E1E1E8;*/
+    /*border-image: initial;*/
+}
+pre {
+    display: block;
+    padding: 8.5px;
+    margin: 0 0 9px;
+    font-size: 12px;
+    line-height: 18px;
+    /*background-color: #f5f5f5;*/
+    /*border: 1px solid #ccc;*/
+    /*border: 1px solid rgba(0, 0, 0, 0.15);*/
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+pre.prettyprint {
+    margin-bottom: 18px;
+}
+pre code {
+    padding: 0;
+    background-color: transparent;
+}
+pre {
+
+    border-width: 0px;
+    margin:20px;
+}
+
+.markdown-preview, .live-sroll{
+    background-color: #ffffff!important;
+}

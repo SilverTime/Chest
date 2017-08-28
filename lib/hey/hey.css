@@ -1,0 +1,190 @@
+/**
+ balalalala
+    Chris Chang
+*/
+
+.hey-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    top: 0;
+    overflow-y: scroll;
+    left: 0;
+    background: rgba(93, 93, 93, 0.5);
+}
+
+/*对话框样式*/
+.hey-panel {
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 200px;
+    background-color: #fdfdfe;
+    position: relative;
+    width: 300px;
+    /*margin-top: 10%;*/
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    transition: 0.25s all ease-in-out;
+    opacity: 0;
+}
+
+
+.on-the-way {
+    overflow: hidden;
+}
+.hey-bg > .state-0{
+    /*开关过渡样式*/
+    margin-top:70%;
+    opacity: 0;
+}
+
+
+.hey-bg > .state-1 {
+    /*开关过渡样式*/
+    margin-top:70%;
+    opacity: 0;
+}
+
+.hey-bg > .state-2 {
+    /*完全开启的样式*/
+    margin-top: 10%;
+    opacity: 1;
+}
+
+
+
+.hey-header-1 {
+    /*danger*/
+    height: 40px;
+    width: 100%;
+    background: #313537;
+    color: #bb1327;
+    line-height: 33px;
+    border-radius: 10px 10px 0 0;
+}
+
+.hey-header-2 {
+    /*danger*/
+    height: 40px;
+    width: 100%;
+    background: #e2e2e0;
+    color: #e88b15;
+    line-height: 40px;
+    border-radius: 10px 10px 0 0;
+}
+
+.hey-header-0 {
+    display: none;
+}
+
+.hey-icon-1 {
+    position: relative;
+    display: inline-block;
+    margin: 0px 5px 0 10px;
+    font-size: 23px;
+    color: #bb1327;
+
+}
+
+.hey-icon-2 {
+    position: relative;
+    display: inline-block;
+    margin: 0px 5px 0 10px;
+    font-size: 23px;
+    color: #e88b15
+}
+
+/*.hey-delete {*/
+    /*float: right;*/
+    /*margin: 0 10px;*/
+    /*font-size: 28px;*/
+    /*cursor: pointer;*/
+/*}*/
+
+/*.hey-footer {*/
+    /*width: 100%;*/
+    /*border-radius: 0 0 10px 10px;*/
+    /*height: 40px;*/
+    /*text-align: center;*/
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*color: #989898;*/
+    /*font-weight: bold;*/
+/*}*/
+
+
+.hey-confirm {
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    color: #fbfcfd;
+    font-size:20px;
+    cursor: pointer;
+}
+
+.hey-footer-0 {
+    background: #50abcb;
+}
+
+.hey-footer-0:active{
+    background: #989898;
+}
+
+
+.hey-footer-1 {
+    background: #c20e23;
+}
+
+.hey-footer-1:active{
+    background: #989898;
+}
+
+
+.hey-footer-2 {
+    background: #e88b15;
+}
+
+.hey-footer-2:active{
+    background: #989898;
+}
+
+
+.hey-close {
+    bottom: 15px;
+    cursor: pointer;
+    transition: 0.05s all;
+    display: inline-block;
+    padding: 5px 30px;
+    margin-bottom: 0;
+    font-size: 14px;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    color: #fbfcfd;
+    background-color: #989898;
+    border: none;
+}
+
+.tip-main {
+    margin:20px 25px 15px 30px;
+}
+
+.tip-main-text{
+    font-size: 13px;
+    margin:15px;
+    text-align: center;
+}
+
+.show{
+    text-align: center;
+    padding-top: 30px;
+    font-size: 22px;
+}
+
+

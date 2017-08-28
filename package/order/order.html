@@ -1,0 +1,242 @@
+<div ms-controller="order">
+    <div class="all-tool hor-ends flexBox">
+        <div class="all-filter flexBox" >
+            <a ms-repeat="data" ms-class="now:now==($index)" ms-click="filt($index)">{{el.name}}</a>
+        </div>
+        <div class="all-filter"><a class="btn btn-default btn-sm" ms-click="resetItem">重置</a>&nbsp;&nbsp;</div>
+    </div>
+    <div class="hor-ends warp search-tools flexBox" >
+        <!--<div>
+            <input type="text" maxlength="50" onkeyup="cutLength(this)" ms-duplex="keyword"
+                   ms-on-keyup-2="checkForm" placeholder=" 关键词" style="width:160px;margin:5px 0;"/>
+        </div>-->
+        <div class="flexBox">
+            <div>
+                <input type="text" maxlength="50"  ms-duplex="goodsKey"
+                       class="go-input-title" style="width:140px;margin:5px 0;"
+                       onkeyup="goodsSearchOrder.posePanel(this);order.checkForm()"
+                       onfocus="goodsSearchOrder.show(true);
+                                   goodsSearchOrder.posePanel(this)"
+                       onblur="goodsSearchOrder.show(false)"
+                       placeholder=" 限定商品"
+                       ms-on-focus="focus(1)" ms-on-blur="blur" id="OrderGoodsInput"/>
+
+                <!--商品查询的搜索结果框-->
+                <tsy:goodsinput config="$optGI_order"></tsy:goodsinput>
+
+            </div>
+            &nbsp;&nbsp;
+            <div ms-if="now!=8">
+                <input type="text" maxlength="50" id="OrderCustomerInput"
+                       class="go-input-title"
+                       style="width:140px;margin:5px 0;"
+                       onkeyup="cusSearchOrder.posePanel(this)"
+                       onfocus="cusSearchOrder.show(true);cusSearchOrder.posePanel(this)"
+                       onblur="cusSearchOrder.show(false)"
+                       onkeyup="cutLength(this)"
+                       ms-duplex="customerKey"
+                       placeholder="限定交易方"/>
+                <!--客户查询的搜索结果框-->
+                <tsy:cusinput config="$optCI_order"></tsy:cusinput>
+            </div>
+        </div>
+        <div class="flexBox">
+            <div>日期范围从&nbsp;</div>
+            <div>
+                <input type="date" class="go-input-title" ms-duplex="gt" ms-blur="checkForm" style="width:135px;margin:5px 0;"/>
+                至
+                <input type="date" class="go-input-title" ms-duplex="lt" ms-blur="checkForm" style="width:135px;margin:5px 0;"/>
+                之前
+            </div>
+        </div>
+        <div class="flexBox" ms-if="now!=8">
+            <div>金额范围从&nbsp;</div>
+            <div>
+                <input type="number" class="go-input-title"  placeholder=" 输入金额" ms-duplex="minMoney" ms-on-keyup="checkForm" style="width:80px;margin:5px 0;"/>
+                至
+                <input type="number" class="go-input-title"  placeholder=" 输入金额" ms-duplex="maxMoney" ms-on-keyup="checkForm" style="width:80px;margin:5px 0;"/>
+            </div>
+        </div>
+    </div>
+    <br  ms-if="now!=8" />
+    <div class=" flexBox"  ms-if="now!=8">
+        <div class="all-filter flexBox" style="margin-right: 30px">
+            <div>
+                <a class="btn btn-default btn-sm" ms-click="checkAll" style="margin:5px 0;">选中全部</a>&nbsp;&nbsp;<a class="btn btn-default btn-sm" ms-click="unCheckAll" style="margin:5px 0;">反选</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="flexBox">
+                <!--<div style="color:#000">选中订单&nbsp;&nbsp;</div>-->
+                <div style="color: #33c965;padding-right:15px;" ms-if="(now==0||now==1||now==3||now==4)&&allInMoney>0">需收款：￥{{allInMoney}}</div>
+                <div style="color:#fb0101" ms-if="(now==0||now==2||now==5||now==6)&&allOutMoney>0">需付款：￥{{allOutMoney}}</div>
+            </div>
+        </div>
+        <div class="all-filter flexBox" ms-if="showEndForm" >
+            <!--<div class="input-tip" ms-if="allMError1||allMError2">-->
+                <!--收/付款金额必须为选中订单需收/付款总额。-->
+                <!--&lt;!&ndash;确认结算金额。&ndash;&gt;-->
+            <!--</div>-->
+            <div style="color:#000" ms-if="(now==0||now==1||now==3||now==4)&&allInMoney>0">
+                确认
+                <span style="color:#33c965">收款</span>
+
+                <input type="number" class="go-input-title"
+                       ms-duplex="endInMoney"
+                       ms-class="errInput:allMError1"
+                       ms-click="checkAllMoney"
+                       ms-on-keyup="checkAllMoney"
+                       placeholder=" 输入结算金额"
+                       style="width:105px;margin:5px 0;" />&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div style="color:#000" ms-if="(now==0||now==2||now==5||now==6)&&allOutMoney>0">
+                确认
+                <span style="color:#fb0101">付款</span>
+
+                <input type="number"
+                       class="go-input-title"
+                       ms-duplex="endOutMoney"
+                       ms-class="errInput:allMError2"
+                       ms-click="checkAllMoney"
+                       ms-on-keyup="checkAllMoney"
+                       placeholder=" 输入结算金额"
+                       style="width:105px;margin:5px 0;" />&nbsp;</div>
+            <div>&nbsp;<a class="btn btn-default btn-success btn-sm" ms-click="toEndAllMoney">批量结算</a></div>
+
+
+
+        </div>
+        <div class="all-filter text-danger" ms-if="haveOtherCus">您选择了不同的交易方，不能进行批量结算！</div>
+    </div>
+    <br ms-if="now!=8" />
+    <!--表格-->
+    <table class="table table-bordered table-hover order-table" ms-visible="now!=8">
+        <thead>
+        <tr>
+            <td class="cell-min" style="min-width: 39px">选中</td>
+            <td style="min-width: 48px">操作</td>
+            <td style="min-width: 68px">订单类型</td>
+            <td style="min-width: 98px">交易方</td>
+            <td style="min-width: 39px">类型</td>
+            <td style="min-width: 48px">总金额</td>
+            <td style="min-width: 48px">未结金额</td>
+            <td style="min-width: 48px">已结金额</td>
+            <td style="min-width: 39px">状态</td>
+            <td style="min-width: 48px">开单日期</td>
+            <td style="min-width: 48px">结清日期</td>
+            <td style="min-width: 48px">开单人</td>
+            <td style="min-width: 48px">库房</td>
+
+            <td style="min-width: 48px">备注</td>
+        </tr>
+        </thead>
+        <!--总单-->
+        <tbody>
+        <!--repeat-start-->
+        <tr ms-repeat="showList" ms-class="type{{el.Type}}:el.Total!=el.Payed">
+            <td class="cell-min">
+                <input type="checkbox" ms-attr-checked="el.checked" ms-click="changeCheck($index)">
+            </td>
+            <td>
+                <a ms-if="Math.abs(el.OrderCode)!=3" class="btn btn-xs btn-success" ms-click="toInfo(el.OrderID,$index,el.OrderCode)" ms-on-mouseenter="ready2info">详情</a>
+            </td>
+            <td>
+                {{typeName[el.Type]}}
+            </td>
+            <td>
+                <a ms-attr-href='"#!/customerInfo/"+el.Trader.TraderID'>
+                    {{el.Trader.Name}}
+                </a>
+            </td>
+            <td>
+                <span ms-if="el.Type==1||el.Type==2||el.Type==12">收款</span>
+                <span ms-if="el.Type==0||el.Type==3">付款</span>
+            </td>
+            <td>{{Math.abs(el.Total)}}</td>
+            <td>{{Math.abs(el.Need)}}</td>
+            <td>{{Math.abs(el.Payed)}}</td>
+            <td>
+                <span ms-if="el.Total!=el.Payed">记账</span>
+                <span ms-if="el.Total==el.Payed">结清</span>
+            </td>
+            <td>{{el.Time*1000|date("yyyy-MM-dd HH:mm")}}</td>
+            <td ms-if="el.Total==el.Payed&&el.SettleLog.length==0"></td>
+            <td ms-if="el.Total==el.Payed&&el.SettleLog.length>0">{{el.SettleLog[el.SettleLog.length-1].Time*1000|date("yyyy-MM-dd HH:mm")}}</td>
+            <td ms-if="el.Total!=el.Payed">未结算</td>
+            <td>{{el.Operator.Account}}</td>
+            <td>{{el.Store.SName}}</td>
+
+            <td class="limit">{{el.Memo}}</td>
+        </tr>
+        <!--repeat-end-->
+        </tbody>
+        <tfoot>
+        <tr class="table-divider">
+            <td></td>
+        </tr>
+        <tr class="table-title">
+            <td>总计</td>
+            <td>单位数量</td>
+            <td>跨越天数</td>
+            <td>总金额</td>
+            <td>未结金额</td>
+            <td>已结金额</td>
+            <td>结清比</td>
+            <td colspan="2">跨越日期</td>
+            <!--<td></td>-->
+            <td>订单量</td>
+            <td>操作人数</td>
+            <td colspan="3"></td>
+
+        </tr>
+        <tr ms-repeat="data" ms-visible="now!=8&&now==$index">
+            <td>总计</td>
+            <td>{{el.CusNum}}</td>
+            <td>{{el.howLong}} 天</td>
+            <td>{{el.allTotle}}</td>
+            <td>{{(el.allTotle-el.allPayed).toFixed(2)}}</td>
+            <td>{{el.allPayed}}</td>
+            <td>{{el.overNum}}</td>
+            <td colspan="2">{{el.minDate*1000|date("yyyy-MM-dd")}} 至 {{el.maxDate*1000|date("yyyy-MM-dd")}}</td>
+            <!--<td></td>-->
+            <td>{{el.allOrder}}</td>
+            <td>{{el.workerNum}}</td>
+            <td colspan="3"></td>
+        </tr>
+        </tfoot>
+    </table>
+
+
+    <br ms-if="now==8" />
+
+    <!--调拨盘点报损表格-->
+    <table class="table table-bordered all-table" ms-visible="now==8">
+        <thead>
+        <tr>
+            <td>类型</td>
+            <td>日期</td>
+           <td>单号</td>
+            <td>开单人</td>
+            <td>操作</td>
+            <td>备注</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ms-repeat="data[7].list">
+            <td>
+                {{typeName[el.Type]}}
+            </td>
+            <td>{{el.Time*1000|date("yyyy-MM-dd HH:mm")}}</td>
+            <td>{{el.OrderID}}</td>
+            <td>{{el.Operator.Accounts[1].Account}}</td>
+            <td>
+                <a class="btn btn-xs btn-success" ms-click="toInfo(el.OrderID,$index)" ms-on-mouseenter="ready2info">详情</a>
+            </td>
+            <td>{{el.Memo}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a ms-repeat="data" class="btn btn-block btn-default" ms-visible="now==$index&&el.L>0"  ms-click="getList">加载更多<small>（还有{{el.L}}条数据）</small></a>
+
+    <br/>
+
+
+</div>

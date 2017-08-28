@@ -1,0 +1,81 @@
+.modal-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+
+    overflow: hidden;
+
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(38, 38, 38, 0.39);
+}
+
+.modal-box {
+    position: absolute;
+    overflow: hidden;
+    box-shadow: 0px 3px 8px rgba(31, 31, 31, 0.64);
+
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+
+}
+
+.tsy-modal ,.tsy-modal > div{
+    transition-property: all;
+    transition-duration: 0.18s;
+    transition-timing-function: ease-out;
+    /* Firefox 4 */
+    -moz-transition-property: all;
+    -moz-transition-duration: 0.18s;
+    -moz-transition-timing-function: ease-out;
+    /* Safari 和 Chrome */
+    -webkit-transition-property: all;
+    -webkit-transition-duration: 0.18s;
+    -webkit-transition-timing-function: ease-out;
+    /* Opera */
+    -o-transition-property: all;
+    -o-transition-duration: 0.18s;
+    -o-transition-timing-function: ease-out;
+}
+.tsy-modal{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 300px;
+    top: 0;
+    left: 0;
+    z-index: 99999999;
+    /*opacity: 0.1;*/
+    /*height: 100%;*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.50);
+}
+
+.tsy-modal > div {
+    overflow: hidden;
+    box-shadow: 0px 6px 20px 3px rgba(31, 31, 31, 0.54);
+    transform-origin: 0 0;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*margin-top: 8%;*/
+    padding: 0px;
+    background-color: #ffffff;
+    /*border-radius: 5px;*/
+    opacity:0;
+    transform: scale(0);
+
+
+}
+
+.modal-in{
+    opacity:1!important;
+    transform: scale(1)!important;
+}

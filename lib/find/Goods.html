@@ -1,0 +1,19 @@
+<!--列表-->
+
+<div class="l-s-i" ms-repeat="list"
+     ms-class="now-active:active==$index"
+     ms-click="select($index)" ms-on-hover="hover($index)">
+    <!--<span ms-if="el.Quality==10">[全新]</span>-->
+    <!--<span ms-if="el.Quality!=10">[折旧]</span>-->
+    {{el.Name}}
+    <br>
+    <small>&nbsp;&nbsp;&nbsp;型号：</small>
+    {{el.Model}}
+    <small>&nbsp;&nbsp;&nbsp;规格：</small>
+    {{el.Standard}}
+    <small>&nbsp;&nbsp;&nbsp;单位：</small>
+    {{el.UnitName}}
+</div>
+<!--<div>-->
+    <!--<a style="cursor: pointer" ms-click="add">没有找到？新加一个</a>-->
+<!--</div>-->

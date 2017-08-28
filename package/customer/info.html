@@ -1,0 +1,232 @@
+<div ms-controller="traderInfo" class="cus">
+    <div class="go-title">
+                    <span>
+                        <span style="color: #66a8bc;cursor: pointer" onclick=' window.location.href="#!/customer/0"'>客户供应商管理</span>
+                        <span>&nbsp;&RightAngleBracket;客户供应商详情</span>
+                    </span>
+
+    </div>
+
+    <!--商品管理详情-->
+    <div>
+        <div style="display: flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-start;align-items:flex-end;" >
+
+            <!--正常显示-->
+            <div  style="margin-right: 20px;">
+                <h2 style="color: #66a8bc;font-weight: bold">
+                    {{info.Name}}
+                    <small>
+                        编号：{{info.TraderID}}
+                    </small>
+                    <a class="icon-pencil" style="cursor: pointer" title="点击编辑" ms-click="traderEdit(info.TraderID)"></a>
+                    <!--<span class="pull-right">-->
+                    <!--<a class="btn btn-info btn-xs">销售开单</a>-->
+                    <!--<a class="btn btn-info btn-xs">采购退货</a>-->
+                    <!--</span>-->
+                </h2>
+                <div class="customerTip">
+                    <div style="background:#D4E9EF;width:8px;flex-shrink:0;"></div>
+                    <div class="main-block" style="position:relative;min-width:520px;word-break: break-all;width:auto !important;height:auto !important;">
+                        <div class="pull-right" style="position:absolute;right:10px;margin-right: 0 !important;padding-left: 10px;">
+                            <span class="c-type c-type-0" ms-if="info.Type==0||info.Type==2">客</span>
+                            <br/>
+                            <span class=" c-type c-type-1" ms-if="info.Type==1||info.Type==2">供</span>
+                        </div>
+                        <div>
+                            <!--<span style="display: inline-block">联系人：{{info.Contact[0].Name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>-->
+                            <span style="display: inline-block">联系方式：{{info.Phone}}</span><br/>
+                            <span>公司地址：{{info.Address}}</span><br>
+                            <span>租赁折扣：{{info.Discount}}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div>
+                <h4 class="side-title" style="color:#333333">
+                        往来订单总量：
+                    <span style="color:#333333">
+                        {{lT}}
+                    </span>
+                </h4>
+                <div  class="customerTip" >
+                    <div class="pull-left" style="background:#D4E9EF;width:8px;min-height:80px;"></div>
+                    <div class="pull-left payInfo">
+                        <!--重点：数字可点击，弹出和首页未付款订单一样的弹窗，输入金额来标记已付款。
+
+        例如：
+
+        点未收款的数额334.00元：弹出这个客户的未付单子，然后输入他给了的钱，依次结算他的订单。
+
+        点击我方未付1234.00元：弹出这个供应商未收的单子，然后输入我们付了的钱（依据是对方的收款单或发票之类的东西），然后消掉他们未收的记录。这个主要是提示我们还有未付的多少钱，并不具有拿去对账的作用，只是记录工具。主要还是以对方那边的账和对方开的票为准。
+
+        -->
+                        <div ms-visible="info.Receivables!=info.Payable"
+                             style="font-size:12px;padding:15px 20px;min-width:400px">
+                            <div ms-visible="moneyInput!=1" style="clear:both">
+                                <span style="font-size: 15px">应付款：<span class="cus-money" style="color:#fb0101">{{Math.abs(info.Payable)}}</span></span>
+                                <button class="btn btn-danger btn-xs pull-right" ms-click="showInput(1)">付款</button>
+                            </div>
+                            <div ms-visible="moneyInput==1" class="cus-pay-input-group" style="clear:both">
+                                <button class="btn  btn-xs pull-right" ms-click="showInput(0)">取消</button>
+                                <button class="btn btn-danger btn-xs pull-right" ms-click="pushMoney">确认付款</button>
+                                <span class="pull-left">
+                                    ￥
+                                </span>
+                                <div class="pull-left">
+                                    <tsy:input ms-data-id="'TraderPay'" style="width: 136px" >
+                                        <input slot="core" type="number" class="go-input-body" ms-duplex="pay" />
+
+                                    </tsy:input>
+                                </div>
+                                <div  style="clear:both"></div>
+                            </div>
+                            <div  ms-visible="moneyInput!=2" style="clear:both">
+                                <span style="font-size: 15px">应收款：<span class="cus-money" style="color: #33c965">{{Math.abs(info.Receivables)}}</span></span>
+                                <button class="btn btn-success btn-xs pull-right" ms-click="showInput(2)">收款</button>
+                            </div>
+                            <div ms-visible="moneyInput==2" class="cus-pay-input-group" style="clear:both">
+                                <button class="btn  btn-xs pull-right" ms-click="showInput(0)">取消</button>
+                                <button class="btn btn-success btn-xs pull-right" ms-click="pushMoney">确认收款</button>
+                                <span class="pull-left" >
+                                    ￥
+                                </span>
+                                <div class="pull-left">
+                                    <tsy:input ms-data-id="'TraderIncome'"  style="width: 136px" >
+                                        <input slot="core"  type="number" class="go-input-body" ms-duplex="income"/>
+                                    </tsy:input>
+                                </div>
+
+                                <div  style="clear:both"></div>
+                            </div>
+
+                        </div>
+                        <div class="text-center" ms-visible="info.Receivables==info.Payable"
+                                style="  font-size: 27px;
+                                        color: #089292;
+                                        padding-top: 20px;">
+                            已结清
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <h4 class="side-title" style="color:#333333">
+            选取账单结算：
+        </h4>
+        <!-- 多账单结算-->
+        <div class="box-row hor-ends ver-center">
+            <!--选择按钮-->
+            <div>
+                <button class="btn btn-sm btn-default" ms-click="checkAll">
+                    全选
+                </button>
+                <button class="btn btn-sm btn-default" ms-click="checkToggle">
+                    反选
+                </button>
+            </div>
+
+            <!-- 总计金额-->
+            <div >
+                <span class="text-danger" ms-visible="allOutM!=0">
+                    需付款：{{allOutM}}
+                </span>
+                &nbsp;&nbsp;&nbsp;
+                <span class="text-success" ms-visible="allInM!=0">
+                    需收款：{{allInM}}
+                </span>
+
+            </div>
+
+            <!-- 结算表单-->
+            <div ms-visible="allOutM!=0||allInM!=0">
+                <span ms-visible="allOutM!=0">
+                    付款：
+                    <input class="go-input-body" type="text" ms-duplex="pay2"/>
+                </span>
+                <span ms-visible="allInM!=0">
+                    收款：
+                    <input class="go-input-body" type="text" ms-duplex="income2"/>
+                </span>
+                <button class="btn btn-sm btn-success" ms-click="settleCheckedOrders"
+                        ms-visible="Number(pay2)==Number(allOutM)&&Number(income2)==Number(allInM)">
+                    确认结算
+                </button>
+                <span class="text-danger"
+                      ms-visible="Number(pay2)!=Number(allOutM)||Number(income2)!=Number(allInM)">
+                    请核对结算金额
+                </span>
+            </div>
+
+        </div>
+        <br/>
+        <!--订单表格-->
+        <table class="table table-bordered text-center cus-table">
+            <thead>
+            <tr>
+                <td>选中</td>
+                <td></td>
+                <td>订单类型</td>
+                <td>收付款类型</td>
+                <td>总金额</td>
+                <td>未结金额</td>
+                <td>已结金额</td>
+                <!--<td>结款状态</td>-->
+                <td>单号</td>
+                <td>开单时间</td>
+                <td>结算时间</td>
+                <td>库房</td>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ms-repeat="OrderList" ms-class="type{{el.Type}}:el.Total!=el.Payed">
+                <td  ms-click="check($index)" style="cursor: pointer" ms-if="el.Need!=0">
+                    <input type="checkbox" ms-duplex-boolean="el.checkable" style="cursor: pointer" />
+                    <!--{{el.checkable}}-->
+                </td>
+                <td ms-if="el.Need==0">
+
+                </td>
+                <td>
+                    <button class="btn btn-xs btn-success"
+                            ms-click="toOrderInfo(el.OrderID,$index,el.OrderCode)"
+                            ms-on-mouseenter="ready2info">
+                        详情
+                    </button>
+                </td>
+                <td>
+                    {{typeName[el.Type]}}
+                </td>
+                <td>
+                    <span ms-if="el.Type==1||el.Type==2">收款</span>
+                    <span ms-if="el.Type==0||el.Type==3">付款</span>
+                </td>
+                <td>{{Math.abs(el.Total)}}</td>
+                <td>{{Math.abs(el.Need)}}</td>
+                <td>{{Math.abs(el.Payed)}}</td>
+                <!--<td>-->
+                    <!--<span ms-if="el.Total!=el.Payed">记账</span>-->
+                    <!--<span ms-if="el.Total==el.Payed">结清</span>-->
+                <!--</td>-->
+                <td>{{el.OrderID}}</td>
+                <td>{{el.Time*1000|date("yyyy年 MMM dd日 HH:mm")}}</td>
+                <td ms-if="el.Total==el.Payed&&el.SettleLog.length==0"></td>
+                <td ms-if="el.Total==el.Payed&&el.SettleLog.length>0">{{el.SettleLog[el.SettleLog.length-1].Time*1000|date("yyyy-MM-dd HH:mm")}}</td>
+                <td ms-if="el.Total!=el.Payed">未结算</td>
+                <td>{{el.Store.SName}}</td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <a class="btn btn-block btn-default" ms-click="getOrder" ms-if="lT>lP*12">加载更多</a>
+        <br/>
+
+    </div>
+</div>

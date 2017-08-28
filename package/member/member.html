@@ -1,0 +1,191 @@
+<div ms-controller="member">
+    <!--顶部标签页-->
+    <div class="tab">
+
+        <div class="input-group pull-right" style="width: 300px;margin-right: 21px;margin-top: -15px">
+            <input id="join_href" type="text" class="form-control  input-sm" ms-duplex="joinHref" style="cursor: text;"
+                   disabled>
+              <span class="input-group-btn">
+                 <button data-clipboard-target="join_href" class="btn btn-sm "
+                         ms-class-1="btn-primary:state==0" ms-class-2="btn-success:state==1" id="join_btn">
+                     {{btn[state]}}
+                 </button>
+              </span>
+        </div><!-- /input-group -->
+
+
+        <a class=" btn-tab" ms-repeat="tabList" ms-attr-href="el.href" ms-class="live:nowTab==$index">
+            {{el.name}}
+
+            <small ms-if="$index==1&&JList.length>0" class="label label-danger">{{JList.length}}</small>
+        </a>
+    </div>
+
+
+    <!--员工管理-->
+    <div style="padding:10px 22px;margin-top: 20px" ms-if="nowTab==0">
+        <table class="table table-bordered all-table">
+            <thead>
+            <tr>
+                <td>
+                    编号
+                </td>
+                <td>
+                    用户名
+                </td>
+                <td>
+                    电话
+                </td>
+                <td>
+                    邮箱
+                </td>
+                <td>
+                    操作
+                </td>
+                <td>
+                    权限
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ms-repeat="userList">
+                <td>
+                    {{el.UID}}
+                </td>
+
+                <td>
+                    <span class="label label-warning" ms-if="el.Rule==1">创建者</span>
+                    {{el.Account}}
+                </td>
+
+                <td>
+                    {{el.Phone}}
+                </td>
+                <td>
+                    {{el.Email}}
+                </td>
+                <td>
+                    <button class="btn btn-xs btn-default" ms-if="el.Rule!=1&&admin"
+                            ms-click="delMember(el.UID)">删除
+                    </button>
+                </td>
+                <td>
+                   <div ms-if="el.Rule!=1&&admin">
+                       <div class="col-xs-4" ms-repeat-al="power">
+                           <label ms-on-change="setPower(el.UID,($index+1),this)" style="font-weight: 400;cursor: pointer">
+                               <input type="checkbox">
+                               {{al}}
+                           </label>
+                       </div>
+                   </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <!--审核加入申请-->
+    <div style="padding:10px 22px" ms-if="nowTab==1">
+        <div class="JList-i" ms-repeat="JList">
+            <h2>
+                <i class="icon  icon-user"></i>
+                用户：{{el.Account}}
+                <small>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="icon icon-phone-sign"></i>
+                    电话：{{el.Phone}}
+                </small>
+                <small>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="icon  icon-envelope-alt"></i>
+                    邮箱：{{el.Email}}
+                </small>
+            </h2>
+
+            <hr>
+            <div class="row" ms-if="admin">
+                <div class="col-sm-3 col-sm-offset-6">
+                    <button class="btn btn-primary btn-block " ms-click="pass(el.UID)">通过</button>
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-default btn-block " ms-cilck="refuse(el.UID)">拒绝加入</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--账户充值-->
+    <div style="padding:10px 0" ms-if="nowTab==2">
+        <!--余额信息-->
+        <div class="cz-panel-dark">
+            <div class="cz-panel-white pull-right">
+                <span style="font-size: 18px">当前余额：{{Balance}}元</span>
+
+            </div>
+
+            <h4>{{cname}}</h4>
+            <br>
+            <p>用户数：{{userList.length}}人</p>
+
+            <div class="clearfix"></div>
+        </div>
+
+        <!--面额选择-->
+        <div style="padding:12px 38px" class="select-money">
+            <h4>
+                <img src="package/member/akfabphp.bmp" alt="" style="height: 37px">
+                选择充值面额：
+            </h4>
+            <div>
+                <div class="cz-panel-white pull-left" ms-repeat="moneyList" ms-class="now:selectedMoney==$index"
+                     style="margin-right: 20px;cursor: pointer" ms-click="selectMoney($index)">
+                    <p>{{el}}元</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+        <!--面额确认-->
+        <div class="cz-panel-dark" ms-if="selectedMoney!=-1">
+            <h4>
+                请确认本次支付金额
+                <span class="text-primary">
+                    {{moneyList[selectedMoney]}}
+                </span>
+
+                元，
+                预计充值后还可使用
+                <span class="text-primary">
+                    {{((moneyList[selectedMoney]+Balance)/userList.length).toFixed(0)}}
+                </span>
+
+                天
+            </h4>
+        </div>
+        <div style="padding:12px 38px" ms-if="selectedMoney!=-1">
+            <button class="btn btn-primary btn-lg" ms-click="pay(moneyList[selectedMoney])">&nbsp;&nbsp;&nbsp;确定充值&nbsp;&nbsp;&nbsp;</button>
+        </div>
+
+        <!--重置细则-->
+        <div style="padding:12px 38px">
+            <p>
+                充值细则：<br>
+
+                1. 本软件收费标准为365元/年，支持多用户使用，扣费标准为1元/天/用户。但是当用户处于禁用状态时不扣费。<br>
+
+                2. 充值最小金额为365元，当账户余额为30元时，系统会自动提醒（线上以系统亮红，线下以短信，邮件的方式）<br>
+
+                3. 充值金额于30分钟内到账。<br>
+
+                4. 当账户欠费超过100元时，进销存软件将失去操作功能。<br>
+
+            </P>
+            <P>
+                帮助中心：<br>
+
+                对于系统有任何疑问可以登录我们公司官网http://www.tansuyun.cn/进行咨询和详细了解，或者拨打我们的客服电话18081246031进行咨询。<br>
+            </p>
+        </div>
+    </div>
+</div>

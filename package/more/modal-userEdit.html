@@ -1,0 +1,39 @@
+<div ms-controller="userEdit" class="box-col hor-ends" style="height: 385px">
+
+    <div class="box-col hor-aver sell-form ver-center" style="height: 100%">
+        <br/>
+            <lable>
+                工号：<input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-body"
+                          ms-duplex="user.Number">
+            </lable>
+
+            <lable>
+                电话：<input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-body"
+                          ms-duplex="user.Phone">
+            </lable>
+
+
+            <lable style="width: 212px">
+                姓名：{{user.UN}}
+            </lable>
+
+            <lable>
+                备注：<input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-body"
+                          ms-duplex="user.Memo">
+            </lable>
+
+
+            <lable>
+                职务：<input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-body"
+                          ms-duplex="user.Job">
+            </lable>
+        <br/>
+
+
+    </div>
+    <div class="mo-footer">
+    <button class="btn btn-success pull-right" ms-click="saveUser()">保存</button>
+
+    <button class="btn btn-default pull-right" ms-click="close()" style="margin-right: 10px">取消</button>
+</div>
+</div>

@@ -1,0 +1,68 @@
+<!--商品查询的搜索结果框-->
+<div class="live-search-goods" style="position: absolute;z-index:999999999999999"
+     ms-visible="showing||hovering"
+     ms-on-mouseenter="goHover(true)" ms-on-mouseleave="goHover(false)"
+     ms-css-left="left" ms-css-top="top">
+
+    <i class="icon-spinner icon-spin icon-2x goodsSearchWaiting"
+       ms-visible="goodsWaiting"></i>
+    <span class="goods-search-tip" ms-visible="!goodsDone">输入商品的关键字或通过扫描条码枪搜索商品</span>
+    <span class="goods-search-tip" ms-visible="goods.length==0&&goodsDone">没有结果……</span>
+    <div ms-visible="goods.length>0">
+        <div>
+
+            &nbsp;&nbsp;第{{GP}} &nbsp;/&nbsp; {{Math.ceil(GT/GN)}}页
+        <span class="pull-right">
+            <i class="icon-caret-left icon-2x search-pager" ms-if="GP>1"
+               ms-click="pagerGoods(1)"></i>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="icon-caret-right icon-2x search-pager"
+               ms-if="GP<(Math.ceil(GT/GN))"
+               ms-click="pagerGoods(-1)"></i>&nbsp;&nbsp;
+
+        </span>
+
+        </div>
+        <table class="table table-search">
+            <thead>
+            <tr>
+                <td>名称</td>
+                <!--<td>条形码</td>-->
+                <td>本店库存</td>
+                <td>总库存</td>
+                <td>标价</td>
+                <td>成本价</td>
+                <td>上次价</td>
+                <td>租赁价</td>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr ms-repeat="goods" ms-on-mouseenter="selectGoods($index)"
+                ms-click="jump2Goods($index)" ms-class="now:focusGoods==$index">
+                <td style="position: relative">
+                    <div style="position: absolute;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+                    width: 120px;
+                    left: -123px;
+                    top: 0px;" ms-if="focusGoods==$index&&el.URl!=''">
+                        <img ms-attr-src="el.URL" alt="" width="100%">
+                    </div>
+                    <!--<span ms-if="el.Quality==10">[全新]</span>-->
+                    <!--<span ms-if="el.Quality<10">[折旧]</span>-->
+                    {{el.Name}} {{el.Model}} {{el.Standard}} （{{el.UnitName}}）</td>
+                <!--<td>{{el.BarCode}}</td>-->
+                <td>{{el.ThisTotle}}</td>
+                <td>{{el.AllTotle}}</td>
+                <Td>{{el.Price1}}</Td>
+                <td>{{el.Price0}}</td>
+                <td>{{el.LP}}</td>
+                <td>{{el.Price3}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

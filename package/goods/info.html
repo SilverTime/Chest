@@ -1,0 +1,198 @@
+<div ms-controller="goodsInfo">
+    <!--<div class="go-title-info">-->
+    <!--<span>-->
+    <!--<span style="color: #66a8bc;cursor: pointer" ms-click="toList">商品管理</span>-->
+    <!--<span>&nbsp;&RightAngleBracket;商品详情</span>-->
+    <!--</span>-->
+    <!--<a class="pull-right" style="cursor: pointer" ms-click="infoClose">关闭</a>-->
+
+    <!--</div>-->
+    <!--商品管理详情-->
+    <div style="padding:0px 20px">
+        <button class="btn btn-sm btn-default pull-right" ms-click="infoEdit(goodsID)">
+            编辑<i class="icon-pencil"></i>
+        </button>
+        <h3 style="color: #66a8bc;">
+
+            <!--<span ms-if="info.Quality==10">[全新]</span>-->
+            <!--<span ms-if="info.Quality!=10">[折旧]</span>-->
+            {{info.Name}}
+            &nbsp;
+            {{info.Model}}&nbsp;
+            {{info.Standard}}&nbsp;
+
+            <small>单位：</small>
+            {{info.UnitName}}
+        </h3>
+        <hr style="clear: both">
+
+
+        <div class="row">
+
+
+            <!--基本信息+价格信息-->
+            <div class="col-xs-9">
+
+                <div class="row">
+                    <div class="col-xs-3" ms-if="info.URL!=''">
+                        <img ms-attr-src="info.URL" style="width: 100%">
+                    </div>
+                    <div ms-class="col-xs-9:info.URL!=''" ms-class-2="col-xs-12:info.URL==''">
+                        <table class="table table-bordered all-table">
+                            <thead>
+                            <tr>
+                                <td>
+                                    条码
+                                </td>
+                                <td>
+                                    商品号
+                                </td>
+                                <td>
+                                    属性
+                                </td>
+                                <td>
+                                    状态
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    {{info.BarCode}}
+                                </td>
+                                <td>
+                                    {{info.Number}}
+                                </td>
+                                <td>
+                                    {{Virtual[info.Virtual]}}
+                                </td>
+                                <td>
+                                    {{Disable[info.Disable]}}
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="" ms-if="info.Memo.length>0">
+                    备注：{{info.Memo}}
+                </div>
+                <div >
+                    分类：
+                 <span ms-repeat="info.Class">
+                    {{el.Name}}&nbsp;
+                 </span>
+                </div>
+                价格：
+                <div class="row">
+                    <div ms-repeat="priceArr" class="col-xs-3 info-sm-solid-box">
+                        <span ms-if="el.TypeID==1">加权成本</span>
+                        <span ms-if="el.TypeID==2">标准售价</span>
+                        <span ms-if="el.TypeID==3">租赁价格</span>
+                        <br />
+                        <span style="color: #fd0001;">￥{{el.Price}}</span>
+                    </div>
+
+                    <!--<div class="col-xs-3 info-sm-dashed-box">-->
+                    <!--<i class="icon-plus"></i>-->
+                    <!--</div>-->
+
+
+
+                </div>
+                <!--<div class="row">-->
+                    <!--<div  class="col-xs-3 info-sm-solid-box">-->
+                        <!--首次租赁价-->
+                        <!--<br />-->
+                        <!--<span style="color: #fd0001;">-->
+                            <!--采购成本的 {{priceArr.T3}} %-->
+                        <!--</span>-->
+                    <!--</div>-->
+                    <!--<div  class="col-xs-3 info-sm-solid-box">-->
+                        <!--未回本租赁价-->
+                        <!--<br />-->
+                        <!--<span style="color: #fd0001;">-->
+                            <!--采购成本的 {{priceArr.T4}} %-->
+                        <!--</span>-->
+                    <!--</div>-->
+                    <!--<div  class="col-xs-3 info-sm-solid-box">-->
+                        <!--已回本租赁价-->
+                        <!--<br />-->
+                        <!--<span style="color: #fd0001;">-->
+                            <!--采购成本的 {{priceArr.T5}} %-->
+                        <!--</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+            </div>
+            <!--库存信息-->
+            <div class="col-xs-3">
+                <span style="font-size:20px;color: #8fc3d2">本店库存:</span>
+                <span style="font-size:24px;color: #fd0033">{{Number(thisStoreTotal)}}</span>
+                <div class="info-inventory">
+                    总库存:<span style="color: #5587e7">{{Number(info.TotalStock)}}</span>
+                    <br />
+                    <div ms-repeat="info.Stock">
+                        {{el.SName}}:<span style="color: #fd0001">{{Number(el.Amount)}}</span>
+                    </div>
+
+                </div>
+                <button class="btn btn-default pull-left" style="width: 78px;background: #5bbfdd;color: #fff;" ms-click="toBill('0')">
+                   入库
+                </button>
+                <button class="btn btn-default pull-right" style="width: 78px;background: #5bbfdd;color: #fff" ms-click="toBill('2')">
+                   销售
+                </button>
+            </div>
+
+
+        </div>
+
+        <!--拆组公式-->
+        <br>
+        商品合成:<br><br>
+
+        <div class="packageBox" ms-repeat="CombineList" style="cursor: pointer">
+            <label class="packageLabel">{{el.Name}}</label>
+            <div class="row">
+                <div class="col-xs-5">
+                    <div ms-repeat-al="el.In" >
+                        {{al.Name+' '+al.Model+" "+al.Standard}} × {{al.Amount}} {{al.UnitName}}<br>
+
+                    </div>
+                </div>
+                <div class="col-xs-2 " style="font-size: 30px;margin-top: -10px;" >
+                    <i class="icon-exchange"></i>
+                </div>
+                <div class="col-xs-5">
+                    <div ms-repeat-al="el.Out" >
+                        {{al.Name+' '+al.Model+" "+al.Standard}} × {{al.Amount}} {{al.UnitName}}<br>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="clearfix">
+                <button class="btn btn-xs btn-primary" ms-click="toMake(el.CombineID)">
+                    合成
+                </button>
+                <button class="btn btn-xs btn-default "
+                        ms-click="composeEdit(el.CombineID)">
+                    编辑
+                </button>
+            </div>
+        </div>
+        <div class="addComposeCss" ms-click="composeEdit(0)">
+            <i class="icon-plus"></i>新建合成公式
+        </div>
+
+
+    </div>
+</div>

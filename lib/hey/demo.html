@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>弹出框组件实例</title>
+    <script src="../../src/js/avalon.modern.1.5.min.js"></script>
+</head>
+<body ms-controller="heyDemo">
+
+<tsy:hey config="$opthey"></tsy:hey>
+<button ms-click="openhey0()">成功</button>
+<button ms-click="openhey1()">错误</button>
+<button ms-click="openhey2()">失败</button>
+<script>
+    avalon.ready(function () {
+        require(['../../lib/hey/hey'], function () {
+            var vm=avalon.define({
+                $id:'heyDemo',
+                ready: function () {
+                    avalon.scan()
+                },
+                $opthey:{
+                    id:'hey',
+//                    width:"",
+//                    height:"",
+//                    x:"360",
+                },
+                openhey0: function () {
+                        hey.success("成功","主要提示内容是这样的")
+                },
+                openhey1: function () {
+                        hey.error("错误","主要提示内容是这样的")
+                },
+                openhey2: function () {
+                        hey.fail("失败","主要提示内容是这样的")
+                }
+            })
+
+            window[vm.$id]=vm
+            vm.ready()
+        })
+    })
+</script>
+</body>
+</html>

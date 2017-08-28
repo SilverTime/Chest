@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            padding:10px
+        }
+        table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #000000;
+    }
+
+    .table td {
+        display: table-cell;
+        border: 1px solid #000000;
+        /*padding: 4px;*/
+        line-height: 1.42857143;
+        vertical-align: top;
+        width: auto;
+    }
+
+    .table thead {
+        background-color: #dddddd;
+    }
+
+    .table-no-border, .table-no-border td {
+        border-color: transparent;
+        text-align: left;
+    }</style>
+</head>
+<body><!--销售开单-->
+<div><!--startprint-->
+    <table class="table table-no-border">
+        <tr>
+            <td colspan="4" style="text-align: center"><strong>{$公司名称}
+                <small>{$单据名称}</small>
+            </strong></td>
+        </tr>
+        <tr>
+            <td>开单时间：{$开单时间}</td>
+            <td>单号：{$订单编号}</td>
+        </tr>
+        <tr>
+            <td>客户名称：{$客户名称}</td>
+            <td>手机号码：{$客户手机}</td>
+        </tr>
+        <tr>
+            <td colspan="2">客户地址：{$客户地址}</td>
+        </tr>
+    </table>
+    <div class="sell-form" style="font-size: 15px;">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <td>编号</td>
+                <td>商品名称</td>
+                <td>规格</td>
+                <td>单位</td>
+                <td>单价</td>
+                <td>数量</td>
+                <td>小计</td>
+                <td>备注</td>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="商品" item="v">
+                <tr>
+                    <td style="width: 10mm">1</td>
+                    <td style="width: 50mm">{$v.Name}</td>
+                    <td> {$v.Standard}</td>
+                    <td> {$v.Unit}</td>
+                    <td>{$v.TradePrice}</td>
+                    <td>{$v.TradeAmount}</td>
+                    <td>{$v['TradePrice']*$v['TradeAmount']}</td>
+                    <td> {$v.Memo}</td>
+                </tr>
+            </foreach>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>总计</td>
+                <td colspan="3">人民币（大写）：{$大写金额}</td>
+                <td>小写</td>
+                <td colspan="3">￥{$小写金额}</td>
+            </tr>
+            </tfoot>
+        </table>
+        <table class="table table-no-border">
+            <tr>
+                <td colspan="4">已结算：￥{$已结算金额}</td>
+            </tr>
+            <tr>
+                <td>出库仓库：{$出库仓库}</td>
+                <td>开单人：{$开单人名}</td>
+                <td>出库员：&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>客户签字：&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4">订单备注：{$订单备注}</td>
+            </tr>
+        </table>
+    </div>
+    <!--endprint--></div>
+</body>
+</html>

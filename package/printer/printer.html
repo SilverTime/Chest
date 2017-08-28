@@ -1,0 +1,41 @@
+<div ms-controller="printer">
+    <div class="box-row hor-ends">
+        <button class="btn btn-sm btn-success" ms-click="gotoEdit(0)">
+            新建配置
+        </button>
+
+        <div>
+            <button class="btn btn-sm  btn-primary"
+                    ms-class="btn-link:Type!==$key"
+                    ms-class="btn-primary:Type===$key"
+                    ms-repeat="$Types" ms-click="setType($key)">
+                {{$val}}
+            </button>
+        </div>
+    </div>
+
+    <br>
+    <div ms-repeat="list" class="PC-block">
+        <span class="label label-info">
+            {{$Types[el.Type]}}
+        </span>
+        <strong>&nbsp;{{el.Title}}</strong>
+        <button class="pull-right btn btn-xs btn-default" ms-click="gotoEdit(el.TID)">编辑</button>
+        <hr>
+        <div class="box-row hor-ends">
+            <code style="width: 100%;height: 150px;overflow-y: scroll;">
+                {{el.Content}}
+            </code>
+            <div style="width: 170px;margin-left:10px;">
+                创建于：{{el.CTime*1000|date('yyyy-MM-dd hh:mm')}}<br>
+                更新于：{{el.UTime*1000|date('yyyy-MM-dd hh:mm')}}
+            </div>
+        </div>
+
+    </div>
+    <button class="btn btn-block btn-default" ms-click="getPrintConfig(P+1)" ms-if="P*N<T">
+        更多配置
+    </button>
+
+
+</div>

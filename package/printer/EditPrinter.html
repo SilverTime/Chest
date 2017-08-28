@@ -1,0 +1,32 @@
+<div ms-controller="EditPrinter">
+    <div class="">
+        <div class="col-xs-6">
+            <br>
+            打印配置标题
+            <input type="text" class="form-control" ms-duplex="info.Title">
+        </div>
+        <div class="col-xs-6">
+            <br>
+            绑定到订单类型
+            <select type="text" class="form-control" ms-duplex="info.Type">
+                <option ms-repeat="$Types" ms-attr-value="$key">{{$val}}</option>
+            </select>
+
+        </div>
+        <div class="col-xs-12">
+            <br>
+            配置代码
+            <textarea class="form-control" rows="8" ms-duplex="info.Content">
+
+            </textarea>
+        </div>
+        <div class="col-xs-6">
+            <br>
+            <button class="btn  btn-link" ms-click="close">取消</button>
+        </div>
+        <div class="col-xs-6">
+            <br>
+            <button class="btn btn-block btn-success" ms-click="save">保存</button>
+        </div>
+    </div>
+</div>

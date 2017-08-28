@@ -1,0 +1,85 @@
+.go-card{
+    /*     padding: 5px; */
+    background-color: #e7eefd;
+    margin-bottom:15px ;
+    margin-right: 7px;
+
+    /*float: left;*/
+    /*width:350px;*/
+    /*     height: 120px; */
+}
+.go-card:hover{
+    box-shadow: 0px 2px 14px #D6D6D6;
+}
+.new-goods{
+    background-color: #ffffff;
+    border: 1px dashed #CCCCCC;
+    padding: 10px;
+    border-radius: 2px;
+    height: auto;
+    cursor: pointer;
+    width:100%
+}
+
+.go-input-body{
+
+    height:20px;
+    border:none;
+    box-shadow: 0px 1px 0px #b3b3b3;
+    outline: none;
+}
+.go-input-body:focus{
+    box-shadow: 0px 1px 0px #0098fe;
+}
+
+.user-info{
+    padding:10px;
+    border:1px solid #cccccc;
+    border-radius: 2px;
+}
+
+/* 导出导入*/
+.port{
+    border:1px dashed #cccccc;
+    padding:10px;
+    border-radius: 2px;
+    color: #737373
+}
+
+.port:hover{
+    background-color: #65a6bb;
+    color:#ffffff
+}
+
+
+/*加入申请列表*/
+.JList-i{
+    margin-top: 20px;
+    border:1px solid #ededed;
+    padding: 0px 20px 20px 20px;
+}
+.JList-i small{
+    font-size: 14px;
+}
+
+/*账户充值*/
+[class^='cz-panel-']{
+    border: 1px solid #e3e3e3;
+}
+.cz-panel-dark{
+    background-color: #f7f7f7;
+    padding:12px 38px
+}
+.cz-panel-white{
+    background-color: #fff;
+    text-align: center;
+    height: 81px;
+    width: 180px;
+    line-height: 81px;
+}
+
+.select-money .now{
+    background-color: #09a9ec;
+    color: #ffffff;
+    font-weight: bold;
+}

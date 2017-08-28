@@ -1,0 +1,14 @@
+<div class="tsy-input-box">
+    <span  class="tip-box" ms-class="tip-box-{{state}}" ms-mouseover="Mouseenter" ms-mouseout="Mouseleave">{{tip}}</span>
+    <div class="tsy-input-core" ><!-- ms-mouseover="move_on()" ms-mouseout="tip_not()"-->
+        {{core|html}}
+        {{label|html}}
+        <span ms-click="ClickIt(this)"  ms-visible="state_icon>0"
+              ms-class-icon-question-sign="state_icon==1"
+              ms-class-icon-exclamation-sign="state_icon==2"
+              ms-class-icon-info-sign="state_icon==3"
+              ms-class-icon-ok-sign="state_icon==4"
+              ms-class="tsy-sign-{{state_icon}}">
+        </span>
+    </div>
+</div>

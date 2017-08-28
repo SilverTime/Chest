@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            padding:10px
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #000000;
+        }
+        .table td{
+            display: table-cell;
+            border: 1px solid #000000;
+            line-height: 1.42857143;
+            vertical-align: top;
+            width: auto;
+        }
+        .table thead{
+            background-color: #dddddd;
+        }
+        .table-no-border,.table-no-border td{
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body>
+<!--销售开单-->
+<div >
+
+<!--startprint-->
+    <table class="table table-no-border">
+        <tr>
+            <td colspan="4" style="text-align: center">
+                <strong>
+                    {$公司名称}
+                    <small>报损单</small>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td>开单时间：{{开单时间}}</td>
+            <td>单号：{{单号}}</td>
+        </tr>
+        <tr>
+            <td>仓库：{{仓库名称}}</td>
+            <td>开单人：{{开单人名称}}</td>
+        </tr>
+
+    </table>
+
+<div class="sell-form" style="font-size: 15px;">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>
+                编号
+            </td>
+            <td >
+                商品名称
+            </td>
+            <td >
+                规格
+            </td>
+            <td >
+                单位
+            </td>
+
+            <td >
+                数量
+            </td>
+
+            <td >
+                备注
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style="width: 10mm">
+                1
+            </td>
+            <td style="width: 50mm">
+                主机硬盘主板+CPU
+            </td>
+            <td>
+               件
+            </td>
+            <td>
+               件
+            </td>
+
+            <td>
+                50
+            </td>
+
+            <td>
+               这是备注内容区
+            </td>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+    <table class="table table-no-border">
+        <tr>
+            <td colspan="4">订单备注：{{备注}}</td>
+        </tr>
+    </table>
+
+</div>
+<!--endprint-->
+</div>
+</body>
+</html>

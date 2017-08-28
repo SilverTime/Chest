@@ -1,0 +1,73 @@
+<div ms-controller="traderEdit">
+    <br>
+
+    <!--编辑状态-->
+
+    <div class="col-sm-4 col-xs-offset-3">
+        <br>
+        <tsy:input ms-data-id="'NewTraderName'">
+            <label slot="label">交易方名称</label>
+            <input slot="core" type="text" maxlength="50" onkeyup="cutLength(this)" style="width: 100%"
+                   class=" form-control" placeholder="输入客户供应商名称" ms-duplex="New.Name"/>
+        </tsy:input>
+    </div>
+    <div class="col-sm-2">
+        <br>
+        <span class="c-type" ms-class="c-type-0:New.Type==0||New.Type==2" ms-click="editType(0)">客</span>
+
+        <span class="c-type" ms-class="c-type-1:New.Type==1||New.Type==2" ms-click="editType(1)">供</span>
+    </div>
+    <div class="col-sm-6 col-xs-offset-3">
+        <br>
+        <tsy:input ms-data-id="'NewTraderPhone'">
+            <label slot="label">联系方式</label>
+            <input slot="core" type="text" maxlength="50" onkeyup="cutLength(this)" class="form-control"
+                   ms-duplex="New.Phone"/>
+        </tsy:input>
+    </div>
+    <div class="col-sm-6 col-xs-offset-3">
+        <br>
+        <tsy:input ms-data-id="'NewTraderDiscount'">
+            <label slot="label">租赁折扣（%）</label>
+            <input slot="core" type="text" maxlength="50" onkeyup="cutLength(this)" class="form-control"
+                   ms-duplex="New.Discount"/>
+        </tsy:input>
+    </div>
+    <div class="col-sm-6 col-xs-offset-3">
+        <br>
+        <tsy:input ms-data-id="'NewTraderAddress'">
+            <label slot="label">通讯地址</label>
+            <input slot="core" type="text" maxlength="50" onkeyup="cutLength(this)" class="form-control"
+                   ms-duplex="New.Address"/>
+        </tsy:input>
+
+    </div>
+    <div class="col-sm-3 col-xs-offset-3">
+        <br>
+        <tsy:input ms-data-id="'NewTraderReceivables'">
+            <label slot="label">期初应收</label>
+            <input slot="core" type="number" class="form-control" ms-duplex="New.Receivables"/>
+        </tsy:input>
+
+    </div>
+    <div class="col-sm-3">
+        <br>
+        <tsy:input ms-data-id="'NewTraderPayable'">
+            <label slot="label">期初应付</label>
+            <input slot="core" type="number" class="form-control" ms-duplex="New.Payable"/>
+        </tsy:input>
+
+    </div>
+    <div class="col-sm-3 col-xs-offset-3">
+        <br>
+        <a class="btn  btn-success btn-block" ms-click="add" ms-if="nowState==0"><i class=" icon-ok"></i>添加</a>
+        <a class="btn  btn-success btn-block" ms-click="add" ms-if="nowState==1"><i class=" icon-ok"></i>保存</a>
+
+
+    </div>
+    <div class="col-sm-3">
+        <br>
+        <a class="btn  btn-default btn-block" ms-click="editClose"><i class=" icon-remove"></i>取消</a>
+    </div>
+
+</div>

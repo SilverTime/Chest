@@ -1,0 +1,77 @@
+<div class="box-row hor-center" style="margin-top: 50px;margin-bottom: 80px" ms-visible="initState==0">
+    <!--导入按钮-->
+    <div style="cursor: pointer;margin-right: 50px" class='text-center port' ms-click="init(1)" >
+        <i class="icon-signin icon-5x"></i><br/>
+        <h4>
+            导入数据
+
+        </h4>
+        <p>
+        可用于基础建帐，批量导入商品及客户供应商数据库
+    </p>
+    </div>
+    <div style="cursor: pointer" class='text-center port' ms-click="init(2)">
+        <i class="icon-signout icon-5x"></i><br/>
+        <h4>
+            导出数据
+
+        </h4>
+        <p>
+        导出基础数据，将商品数据以及客户供应商数据导出为Excel
+    </p>
+    </div>
+</div>
+
+<div class="box-row hor-center">
+    <!--导入-->
+    <div ms-visible="initState==1">
+        <h3>
+            选择导入的文件
+        </h3>
+
+        <input type="file" id="inFile" onchange="more.readFile()"/><br/>
+        <label style="cursor: pointer;">
+            <input type="radio" name="typeIn"/>
+            重建数据
+        </label>
+        <br/>
+        <label  style="cursor: pointer;">
+            <input type="radio" name="typeIn"/>
+            覆盖数据
+        </label>
+        <br/><br/>
+        <div>
+            <button class="btn btn-lg btn-default" ms-click="init(0)">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+            <button class="btn btn-lg btn-primary">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+        </div>
+    </div>
+
+    <!--导出-->
+    <div ms-visible="initState==2">
+
+        <h3>选择导出的数据</h3>
+        <label style="cursor: pointer;">
+            <input type="checkbox" name="typeOut"/>
+            所有往来商家的数据
+        </label>
+        <br/>
+        <label  style="cursor: pointer;">
+            <input type="checkbox" name="typeOut"/>
+            所有商品数据
+        </label>
+        <br/><br/>
+        <div>
+            <button class="btn btn-lg btn-default" ms-click="init(0)">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+            <button class="btn btn-lg btn-primary">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+        </div>
+
+    </div>
+</div>

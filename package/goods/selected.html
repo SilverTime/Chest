@@ -1,0 +1,50 @@
+<div class="sell-form" ms-controller="selected">
+    <div style="margin-bottom:10px;"><b>已选中商品列表：</b><a class="btn btn-default btn-xs pull-right" ms-click="clearGoods">清空</a></div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>商品名称</td>
+            <td>型号</td>
+            <td>规格</td>
+            <td>类型</td>
+            <td>库存</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ms-repeat="goodsCarList">
+            <td>
+                <a ms-attr-href='"#!/goodsInfo/"+el.GoodsID+","' style="cursor: pointer">{{el.Name}}</a>
+            </td>
+            <td>{{el.Model}}</td>
+            <td>{{el.Standard}}</td>
+            <td>
+                   <span ms-repeat-al="el.Class">
+                    {{al.Name}}&nbsp;
+                </span>
+            </td>
+            <td>×{{el.TotalStock}}</td>
+            <td>
+                <span class="btn-xs btn btn-danger" ms-click="delItem($index)">取消备选</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <b>批量操作：</b>
+        <div style="margin-top:10px;">
+            <!--<a class="btn btn-default" ms-click="quickStart.start('quotation&')">导出报价单</a>-->
+            <a class="btn btn-primary" ms-click="quickStart.start('12&&selected')">租赁开单</a>
+            <a class="btn btn-primary" ms-click="quickStart.start('2&&selected')">销售开单</a>
+            <a class="btn btn-default" ms-click="quickStart.start('0&&selected')">采购开单</a>
+            <a class="btn btn-default" ms-if="moreOption" ms-click="changeMOption">更多</a>
+        </div>
+        <div style="margin-top:10px;" ms-if="!moreOption">
+            <a class="btn btn-default" ms-click="quickStart.start('3&&selected')">销售退货</a>
+            <a class="btn btn-default" ms-click="quickStart.start('1&&selected')">采购退货</a>
+            <a class="btn btn-default" ms-click="quickStart.start('6&&selected')">调拨</a>
+            <a class="btn btn-default" ms-click="quickStart.start('4&&selected')">报损</a>
+            <a class="btn btn-default" ms-click="quickStart.start('5&&selected')">盘存</a>
+        </div>
+    </div>
+</div>

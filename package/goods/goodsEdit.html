@@ -1,0 +1,155 @@
+<div ms-controller="goodsEdit" style="position: relative;height: 100%">
+    <!--商品添加及编辑-->
+    <br/>
+    <br>
+    <div>
+        <div class="col-xs-12">
+            <label>基本信息</label>
+            <br><br>
+        </div>
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsName'">
+                <label slot="label" style="opacity: 1">名称
+                    <small class="text-danger">（必填）</small>
+                </label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.Name">
+            </tsy:input>
+            <br/>
+        </div>
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsModel'">
+                <label slot="label">型号</label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.Model">
+            </tsy:input>
+            <br/>
+
+        </div>
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsStandard'">
+                <label slot="label">规格</label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.Standard">
+            </tsy:input>
+            <br/>
+        </div>
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsUnit'">
+                <label slot="label">单位
+                    <small class="text-danger">（必填）</small>
+                </label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.UnitName">
+            </tsy:input>
+            <br/>
+        </div>
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsBarCode'">
+                <label slot="label">条码</label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.BarCode">
+            </tsy:input>
+            <br/>
+        </div>
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsNumber'">
+                <label slot="label">商品编号</label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.Number">
+            </tsy:input>
+            <br/>
+        </div>
+
+        <div class="col-xs-3" ms-if="nowState==0">
+            <tsy:input ms-data-id="'goodsPrice0'" >
+                <label slot="label">初始成本价</label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.Price0">
+            </tsy:input>
+            <br/>
+        </div>
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsPrice1'">
+                <label slot="label">标价</label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.Price1">
+            </tsy:input>
+            <br/>
+        </div>
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsPrice3'">
+                <label slot="label">租赁价</label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.Price3">
+            </tsy:input>
+            <br/>
+        </div>
+
+        <!--</div>-->
+        <div class="col-xs-6">
+            <tsy:input ms-data-id="'goodsMemo'">
+                <label slot="label">备注</label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.Memo" id="addGoodsMemo">
+            </tsy:input>
+            <br/>
+        </div>
+
+
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsAmount'">
+                <label slot="label">初始库存</label>
+                <input slot='core' type="text" class="form-control" ms-duplex="New.TotalStock">
+            </tsy:input>
+            <br/>
+        </div>
+
+
+        <div class="col-xs-3">
+            <tsy:input ms-data-id="'goodsVirtual'">
+                <label slot="label">属性</label>
+                <select slot='core' type="text" class="form-control" ms-duplex="New.Virtual">
+                    <option value="0">实体</option>
+                    <option value="1">虚拟</option>
+                </select>
+            </tsy:input>
+            <br/>
+        </div>
+
+
+        <div class="col-xs-12">
+            <label>分类</label>
+        </div>
+        <div class="col-xs-3" ms-repeat="Class">
+            <!--<input  type="text"  class="form-control" >-->
+            <div style="position: relative">
+                <tsy:input ms-data-id="'goodsClass'+$index">
+                    <!--<label slot="label">备注</label>-->
+                    <input slot="core" type="text" maxlength="50" id="classSearch"
+                           class="form-control addGoodsClass"
+                           onkeyup="classSearch.posePanel(this);cutLength(this);goodsEdit.New.CID='';goodsEdit.ClassName=this.value"
+                           onfocus="classSearch.show(true);classSearch.posePanel(this)"
+                           onblur="classSearch.show(false)"
+                           ms-on-focus="classFocus($index)"
+                           ms-duplex="el.Name"
+                           placeholder="分类搜索"/>
+                </tsy:input>
+
+
+                <i class="icon-remove-sign pop-close" ms-click="delClassInput($index)"></i>
+            </div>
+            <br/>
+        </div>
+        <div class="col-xs-3">
+            <button class="btn btn-success btn-block" ms-click="addClassInput">新分类</button>
+            <br>
+        </div>
+        <div class="col-xs-12">
+            <label>
+                商品图片：
+            </label>
+
+            <img ms-attr-src="New.URL" alt="" style="max-width: 100%" ms-if="URL!=''">
+            <tsy:fileuploader config="$optGoodsPic"></tsy:fileuploader>
+            <br>
+        </div>
+    </div>
+
+    <div class="btn-group-box">
+        <button class="btn btn-default" ms-click="close">取消</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-info" ms-click="save">保存</button>
+    </div>
+
+</div>

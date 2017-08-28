@@ -1,0 +1,11 @@
+<div ms-controller="more">
+    <!-- 标签页-->
+    <div class="tab">
+        <a class=" btn-tab" ms-repeat="tableList" ms-attr-href="el.href" ms-class="live:nowTable==$index">
+            {{el.name}}
+        </a>
+    </div>
+    <div style="padding:10px 22px">
+        {{url|html}}
+    </div>
+</div>

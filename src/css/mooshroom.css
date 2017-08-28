@@ -1,0 +1,97 @@
+
+
+
+
+/*卡片动效*/
+.alive-loading{
+    animation: loading 1s ease;
+    -moz-animation: loading 1s ease;    /* Firefox */
+    -webkit-animation: loading 1s ease; /* Safari 和 Chrome */
+    -o-animation: loading 1s ease;  /* Opera */
+}
+/*载入*/
+@keyframes loading
+{
+    from {margin-top:60px}
+    to {margin-top:0px}
+}
+
+@-moz-keyframes loading /* Firefox */
+{
+    from {margin-top:60px}
+    to {margin-top:0px}
+}
+
+@-webkit-keyframes loading /* Safari 和 Chrome */
+{
+    from {margin-top:60px}
+    to {margin-top:0px}
+}
+
+@-o-keyframes loading /* Opera */
+{
+    from {margin-top:60px}
+    to {margin-top:0px}
+}
+/*悬浮响应*/
+.alive-hover{
+    transition-property:all;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-out;
+    /* Firefox 4 */
+    -moz-transition-property:all;
+    -moz-transition-duration:0.15s;
+    -moz-transition-timing-function:ease-out;
+    /* Safari 和 Chrome */
+    -webkit-transition-property:all;
+    -webkit-transition-duration:0.15s;
+    -webkit-transition-timing-function:ease-out;
+    /* Opera */
+    -o-transition-property:all;
+    -o-transition-duration:0.15s;
+    -o-transition-timing-function:ease-out;
+}
+.alive-hover:hover{
+    box-shadow: 0px 8px 16px 0px rgba( 6, 0, 1 ,0.3);
+}
+/*按钮动效*/
+.alive-btn{
+    transition-property:all;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
+    /* Firefox 4 */
+    -moz-transition-property:all;
+    -moz-transition-duration:0.1s;
+    -moz-transition-timing-function:ease-out;
+    /* Safari 和 Chrome */
+    -webkit-transition-property:all;
+    -webkit-transition-duration:0.1s;
+    -webkit-transition-timing-function:ease-out;
+    /* Opera */
+    -o-transition-property:all;
+    -o-transition-duration:0.1s;
+    -o-transition-timing-function:ease-out;
+}
+.alive-btn:hover{
+    box-shadow: 0px 5px 12px 0px rgba( 6, 0, 1 ,0.5);
+}
+.alive-btn:active{
+    box-shadow: 0px 0px 4px 0px rgba( 6, 0, 1 ,0.5);
+}
+.alive{
+    transition-property:all;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
+    /* Firefox 4 */
+    -moz-transition-property:all;
+    -moz-transition-duration:0.1s;
+    -moz-transition-timing-function:ease-out;
+    /* Safari 和 Chrome */
+    -webkit-transition-property:all;
+    -webkit-transition-duration:0.1s;
+    -webkit-transition-timing-function:ease-out;
+    /* Opera */
+    -o-transition-property:all;
+    -o-transition-duration:0.1s;
+    -o-transition-timing-function:ease-out;
+}

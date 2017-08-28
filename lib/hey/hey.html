@@ -1,0 +1,28 @@
+<div class="hey-bg" ms-visible="state>0" ms-class="on-the-way:state==1">
+    <div class="hey-panel" ms-css-width="width" ms-css-height="height" ms-css-margin-left="x"
+          ms-class="state-{{state}}">
+        <div class="tip-main">
+            <div class="show">
+                <div ms-if="tipState==0">
+                    <i style="font-size: 50px;color: #2797d0;" class="iconfont">&#xe621;</i>
+                    {{title|html}}
+                </div>
+                <div ms-if="tipState==1">
+                    <i style="font-size: 50px;color: #c20e23;" class="iconfont icon-iconfont31tishi"></i>
+                    {{title|html}}
+                </div>
+                <div ms-if="tipState==2">
+                    <i style="font-size: 50px;color: #e88b15;" class="iconfont icon-sad"></i>
+                    {{title|html}}
+                </div>
+
+            </div>
+            <div class="tip-main-text">
+                {{html|html}}
+            </div>
+        </div>
+        <div class="hey-confirm" ms-class="hey-footer-{{tipState}}" ms-click="close">
+            确定
+        </div>
+    </div>
+</div>

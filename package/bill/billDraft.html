@@ -1,0 +1,37 @@
+<div ms-controller="billDraft">
+    <!--查看当前是启用还是禁用-->
+    <div class='box-row hor-ends ver-top'>
+        <div class="all-filter" >
+        <a ms-repeat="billType" ms-class="now:nowBillType==($index)" ms-click="changeType($index)">{{el}}</a>
+            <!--<button class="btn btn-xs btn-default ">清空草稿箱</button>-->
+    </div>
+        <div class="btn-toggle " ms-class="toggle-right:listType==1"
+             ms-class-2="toggle-left:listType==0">
+            <span class="btn-t-left">我的草稿</span>
+            <div class="btn-t-out" ms-click='toListType("auto")'>
+                <div class="btn-t-in" ></div>
+            </div>
+            <span class="btn-t-right">全部草稿</span>
+        </div>
+
+
+    </div>
+
+    <!--草稿箱列表-->
+    <div style="clear: both">
+        <div ms-repeat="list" class="draft-l" ms-class="d-type-{{el.Type}}" ms-click="goOn($index)">
+            <!--删除按钮-->
+            <i class="icon-remove-sign icon-2x pull-right" ms-click="del(el.DraftID)"></i>
+            <div>
+                <h4>{{billType[Number(el.Type)+1]}}</h4>
+                开单人：{{el.User.Accounts[1].Account}} &nbsp;&nbsp;
+                创建时间：{{el.CTime*1000|date("yyyy-MM-dd HH:mm")}} &nbsp;&nbsp;
+                最近修改：{{el.UTime*1000|date("yyyy-MM-dd HH:mm")}} &nbsp;&nbsp;
+
+            </div>
+        </div>
+    </div>
+
+
+    <tsy:pager config="$paper"></tsy:pager>
+</div>

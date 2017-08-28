@@ -1,0 +1,104 @@
+<div ms-controller="compose" style="position: relative;height: 100%">
+    <br/>
+    <br>
+
+    <div class="col-xs-12">
+        <tsy:input ms-data-id="'composeName'">
+            <label slot="label" style="opacity: 1">公式名称</label>
+            <input slot='core' type="text" class="form-control" ms-duplex="CombineName">
+        </tsy:input>
+        <br/><br/>
+    </div>
+    <div class="col-xs-5 composeBox" style="margin-left: 17px">
+        <div ms-repeat="ComposeLeft" class="row">
+            <div class="col-xs-8" style="position: relative">
+                <tsy:input ms-data-id="'goodsNameL'+$index">
+                    <label slot="label">
+                        <span ms-if="el.Model+el.Standard==''">商品</span>
+                        <div ms-if="el.Model+el.Standard!=''"  style="font-weight: 100;width: 150px;height: 20px;;overflow: hidden">
+                            {{el.Model+' '+el.Standard}}
+                            <!--{{el.Name}}-->
+                        </div>
+                    </label>
+                    <input slot='core' type="text" style="overflow: hidden" class="form-control" ms-attr-id="NameLeft{{$index}}"
+                           ms-duplex="el.Name" ms-on-focus="focus('Left',$index)"
+                           onkeyup="composeGoodsSearch.posePanel(this)"
+                           onfocus="composeGoodsSearch.show(true);composeGoodsSearch.posePanel(this)"
+                           onblur="composeGoodsSearch.show(false)">
+                </tsy:input>
+                <span style="position: absolute;right:-3px;top: 6px;">x</span>
+                <br>
+            </div>
+            <div class="col-xs-4">
+                <tsy:input ms-data-id="'goodsNumberL'+$index">
+                    <label slot="label">
+                        <span ms-if="el.UnitName==''">数量</span>
+                        <span ms-if="el.UnitName!=''">{{el.UnitName}}</span>
+                    </label>
+                    <input slot="core" type="number" ms-attr-id="NumLeft{{$index}}"
+                           class="form-control" ms-duplex="el.Amount">
+                </tsy:input>
+
+                <i class="icon-remove-sign pop-close" style="right: 7px;"
+                   ms-click="delCompose('Left',$index)"></i>
+            </div>
+        </div>
+        <div class="addGoodsCss col-xs-12" ms-click="addCompose('Left')"><i class="icon-plus"></i>添加商品</div>
+    </div>
+    <div class="col-xs-1 composeExchange">
+        <i class="icon-exchange"></i>
+    </div>
+    <div class="col-xs-5 composeBox" style="margin-left: 15px;">
+        <div ms-repeat="ComposeRight"  class="row">
+            <div class="col-xs-8" style="position: relative">
+                <tsy:input ms-data-id="'goodsNameR'+$index">
+                    <label slot="label">
+                        <span ms-if="el.Model+el.Standard==''">商品</span>
+                        <span ms-if="el.Model+el.Standard!=''" style="font-weight: 100">
+                            {{el.Model+' '+el.Standard}}
+                        </span>
+                    </label>
+                    <input slot='core' type="text" class="form-control" ms-attr-id="NameRight{{$index}}"
+                           ms-duplex="el.Name" ms-on-focus="focus('Right',$index)"
+                           onkeyup="composeGoodsSearch.posePanel(this)"
+                           onfocus="composeGoodsSearch.show(true);composeGoodsSearch.posePanel(this)"
+                           onblur="composeGoodsSearch.show(false)">
+                </tsy:input>
+                <span style="position: absolute;right:-3px;top: 6px;">x</span>
+                <br>
+            </div>
+            <div class="col-xs-4">
+                <tsy:input ms-data-id="'goodsNumberR'+$index">
+                    <label slot="label">
+                        <span ms-if="el.UnitName==''">数量</span>
+                        <span ms-if="el.UnitName!=''">{{el.UnitName}}</span>
+                    </label>
+                    <input slot="core" type="number"  ms-attr-id="NumRight{{$index}}"
+                           class="form-control" ms-duplex="el.Amount">
+                </tsy:input>
+
+                <i class="icon-remove-sign pop-close" style="right: 7px;"
+                   ms-click="delCompose('Right',$index)"></i>
+            </div>
+        </div>
+        <div class="addGoodsCss col-xs-12" ms-click="addCompose('Right')"><i class="icon-plus"></i>添加商品</div>
+    </div>
+
+
+    <!--<input type="text" maxlength="50" id="classSearch"-->
+    <!--class="form-control addGoodsClass"-->
+    <!--onkeyup="classSearch.posePanel(this);cutLength(this);goodsEdit.New.CID='';goodsEdit.ClassName=this.value"-->
+    <!--onfocus="classSearch.show(true);classSearch.posePanel(this)"-->
+    <!--onblur="classSearch.show(false)"-->
+    <!--ms-on-focus="classFocus($index)"-->
+    <!--ms-duplex="el.Name"-->
+    <!--placeholder="分类搜索"/>-->
+
+
+    <div class="btn-group-box col-xs-12" style="margin: 10px 0">
+        <button class="btn btn-default" ms-click="close">取消</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-info" ms-click="save">保存</button>
+    </div>
+
+</div>

@@ -1,0 +1,154 @@
+<!--<input type="text" maxlength="50" onkeyup="cutLength(this)" placeholder="输入工号姓名进行查询"/>-->
+<!--<button><i class="icon-search"></i></button>-->
+
+
+
+
+<!--个人信息-->
+<h4>我的信息</h4>
+<div class="box-row hor-ends warp user-info" style="cursor: auto">
+    <div class="box-row hor-ends warp" style="max-width: 900px">
+        <lable ms-visible="my.Number">
+            工号：{{my.Number}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </lable>
+
+        <lable ms-visible="my.Phone">
+            电话：{{my.Phone}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </lable>
+
+
+        <lable ms-visible="my.UN">
+            姓名：{{my.UN}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </lable>
+
+        <lable ms-visible="my.Memo">
+            备注：{{my.Memo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </lable>
+
+        <lable ms-visible="my.Job">
+            职务：{{my.Job}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </lable>
+    </div>
+
+    <div class="box-col hor-ends">
+        <button class="btn btn-success btn-sm" ms-click="toEdit(my,0)">编辑</button>
+
+        <button class="btn btn-default btn-sm" ms-click="toEdit(my,1)">修改密码</button>
+    </div>
+</div>
+<br/>
+<!--新加员工-->
+<div style="margin-top: 5px" class="go-card new-goods" ms-if="nowUser.uid==1">
+    <div class=" text-center" ms-if="!adding" ms-click="toggleAdd()">
+        <span style="color:#b0b0b0;font-size: 18px">
+            <i class="icon-plus "></i>
+        添加员工
+        </span>
+    </div>
+    <div ms-if="adding" class="box-row hor-ends" style="cursor: auto">
+        <div>
+            <lable>
+                工号：<input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-body"  ms-duplex="newUser.Number">
+            </lable>
+            <br/><br/>
+            <lable>
+                电话：<input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-body"  ms-duplex="newUser.Phone">
+            </lable>
+
+        </div>
+        <div>
+            <lable>
+                姓名：<input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-body"  ms-duplex="newUser.UN">
+            </lable>
+            <br/><br/>
+            <lable>
+                备注：<input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-body"  ms-duplex="newUser.Memo">
+            </lable>
+
+        </div>
+        <div>
+            <lable>
+                职务：<input type="text" maxlength="50" onkeyup="cutLength(this)" class="go-input-body"  ms-duplex="newUser.Job">
+            </lable>
+            <br/><br/>
+            <lable>
+                密码：<input type="password" class="go-input-body"  ms-duplex="newUser.PWD">
+            </lable>
+
+        </div>
+        <div class="box-col hor-ends">
+            <button class="btn btn-success btn-sm" ms-click="addUser()">新增</button>
+
+            <button class="btn btn-default btn-sm" ms-click="toggleAdd()">取消</button>
+        </div>
+    </div>
+</div>
+<!--成员列表-->
+<table class="table table-bordered all-table">
+    <thead>
+    <tr>
+        <td ms-if="nowUser.uid==1" style="width: 50px">
+            操作
+        </td>
+        <td>
+            序号
+        </td>
+        <td>
+            工号
+        </td>
+        <td>
+            姓名
+        </td>
+        <td>
+            职务
+        </td>
+        <td>
+            电话
+        </td>
+        <td>
+            备注
+        </td>
+        <td  style="width: 100px">
+            状态
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ms-repeat="userList" >
+        <td ms-if="nowUser.uid==1">
+            <button class="btn btn-success btn-xs" ms-click="toEdit(el,0)">编辑</button>
+        </td>
+        <td>
+            {{el.UID}}
+        </td>
+        <td>
+            {{el.Number}}
+        </td>
+        <td>
+            {{el.UN}}
+        </td>
+        <td>
+            {{el.Job}}
+        </td>
+        <td>
+            {{el.Phone}}
+        </td>
+        <td>
+            {{el.Memo}}
+        </td>
+        <td>
+            <span ms-visible="el.Disable==0">启用中</span>
+            <span ms-visible="el.Disable==1">禁用中</span>
+
+            <span ms-if="nowUser.uid==1">
+                <button ms-visible="el.Disable==1" ms-click="userToggle(el.UID,0)" class="btn btn-xs btn-success">
+                    启用
+                </button>
+                <button ms-visible="el.Disable==0&&el.UID!=1"  ms-click="userToggle(el.UID,1)" class="btn btn-xs btn-danger">
+                    禁用
+                </button>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>

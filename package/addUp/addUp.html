@@ -1,0 +1,120 @@
+<div ms-controller="addUp">
+    <b style="color: #66a8bc;cursor: pointer">
+        报表中心
+    </b>
+    <div class="pull-right">
+
+        <button class="btn btn-sm btn-default "><i class=" icon-reply">&nbsp;&nbsp;</i>重置</button>
+        &nbsp;&nbsp;
+        <button class="btn btn-sm btn-default "><i class="icon-refresh">&nbsp;&nbsp;</i>刷新</button>
+    </div>
+    <!-- 标签页-->
+    <div class="tab">
+        <a class=" btn-tab" ms-repeat="tableList" ms-attr-href="{{el.href}}&&{{startDate}}&&{{endDate}}&&{{accuracyVal}}" ms-class="live:nowTable==$index"  >
+            {{el.name}}
+        </a>
+
+
+    </div>
+    <br/>
+
+    <!--统计工具条-->
+    <div class="row">
+
+        <!--商品查询的-->
+        <div class="col-sm-3" ms-if='nowTable==0'>
+            <tsy:find config="$optSearchGoods"></tsy:find>
+        </div>
+
+
+
+
+
+        <div class="col-sm-4 box-row hor-ends ver-center">
+            <input type="date"  class="form-control" ms-duplex="startDateShow">
+            <span style="width: 60px;text-align: center">
+               至
+            </span>
+            <input type="date"  class="form-control" ms-duplex="endDateShow">
+        </div>
+
+    </div>
+    <div >
+        <div class="search-item" ms-repeat="goodsList">
+            <!--<span ms-if="el.Quality==10">[全新]</span>-->
+            <!--<span ms-if="el.Quality!=10">[折旧]</span>-->
+            {{el.Name}}
+            <br>
+            <small>&nbsp;&nbsp;&nbsp;型号：</small>
+            {{el.Model}}
+            <small>&nbsp;&nbsp;&nbsp;规格：</small>
+            {{el.Standard}}
+            <small>&nbsp;&nbsp;&nbsp;单位：</small>
+            {{el.UnitName}}
+
+            <i class="icon-remove-sign search-item-del" ms-click="delGoodsSearch($index)"></i>
+        </div>
+    </div>
+
+    <!--商品租赁-->
+    <div ms-if="nowTable==0">
+        <br>
+        <table class="table table-bordered table-responsive">
+            <thead>
+            <tr>
+                <td>商品</td>
+                <td>租赁次数</td>
+                <td>租赁总金额</td>
+                <td>租赁总成本</td>
+                <td>租赁已支付金额</td>
+                <td>租赁未支付金额</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ms-repeat="ReportGoods">
+                <td>
+                    <!--<span ms-if="el.Goods.Quality==10">[全新]</span>-->
+                    <!--<span ms-if="el.Goods.Quality!=10">[折旧]</span>-->
+                    {{el.Goods.Name}}
+
+                    <small>&nbsp;&nbsp;&nbsp;型号：</small>
+                    {{el.Goods.Model}}
+                    <small>&nbsp;&nbsp;&nbsp;规格：</small>
+                    {{el.Goods.Standard}}
+                    <small>&nbsp;&nbsp;&nbsp;单位：</small>
+                    {{el.Goods.UnitName}}
+                </td>
+                <td>{{el.Amount}}</td>
+                <td>{{el.RentMoney}}</td>
+                <td>{{el.RentCost}}</td>
+                <td>{{el.Payed}}</td>
+                <td>{{el.RentMoney-el.Payed}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--商品统计-->
+    <div ms-if="nowTable==1">
+
+    </div>
+
+    <!--门店统计-->
+    <div ms-if="nowTable==2">
+
+    </div>
+
+    <!--员工统计-->
+    <div ms-if="nowTable==3">
+
+    </div>
+    <!--交易方统计-->
+    <div ms-if="nowTable==4">
+
+    </div>
+
+    <div class="clearfix">
+
+    </div>
+
+</div>

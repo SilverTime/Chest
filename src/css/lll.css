@@ -1,0 +1,127 @@
+/*
+24川网格系统 V0.0.0
+设计者：mooshroom
+2014-11-06
+目前版本不可用于IE7浏览器，在其余浏览器上均可愉快使用，
+在使用15；9的分栏方式无法填满100%，所以请避免15:9分栏与其他分栏混合使用
+在IE6下，各种比列的分栏方式无法保持一致，所以请避免使用多种分栏方式，不过问题不大，不是强迫症的可以随意使用。
+*/
+
+/*外框架 开始*/
+
+.container-lll{
+
+    width:1024px;
+    /*TODO 根据实际页面需要 调整宽度*/
+
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.row-lll{
+    margin-left:-10px;
+    margin-right: -10px;
+
+}
+.row-lll:before,.row-lll:after{
+    display:table;
+    content:"";
+    line-height: 0;
+}
+.row-lll:after{
+    clear: both;
+}
+/*外框架 结束*/
+
+/*核心架子 开始*/
+/*全局lll*/
+.l-1,.l-2,.l-3,.l-4,.l-5,.l-6,.l-7,.l-8,.l-9,.l-10,.l-11,.l-12,.l-13,.l-14,.l-15,.l-16,.l-17,.l-18,.l-19,.l-20,.l-21,.l-22,.l-23,.l-24{
+    position: relative;
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    float:left;
+}
+/*宽度设置*/
+.l-1{
+    width: 4.1666666667%;
+}
+.l-2{
+    width:8.3333333333%
+}
+.l-3{
+    width:12.5%
+}
+.l-4{
+    width:16.66666666669%
+}
+.l-5{
+    width:20.8333333333%
+}
+.l-6{
+    width: 25%;
+}
+.l-7{
+    width:29.16666666669%;
+}
+.l-8{
+    width: 33.33333333329%;
+}
+.l-9{
+    width: 37.5%;
+}
+.l-10{
+    width: 41.6666666667%;
+}
+.l-11{
+    width: 45.83333333329%;
+}
+.l-12{
+    width: 50%;
+}
+.l-13{
+    width: 54.1666666667%;
+}
+.l-14{
+    width: 58.33333333329%;
+}
+.l-15{
+    width: 62.5%;
+}
+.l-16{
+    width: 66.66666666669%;
+}
+.l-17{
+    width:70.8333333333%;
+}
+.l-18{
+    width:75%;
+}
+.l-19{
+    width:79.16666666669%;
+}
+.l-20{
+    width:83.3333333333%;
+}
+.l-21{
+    width:87.5%;
+}
+.l-22{
+    width: 91.66666666669%;
+}
+.l-23{
+    width: 95.8333333333%;
+}
+.l-24{
+    width: 100%;
+}
+/*核心架子 结束*/
+.test-block{
+    background-color: #31b0d5;
+    border-color:#285e8e;
+
+    border: 1px solid;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
+}

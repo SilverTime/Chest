@@ -1,0 +1,651 @@
+<!--销售开单-->
+<div ms-controller="bill">
+    <div>
+        <!--<a class="pull-right" ms-click="close">关闭</a>-->
+        <!--<span ms-if='state=="2"'>-->
+            <!--开具销售出库单-->
+        <!--</span>-->
+        <!--<span ms-if='state=="3"'>-->
+            <!--开具销售退货单-->
+        <!--</span>-->
+        <!--<span ms-if='state=="0"'>-->
+            <!--开具采购入库单-->
+        <!--</span>-->
+        <!--<span ms-if='state=="1"'>-->
+             <!--开具采购退货单-->
+        <!--</span>-->
+        <!--<span ms-if='state=="6"'>-->
+             <!--开具调拨单-->
+        <!--</span>-->
+        <!--<span ms-if='state=="4"'>-->
+             <!--开具报损单-->
+        <!--</span>-->
+        <!--<span ms-if='state=="5"'>-->
+             <!--开具盘存单-->
+        <!--</span>-->
+
+        <!--<span ms-if='state==11'>-->
+             <!--开具销售报价单-->
+        <!--</span>-->
+        <!--<span ms-if='state==12'>-->
+             <!--开具租赁出库单-->
+        <!--</span>-->
+
+
+        <button class="btn btn-xs btn-default pull-right" ms-if="state!='goodsCar'" ms-click="reset">重置表单</button>
+
+    </div>
+
+    <div class="sell-form" ms-if="state!='goodsCar'">
+        <h2 class="text-center">
+            <!--【乐山新宇电脑】--->
+            <span ms-if='state=="2"'>
+                开具消耗品出库单
+            </span>
+            <span ms-if='state=="3"'>
+                开具消耗品退货单
+            </span>
+            <span ms-if='state=="0"'>
+                开具采购入库单
+            </span>
+            <span ms-if='state=="1"'>
+                 开具采购退货单
+            </span>
+            <span ms-if='state=="6"'>
+                 开具调拨单
+            </span>
+            <span ms-if='state=="4"'>
+                 开具报损单
+            </span>
+            <span ms-if='state=="5"'>
+                 开具盘存单
+            </span>
+            <span ms-if='state=="11"'>
+                 开具销售报价单
+            </span>
+            <span ms-if='state==12'>
+             开具租赁出库单
+        </span>
+        </h2>
+        <br/>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <label>
+                    开单时间：
+                    <span>{{date|date("yyyy年 MMM dd日 HH:mm")}}</span>
+
+                </label>
+
+            </div>
+            <div class="col-xs-4">
+
+            </div>
+            <div class="col-xs-4">
+                <label>
+                    单号：
+                    <small>{{orderID}}</small>
+                </label>
+            </div>
+
+        </div>
+
+        <!-- 一般的交易单-->
+        <div ms-if='state<4||state==11||state==12'>
+            <div class="row">
+                <div class="col-sm-4">
+                    <br>
+                    <tsy:input ms-data-id="'billCus'">
+                        <label slot="label">
+                            <span ms-if='state==2||state==3||state==11||state==12'>客户名称：</span>
+                            <span ms-if='state<2'>供应商名称：</span>
+                        </label>
+                        <input slot="core" type="text" maxlength="50" id="inputCus"
+                               class="form-control"
+                               onkeyup="billCusSearch.posePanel(this)"
+                               onfocus="billCusSearch.show(true);billCusSearch.posePanel(this)"
+                               onblur="billCusSearch.show(false)"
+                               onkeyup="cutLength(this)"
+                               ms-duplex="customer.Name"
+                               placeholder="客户搜索"/>
+                    </tsy:input>
+
+                    <!--客户查询的搜索结果框-->
+
+
+
+                </div>
+                <div class="col-sm-4">
+                    <br>
+                    <tsy:input ms-data-id="'billCusPhone'">
+                        <label slot="label">
+                            联系方式
+                        </label>
+                        <input slot="core" type="text" maxlength="50" onkeyup="cutLength(this)" class="form-control"
+                               ms-duplex="customer.Phone"/>
+                    </tsy:input>
+
+                </div>
+                <div class="col-sm-4">
+                    <br>
+                    <tsy:input ms-data-id="'billCusAddress'">
+                        <label slot="label">
+                            地址
+                        </label>
+                        <input slot="core" type="text" maxlength="50" onkeyup="cutLength(this)"
+                               onkeyup="cutLength(this)"
+                               class="form-control" ms-duplex="customer.Address"/>
+                    </tsy:input>
+                </div>
+
+            </div>
+            <br>
+            <div ms-if="state==12" class="text-right text-danger">
+                折扣：{{customer.Discount}}%
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td></td>
+                    <!--<td style="min-width:50px">-->
+                        <!--编号-->
+                    <!--</td>-->
+                    <td style="min-width:120px">
+                        商品名称
+                    </td>
+                    <td style="min-width:100px">
+                        条形码
+                    </td>
+                    <td style="min-width:50px">
+                        型号
+                    </td>
+                    <td style="min-width:50px">
+                        规格
+                    </td>
+                    <td style="min-width:50px">
+                        单位
+                    </td>
+                    <td style="min-width:50px">
+                        数量
+                    </td>
+                    <td style="min-width:80px">
+                        <span ms-if='state=="2"||state=="11"'>单价</span>
+                        <span ms-if='state=="0"'>进价</span>
+                        <span ms-if='state=="3"'>退货价</span>
+                        <span ms-if='state=="1"'>退货价</span>
+                        <span ms-if="state==12">租赁价</span>
+                    </td>
+
+                    <td style="width:100px">
+                        小计
+                    </td>
+                    <td style="width:150px">
+                        备注
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr ms-repeat-el="List" ms-class="delFocus:delFocusing==$index">
+                    <td>
+                        <span
+                                class="btn-xs btn btn-danger"
+                                ms-on-mouseenter="delFocus($index)"
+                                ms-on-mouseleave="delFocus(-1)"
+                                ms-click="delRow($index)">
+                            <i class="icon-minus-sign"></i>
+                                删
+                        </span>
+                    </td>
+                    <!--<td>-->
+
+                        <!--{{$index+1}}-->
+
+                    <!--</td>-->
+                    <td style="position: relative" ms-on-mouseenter="showImg($index)" ms-on-mouseleave="showImg(-1)">
+                        <div style="position: absolute;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    /*box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);*/
+                    width: 120px;
+                    left: -123px;
+                    top: 0px;" ms-if="showingImg==$index&&el.URl!==''">
+                            <img ms-attr-src="el.URL" alt="" width="100%">
+                        </div>
+
+                        <tsy:input ms-data-id="'goodsName'+$index">
+                            <input slot="core" maxlength="50"
+                                   ms-on-focus-1="checkLast($last)"
+                                   class="input-in-table billInput"
+                                   ms-duplex="el.Name"
+                                   ms-on-focus="goodFocus($index)"
+                                   ms-on-blur="goodBlur(-1)"
+                                   ms-on-keydown-5="getIndex($index)"
+                                   onkeyup="billGoodsSearch.posePanel(this)"
+                                   onfocus="billGoodsSearch.show(true);billGoodsSearch.posePanel(this)"
+                                   onblur="billGoodsSearch.show(false)"
+                                   onkeyup="cutLength(this)" style="border: none;box-shadow: none;" type="text"
+                                   class="tsy-input tsy-input-md input-in-table billInput" placeholder="搜索商品">
+                        </tsy:input>
+
+                    </td>
+                    <td>
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table"
+                               ms-duplex="el.BarCode"/>
+                    </td>
+                    <td>
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table"
+                               ms-duplex="el.Model"/>
+                    </td>
+                    <td>
+
+
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table"
+                               ms-duplex="el.Standard"/>
+                        <!--<span ms-if='el.os!=""'>{{el.Standard}}</span>-->
+                    </td>
+                    <td>    <!--  ms-focus="unitFocus($index)" ms-blur="unitBlur"   -->
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table unitInput"
+                               ms-duplex="el.UnitName"/>
+                        <!--<span ms-if='el.ou!=""'>{{el.UnitName}}</span>-->
+                    </td>
+                    <td style="position: relative">
+                        <!--<input type="number" maxlength="50" onkeyup="cutLength(this)" class="input-in-table numInput"-->
+                        <!--ms-duplex="el.Amount"-->
+                        <!--ms-focus="numFocus($index)" ms-blur="numBlur" ms-on-keyup="sum"-->
+                        <!--ms-on-keyup-2="amountErr($index)" ms-class="err:el.AmountErr"/>-->
+
+                        <tsy:input ms-data-id="'goodsNum'+$index">
+                            <input slot="core" type="number" maxlength="50" onkeyup="cutLength(this)"
+                                   ms-duplex="el.Amount"
+                                   ms-focus="numFocus($index)" ms-blur="numBlur" ms-on-input="sum"
+                                   ms-on-keyup-2="amountErr($index)" ms-class="err:el.AmountErr"
+                                   class="input-in-table priceInput">
+                        </tsy:input>
+
+                        <!--<span class="label label-danger pull-right" ms-if="el.AmountErr"-->
+                        <!--style="position: absolute;top: 26px;left: 4px;">超库存</span>-->
+                    </td>
+                    <td style="position: relative" ms-if="state!=12">
+
+                        <tsy:input ms-data-id="'goodsPrice'+$index">
+                            <input slot="core" type="number" maxlength="50" onkeyup="cutLength(this)"
+                                   class="input-in-table priceInput"
+                                   ms-duplex="el.Price1" id="goodsPrice"
+                                   ms-focus="priceFocus($index)" ms-blur="priceBlur" ms-on-input="sum"
+                                   ms-on-keyup-2="priceErr($index)" ms-class="err:el.PriceErr"/>
+                        </tsy:input>
+
+                        <!--<span class="label label-danger pull-right" ms-if="el.PriceErr"-->
+                        <!--style="position: absolute;top: 26px;left: 4px;">低于成本</span>-->
+                    </td>
+                    <td style="position: relative" ms-if="state==12">
+                        {{el.Price1}}×{{customer.Discount}}%
+                    </td>
+
+                    <td>
+                        <span ms-if="state!=0">
+                            {{el.sum}}
+                        </span>
+
+                        <input type="number" maxlength="50" onkeyup="cutLength(this)" class="input-in-table" ms-if="state==0"
+                               ms-duplex="el.sum" ms-on-input="backSum"/>
+                    </td>
+                    <td>
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table"
+                               ms-duplex="el.Memo"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="10" style="border: none">
+                        <button class="btn btn-success btn-sm" ms-click="addRow(1)">
+                            <i class="icon-plus"></i>
+                            添加一栏
+                        </button>
+                    </td>
+                </tr>
+
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="3">
+                        总计(人民币)：
+                    </td>
+                    <td colspan="2">
+                        小写:
+                        ￥{{Total}}
+                    </td>
+                    <td colspan="5">
+                        大写:
+                        {{bigTotal}}
+                    </td>
+
+                </tr>
+                </tfoot>
+            </table>
+            <!--<table class="table table-bordered" style="margin-top: -21px">-->
+            <!--<tbody style="height: 30px">-->
+            <!-- -->
+            <!--</tbody>-->
+            <!--</table>-->
+            <div ms-if='state!="quotation"'>
+
+                <div class="row" ms-if="state!=12">
+                    <div class="col-sm-4">
+                        <tsy:input ms-data-id="'billPay'">
+                            <label slot="label" style="color: #666666;font-weight: bold">
+                                已付款：￥
+                            </label>
+                            <input slot="core" type="number" class="form-control" ms-duplex="pay"
+                                   style="border-bottom: 1px solid #66a7bb"/>
+                        </tsy:input>
+                    </div>
+                </div>
+
+                <div class="row" ms-if="state==12">
+
+                    <div class="col-sm-2">
+                        <label style="color: #666666;font-weight: bold">建议押金：￥{{sugDeposit}}</label>
+                    </div>
+                    <div class="col-sm-4">
+                    <tsy:input ms-data-id="'billDeposit'">
+                        <label slot="label" style="color: #666666;font-weight: bold">
+                            已付押金：￥
+                        </label>
+                        <input slot="core" type="number" class="form-control" ms-duplex="Deposit"
+                               style="border-bottom: 1px solid #66a7bb"/>
+                    </tsy:input>
+                </div>
+                </div>
+
+                <br>
+                <div class="box-row hor-ends warp">
+                    <div>
+                        <label>
+                            <span ms-visible='state=="2"||state=="1"||state==12'>
+                                出库仓库：
+                            </span>
+                            <span ms-visible='state=="3"||state=="0"'>
+                                入库仓库
+                            </span>
+                        <span>
+                            {{Store.SName}}
+                        </span>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            开单人：
+                        <span>
+                            {{Operator}}
+                        </span>
+                        </label>
+                    </div>
+
+
+                    <div>
+                        <label>
+                            <span ms-if='state=="2"||state=="1"||state==12'>出库员：</span>
+                            <span ms-if='state=="3"||state=="0"'>入库员: </span>
+                                <span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            <span ms-if='state=="2"||state=="1"||state==12'>客户签字：</span>
+                            <span ms-if='state=="1"'>收货人签字：</span>
+                                <span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </span>
+                        </label>
+                    </div>
+                    <div ms-if='state=="0"'>
+
+                        <div>
+                            <label>
+                                库管人签字：
+                        <span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                            </label>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- 调拨单 以及报损 以及盘存-->
+        <div ms-if='state>=4&&state!=11&&state!=12'>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td style="width: 59px"></td>
+                    <!--<td style="width:50px">-->
+                        <!--编号-->
+                    <!--</td>-->
+                    <td style="min-width:120px">
+                        商品名称
+                    </td>
+                    <td style="min-width:120px">
+                        条形码
+                    </td>
+                    <td style="min-width:100px">
+                        规格
+                    </td>
+                    <td style="min-width:50px">
+                        单位
+                    </td>
+                    <td ms-if='state=="5"' style="min-width:50px">
+                        盘前
+                    </td>
+                    <td style="min-width:50px" ms-if='state!="5"'>
+                        数量
+                    </td>
+                    <td style="min-width:50px" ms-if='state=="5"'>
+                        实盘
+                    </td>
+                    <td ms-if='state=="5"' style="min-width:50px">
+                        盈亏
+                    </td>
+                    <!--<td style="width:80px">-->
+                    <!--单价-->
+                    <!--</td>-->
+                    <!---->
+                    <!--<td style="width:80px">-->
+                    <!--小计-->
+                    <!--</td>-->
+                    <td style="width:150px">
+                        备注
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr ms-repeat-el="List" ms-class="delFocus:delFocusing==$index">
+                    <td>
+                    <span class="btn-xs btn btn-danger" ms-on-mouseenter="delFocus($index)"
+                          ms-on-mouseleave="delFocus(-1)" ms-click="delRow($index)">
+
+                        删除
+
+                    </span>
+                    </td>
+                    <!--<td>-->
+                        <!--{{$index+1}}-->
+                    <!--</td>-->
+                    <td><!--  tGoodInput    -->
+                        <tsy:input ms-data-id="'goodsName'+$index">
+                            <input slot="core" type="text" maxlength="50" name="goodsInput"
+                                   class="input-in-table bill2Input"
+                                   ms-duplex="el.Name"
+                                   ms-on-focus="goodFocus($index)"
+                                   ms-on-focus-1="checkLast($last)"
+                                   ms-on-blur="goodBlur(-1)"
+                                   ms-on-keydown-5="getIndex($index)"
+                                   onkeyup="billGoodsSearch.posePanel(this)"
+                                   onfocus="billGoodsSearch.show(true);billGoodsSearch.posePanel(this)"
+                                   onblur="billGoodsSearch.show(false)"
+                                   onkeyup="cutLength(this)"
+                                   placeholder="搜索商品"/>
+                        </tsy:input>
+                    </td>
+                    <td>
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table"
+                               ms-duplex="el.BarCode" ms-if='el.os==""'/>
+                    </td>
+                    <td>
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table"
+                               ms-duplex="el.Standard" ms-if='el.os==""'/>
+                        <span ms-if='el.os!=""'>{{el.Standard}}</span>
+                    </td>
+                    <td>
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table"
+                               ms-duplex="el.UnitName" ms-if='el.ou==""'/>
+                        <span ms-if='el.ou!=""'>{{el.UnitName}}</span>
+                    </td>
+                    <td ms-if='state=="5"'>
+                        {{el.ThisTotle}}
+                        <span ms-if="el.ThisTotle==0&&el.GoodsID!=0">0</span>
+                    </td>
+                    <td>
+                        <tsy:input ms-data-id="'goodsNum'+$index">
+                            <input slot="core" type="number" min="0" maxlength="50" onkeyup="cutLength(this)"
+                                   class="input-in-table num2Input"
+                                   ms-duplex="el.Amount" ms-focus="numBlind2($index)" ms-blur="offNumBlind2"
+                                   ms-on-keyup="sum"/>
+                        </tsy:input>
+
+                    </td>
+                    <!--<td>-->
+                    <!--<input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table" ms-duplex="el.Price1"  ms-on-keyup="sum"/>-->
+                    <!--</td>-->
+
+                    <!--<td>-->
+                    <!--<input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table" ms-duplex="el.sum"/>-->
+                    <!--</td>-->
+
+                    <td ms-if='state=="5"'>
+                        <span ms-visible="el.Name!=''">
+                            {{Number(el.Amount-el.ThisTotle).toFixed(3)}}
+                        </span>
+
+                    </td>
+                    <td>
+                        <input type="text" maxlength="50" onkeyup="cutLength(this)" class="input-in-table"
+                               ms-duplex="el.Memo"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="10" style="border: none">
+                        <button class="btn btn-success btn-sm" ms-click="addRow(1)">
+                            <i class="icon-plus"></i>
+                            添加一栏
+                        </button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <div ms-if='state=="6"' class="row">
+
+                <div class="col-sm-3">
+
+                    <tsy:input ms-data-id="'billOStoreID'">
+                        <label slot="label">出库库房</label>
+                        <select slot="core" class="form-control" ms-duplex="OStoreID" style="font-size: 14px">
+                            <option value="">选择库房</option>
+                            <option ms-attr-value="el.StoreID" ms-repeat="Stores">{{el.SName}}</option>
+                        </select>
+                    </tsy:input>
+
+
+                    </label>
+                </div>
+                <div class="col-sm-3">
+
+                        <tsy:input ms-data-id="'billIStoreID'">
+                            <label slot="label">入库库房</label>
+                            <select slot="core" class="form-control" ms-duplex="ToStoreID" style="font-size: 14px">
+                                <option value="">选择库房</option>
+                                <option ms-attr-value="el.StoreID" ms-repeat="Stores">{{el.SName}}</option>
+                            </select>
+                        </tsy:input>
+
+
+                </div>
+
+
+            </div>
+            <div ms-if='state=="4"||state=="5"'>
+                <span>
+                    <label>
+                        <span class="pull-left">
+                            库房：
+                        </span>
+
+                         <span>
+                             {{Store.Name}}
+                         </span>
+                        &nbsp;
+                    </label>
+                </span>
+            </div>
+        </div>
+
+        <!-- 盘存单-->
+
+        <!-- 报损单-->
+
+        <br/>
+
+        <tsy:input ms-data-id="'billMemo'">
+            <label slot="label">
+                订单备注
+            </label>
+            <input slot="core" type="text" class="form-control" ms-duplex="Memo"/>
+        </tsy:input>
+
+        <!--<div ms-if='state=="A"||state=="B"||state=="-4"' style="height: 20px;"></div>-->
+
+        <br>
+
+    </div>
+    <div class="mo-footer" ms-if="state!='goodsCar'">
+        <label style="font-weight: normal;cursor: pointer" ms-if='state<4'>
+            <input type="checkbox" ms-click="toggleV()"/>
+        <span>
+            测试订单（不会影响库存信息，但会记录金额）
+        </span>
+        </label>
+
+        <div class="pull-right">
+            <button class="btn  btn-success " style="margin-right:39px" ms-click="exportQuotation"
+                    ms-if="state=='quotation'">
+                导出
+            </button>
+            <button class="btn  btn-success " style="margin-right: 39px" ms-click="haveDone"
+                    ms-if="showBtn&&state!='quotation'">
+                <i class="icon-shopping-cart"></i>
+                开单
+            </button>
+            <span ms-if="!showBtn">正在开单……</span>
+            <button class="btn  btn-default " ms-click="saveDraft">保存草稿</button>
+        </div>
+    </div>
+
+    <!--<div ms-widget="tip,billTip"></div>-->
+    <!--<tsy:tip config="btConfig"></tsy:tip>-->
+</div>

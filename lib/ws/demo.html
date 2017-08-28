@@ -1,0 +1,52 @@
+<div ms-controller="wsDemo">
+    组件示范：
+    <div ms-widget="ws,ws,$opt"></div>
+    <label for="">
+        服务器地址：
+        <input type="text" ms-duplex="$opt.server"/>
+    </label>
+    <label for="">
+        要发送的内容：
+        <input type="text" ms-duplex="message"/>
+    </label>
+    <br/>
+    <a ms-click="start" class="btn btn-success">连接</a>
+    <a ms-click="send" class="btn btn-primary">发送</a>
+    <br/>
+    接收到的内容：<br/>
+    {{back}}
+
+
+
+
+</div>
+<script>
+    require(['../../ui/ws/ws.js'],function(){
+        var wsDemo=avalon.define({
+            $id:"wsDemo",
+            $opt:{
+                server:"ws://10.10.13.188:46030",
+                onopen:function(){
+                    alert('连接创建成功')
+                },
+            },
+            message:"",
+            start: function () {
+              ws.start()
+            },
+            back:"",
+            send:function(){
+                ws.call({
+                    i:'Goods/search',
+                    data:{
+                        keyword:wsDemo.message
+                    },
+                    success:function(d){
+                        wsDemo.back=d
+                    }
+                })
+            }
+        })
+        avalon.scan()
+    })
+</script>

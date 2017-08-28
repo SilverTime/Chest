@@ -1,0 +1,33 @@
+<div ms-controller="userEdit" style="height: 385px" class="box-col hor-ends">
+
+    <!--<div class="mo-header">-->
+    <!--<a class="pull-right" onclick="layout.rightShowing=false">关闭</a>-->
+    <!--<span>-->
+    <!--修改密码-->
+    <!--</span>-->
+
+    <!--</div>-->
+
+    <div class="box-col hor-aver ver-center sell-form" style="height: 100%">
+        <br/> <br/>
+        <div style="margin-bottom: 40px;margin-top: 18px">
+            原来的密码
+            <input type="password" ms-duplex="oldPWD" class="go-input-body" style="margin-bottom: 10px"/>
+        </div >
+        <div style="margin-bottom: 40px">
+            新设的密码
+            <input type="password" ms-duplex="newPWD" class="go-input-body" style="margin-bottom: 10px"/>
+        </div>
+        <div style="margin-bottom: 40px">
+            重复新密码
+            <input type="password" ms-duplex="rePWD" class="go-input-body" style="margin-bottom: 10px"/>
+        </div>
+        <br/> <br/>
+    </div>
+
+    <div class="mo-footer">
+        <button class="btn btn-success pull-right" ms-click="savePWD()">保存</button>
+
+        <button class="btn btn-default pull-right" ms-click="close()" style="margin-right: 10px">取消</button>
+    </div>
+</div>

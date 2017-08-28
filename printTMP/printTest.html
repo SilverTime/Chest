@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打印模版编辑测试页面</title>
+    <script src="../src/js/LodopFuncs.js"></script>
+</head>
+<body onload="CheckIsInstall()">
+<h2><b><font color="#009999">WEB打印控件Lodop(V6.x)使用说明及样例</font></b></h2>
+<table cellpadding="0" cellspacing="0" border="0" width="569">
+    <tr valign="top">
+        <td align="right" nowrap width="6"></td>
+        <td width="812">
+            <table width="777" height="45">
+                <tr>
+                    <td style="vertical-align: top" width="747" height="18"><p><b><font color="#0000FF" face="黑体"
+                                                                                        size="3">Lodop</font></b>(标音:劳道谱,俗称:露肚皮)是专业WEB控件,用它既可裁剪输出页面内容，又可用程序代码直接实现
+                    </p></td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="747" height="1"><p>复杂打印。控件功能强大,却简单易用,所有调用如同<font size="2">JavaScript</font>扩展语句,主要接口函数如下：
+                    </p></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<table cellpadding="0" cellspacing="0" border="0" width="550" height="202">
+    <tr valign="top">
+        <td align="right" nowrap width="6" height="202"></td>
+        <td width="812" height="202">
+            <table width="775" height="174">
+                <tr>
+                    <td style="vertical-align: top" width="13" height="1"><font color="#0000FF"><font size="1">●</font></font>
+                    </td>
+                    <td style="vertical-align: top" width="752" height="1"><font color="#0000FF" size="2">PRINT_INIT(strPrintTaskName)打印初始化</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="18"><font size="1" color="#0000FF">●</font></td>
+                    <td style="vertical-align: top" width="752" height="18"><font color="#0000FF" size="2">SET_PRINT_PAGESIZE(intOrient,intPageWidth,intPageHeight,strPageName)设定纸张大小</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="18"><font color="#0000FF"><font size="1">●</font></font>
+                    </td>
+                    <td style="vertical-align: top" width="752" height="18"><font color="#0000FF" size="2">ADD_PRINT_HTM(intTop,intLeft,intWidth,intHeight,strHtml)增加超文本项</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="18"><font color="#0000FF"><font size="1">●</font></font>
+                    </td>
+                    <td style="vertical-align: top" width="752" height="18"><font color="#0000FF" size="2">ADD_PRINT_TEXT(intTop,intLeft,intWidth,intHeight,strContent)增加纯文本项</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="18"><font color="#0000FF"><font size="1">●</font></font>
+                    </td>
+                    <td style="vertical-align: top" width="752" height="18"><font color="#0000FF" size="2">ADD_PRINT_TABLE(intTop,intLeft,intWidth,intHeight,strHtml)增加表格项</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="1"><font size="1" color="#0000FF">●</font></td>
+                    <td style="vertical-align: top" width="752" height="1">
+                        <font color="#0000FF" size="2">ADD_PRINT_SHAPE(intShapeType,intTop,intLeft,intWidth,intHeight,intLineStyle,intLineWidth,intColor)画图形</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="1"><font size="1" color="#0000FF">●</font></td>
+                    <td style="vertical-align: top" width="752" height="1">
+                        <font color="#0000FF" size="2">SET_PRINT_STYLE(strStyleName,
+                            varStyleValue)设置对象风格</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="1"><font size="1" color="#0000FF">●</font></td>
+                    <td style="vertical-align: top" width="752" height="1"><font color="#0000FF"
+                                                                                 size="2">PREVIEW打印预览</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="1"><font size="1" color="#0000FF">●</font></td>
+                    <td style="vertical-align: top" width="752" height="1"><font color="#0000FF"
+                                                                                 size="2">PRINT直接打印</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="14"><font size="1" color="#0000FF">●</font></td>
+                    <td style="vertical-align: top" width="752" height="14"><font color="#0000FF" size="2">PRINT_SETUP打印维护</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top" width="13" height="1"><font size="1" color="#0000FF">●</font></td>
+                    <td style="vertical-align: top" width="752" height="1"><font color="#0000FF" size="2">PRINT_DESIGN打印设计</font>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<br>
+<button onclick="design()">打开打印维护</button>
+<button onclick="preview()">打开打印预览</button>
+<button onclick="printThat()">打印</button>
+
+
+<!--打印模版测试区域-->
+
+<table border=1 width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse" bordercolor="#000000">
+    <thead>
+    <tr>
+        <td colspan="8">
+            {{typeName[info.Type]}}
+            <small style="float:right">
+                当前是第<font tdata="PageNO" format="ChineseNum" color="blue">##</font>页</span>/共<font tdata="PageCount" format="ChineseNum" color="blue">##</font></span>页
+            </small>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5">
+            开单时间：{{info.Time*1000|date("yyyy年 MMM dd日 HH:mm")}}
+        </td>
+        <td colspan="3">
+            单号：{{info.OrderID}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5">
+            客户名称： {{infoCus.Name}}
+        </td>
+        <td colspan="3">
+            手机号码: {{infoCus.Phone}}
+        </td>
+    </tr>
+
+
+    <tr>
+        <td colspan="8">
+            客户地址： {{infoCus.Address}}
+        </td>
+    </tr>
+
+    <tr style="border:1px solid ;border-color:#424242;background-color: #DDDDDD">
+        <td style="">
+            编号
+        </td>
+        <td style="">
+            商品名称
+        </td>
+        <td style="">
+            规格
+        </td>
+        <td style="">
+            单位
+        </td>
+        <td style="">
+            单价
+        </td>
+        <td style="">
+            数量
+        </td>
+
+        <td style="">
+            小计
+        </td>
+        <td style="">
+            备注
+        </td>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr ms-repeat-el="info.Goods">
+        <td>
+            {{$index+1}}
+        </td>
+        <td>
+
+                {{el.Name}}
+
+        </td>
+        <td>
+            {{el.Standard}}
+        </td>
+        <td>
+            {{el.Unit}}
+        </td>
+        <td >
+
+                    {{el.TradePrice}}
+
+
+        </td>
+
+        <td>
+                <span ms-if="el.TradeAmount">
+                    {{el.TradeAmount}}
+                </span>
+                 <span ms-if="el.Amount">
+                    {{el.Amount}}
+                </span>
+        </td>
+
+        <td >
+            {{(el.TradePrice*el.Amount).toFixed(2)}}
+        </td>
+        <td >
+            {{el.Memo}}
+        </td>
+
+
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="2">
+            本页本列行数:<font  tdata="SubCount" format="#" color="blue">###</font>
+        </td>
+
+
+        <td></td>
+        <td></td>
+
+        <td   align="left"tdata="SubAverage" format="#.##" >
+            本页均价：<font color="blue">######</font>
+        </td>
+        <td align="left" width="26%" tdata="SubSum" format="#">
+            本页数量小计：<font color="blue">######</font>
+        </td>
+        <td align="left" width="26%" tdata="SubSum" format="#.##">
+            本页金额小计：<font color="blue">######</font>
+        </td>
+        <td >
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            总计
+        </td>
+        <td  colspan="4">
+            人名币（大写）：
+            {{bigTotal}}
+        </td>
+        <td >
+            小写:
+        </td>
+        <td colspan="2">
+            ￥{{info.Total}}
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="8">
+            已结算：￥
+            {{info.Payed}}
+            <span ms-if="info.Total==info.Payed">（结清）</span>
+            <span ms-if="info.Total!=info.Payed">（待结算：￥{{info.Total-info.Payed|number(2)}}）</span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            出库仓库
+            <span ms-text="info.Store.SName"></span>
+        </td>
+        <td colspan="3">
+            开单人：
+                        <span ms-text="info.Operator.Accounts[1].Account">
+
+                        </span>
+        </td>
+        <td colspan="1">
+            出库员：
+                        <span>
+
+                        </span>
+        </td>
+        <td colspan="2">
+            客户签字：
+                        <span>
+
+                        </span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="8">
+
+            订单备注：{{info.Memo}}
+
+        </td>
+    </tr>
+    </tfoot>
+</table>
+<script>
+    var LODOP
+    function CheckIsInstall() {
+        try {
+            LODOP = getLodop();
+            if (LODOP.VERSION) {
+//                design()
+
+            }
+            ;
+        } catch (err) {
+        }
+    }
+    ;
+    var vm = {
+        typeName: ['采购入库', '采购退货', '销售出库', '销售退货', '报损', '盘存', '调拨', '期初应收', '期初应付'],
+    }
+    var data = {
+        "OrderID": "290",
+        "Type": "2",
+        "Time": "1472696816",
+        "Cost": "0.00",
+        "Total": "600.00",
+        "Payed": "0.00",
+        "State": "1",
+        "IsFiled": "0",
+        "OperatorUID": "4",
+        "TraderID": "51",
+        "Memo": "",
+        "IsVirtual": "0",
+        "Clerk": [],
+        "SettleLog": [],
+        "Operator": {
+            "UID": "4",
+            "Name": "mooshroom",
+            "Number": "0",
+            "Job": "",
+            "Phone": "18081246031",
+            "State": "1",
+            "Memo": "",
+            "Email": "mooshroom@tansuyun.cn",
+            "Account": "mooshroom",
+            "Balance": "0.00"
+        },
+        "Goods": [
+            {
+                "NormalID": "228",
+                "OrderID": "290",
+                "GoodsID": "20",
+                "StoreID": "8",
+                "Amount": "20.00",
+                "Price": [],
+                "Cost": "0.00",
+                "IsAdd": "0",
+                "Type": "1",
+                "Version": "0",
+                "Memo": "",
+                "SName": "店6",
+                "Address": "",
+                "UID": "4",
+                "Phone": "",
+                "CName": "",
+                "Time": "0",
+                "IsRetail": "0",
+                "Status": "1",
+                "VersionID": "20",
+                "Content": "",
+                "UTime": "1466246157",
+                "Key": "20-0",
+                "BasicID": "21",
+                "Rate": "1.00",
+                "Model": "无糖型",
+                "BarCode": "",
+                "UnitID": "4",
+                "Standard": "100ml",
+                "IsBasic": "1",
+                "Name": "可口可乐",
+                "Disable": "0",
+                "Virtual": "0",
+                "PinYin": "",
+                "ProducerDicID": "1",
+                "Number": "",
+                "UnitName": "瓶",
+                "Class": [],
+                "Stock": [],
+                "TotalStock": 0,
+                "TradePrice": "30.00"
+            },
+            {
+                "NormalID": "228",
+                "OrderID": "290",
+                "GoodsID": "20",
+                "StoreID": "8",
+                "Amount": "20.00",
+                "Price": [],
+                "Cost": "0.00",
+                "IsAdd": "0",
+                "Type": "1",
+                "Version": "0",
+                "Memo": "",
+                "SName": "店6",
+                "Address": "",
+                "UID": "4",
+                "Phone": "",
+                "CName": "",
+                "Time": "0",
+                "IsRetail": "0",
+                "Status": "1",
+                "VersionID": "20",
+                "Content": "",
+                "UTime": "1466246157",
+                "Key": "20-0",
+                "BasicID": "21",
+                "Rate": "1.00",
+                "Model": "无糖型",
+                "BarCode": "",
+                "UnitID": "4",
+                "Standard": "100ml",
+                "IsBasic": "1",
+                "Name": "可口可乐",
+                "Disable": "0",
+                "Virtual": "0",
+                "PinYin": "",
+                "ProducerDicID": "1",
+                "Number": "",
+                "UnitName": "瓶",
+                "Class": [],
+                "Stock": [],
+                "TotalStock": 0,
+                "TradePrice": "30.00"
+            },
+            {
+                "NormalID": "228",
+                "OrderID": "290",
+                "GoodsID": "20",
+                "StoreID": "8",
+                "Amount": "20.00",
+                "Price": [],
+                "Cost": "0.00",
+                "IsAdd": "0",
+                "Type": "1",
+                "Version": "0",
+                "Memo": "",
+                "SName": "店6",
+                "Address": "",
+                "UID": "4",
+                "Phone": "",
+                "CName": "",
+                "Time": "0",
+                "IsRetail": "0",
+                "Status": "1",
+                "VersionID": "20",
+                "Content": "",
+                "UTime": "1466246157",
+                "Key": "20-0",
+                "BasicID": "21",
+                "Rate": "1.00",
+                "Model": "无糖型",
+                "BarCode": "",
+                "UnitID": "4",
+                "Standard": "100ml",
+                "IsBasic": "1",
+                "Name": "可口可乐",
+                "Disable": "0",
+                "Virtual": "0",
+                "PinYin": "",
+                "ProducerDicID": "1",
+                "Number": "",
+                "UnitName": "瓶",
+                "Class": [],
+                "Stock": [],
+                "TotalStock": 0,
+                "TradePrice": "30.00"
+            }
+        ],
+        "Trader": {
+            "TraderID": "51",
+            "Name": "王宝强",
+            "Phone": "18780567107",
+            "Address": "",
+            "IsCue": "1",
+            "IsSur": "0",
+            "IsDisable": "0",
+            "Limit": "0.00",
+            "Receivables": "-1400.00",
+            "Payable": "200000.00",
+            "Contact": []
+        },
+        "Store": {
+            "StoreID": "8",
+            "SName": "店6",
+            "Address": "",
+            "UID": "4",
+            "Phone": "",
+            "Type": "1",
+            "CName": "",
+            "Time": "0",
+            "Cost": "0.00",
+            "Price": "0.00",
+            "IsRetail": "0",
+            "Memo": "",
+            "Status": "1"
+        }
+    }
+
+    function printScript() {
+        //todo 这里编写打印配置模版进行测试
+        LODOP.SET_PRINT_PAGESIZE(1, 0, 0, "A4");
+
+    }
+
+    function design() {
+        LODOP.PRINT_INIT(new Date().getTime())
+        printScript()
+        LODOP.PRINT_DESIGN()
+    }
+    function preview() {
+        LODOP.PRINT_INIT(new Date().getTime())
+        printScript()
+        LODOP.PREVIEW()
+    }
+    function printThat() {
+        LODOP.PRINT_INIT(new Date().getTime())
+        printScript()
+        LODOP.PRINT()
+    }
+</script>
+</body>
+</html>

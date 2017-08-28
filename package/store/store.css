@@ -1,0 +1,41 @@
+.storeCard{
+    padding:10px 20px;
+    border: 1px solid #dddddd;
+    margin-top: 20px;
+}
+.storeCard>h3{
+    margin-top: 0px;
+}
+
+/*左边的时候*/
+.toggle-left > .btn-t-out > .btn-t-in {
+    margin-left: 0px;
+}
+
+.toggle-left > .btn-t-out {
+    background-color: #449d44;
+    border: 1px solid #449d44;
+}
+
+.toggle-left > .btn-t-left {
+    color: #449d44
+}
+
+/*右边的时候*/
+.toggle-right > .btn-t-out > .btn-t-in {
+    margin-left: 24px;
+}
+
+.toggle-right > .btn-t-out {
+    background-color: #fdcb33;
+    border: 1px solid #fdcb33;
+}
+
+.toggle-right > .btn-t-right {
+    color: #fdcb33
+}
+
+/*动画加持*/
+.btn-t-in, .btn-toggle, .btn-t-out, .btn-toggle > span {
+    transition: all 0.3s;
+}
